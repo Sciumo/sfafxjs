@@ -191,6 +191,10 @@
     });
     QUnit.test( "SFAFx.dictionary", function(assert){
       assert.ok( SFAFx.dictionary, "dictionary exists");
+      assert.ok( SFAFx.dictionary.specialHandlingCodes, "specialHandlingCodes exists");
+      var ua = SFAFx.dictionary.getSHC("UA");
+      assert.ok( ua, "UA specialHandlingCodes exists");
+      assert.equal( ua.label, "Public Unlimited", "UA SHC Public Unlimited");
       assert.ok( SFAFx.dictionary.modulation, "modulation exists");
       assert.ok( SFAFx.dictionary.modulation.modtype, "modulation type exists");
       assert.ok( SFAFx.dictionary.modulation.modinformation, "modinformation type exists");

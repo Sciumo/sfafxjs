@@ -4792,10 +4792,60 @@ var modmux = modulation["modmux"] =
     'X' : { type:'other or unknown'},
 };
 
+  var specialHandlingCodes = {
+  'A': { label:'Public Unlimited',
+      description:'Approved for public release; distribution is unlimited (DoD Directive 5230.24).'},
+  'B': { label:'Public NATO Only',
+      description:'Releasable to soil country and the North Atlantic Treaty Organization (NATO); otherwise, not releasable outside the US Government in accordance with (IAW) Section 552 (b)(1) of Title 5 of the US Code.'},
+  'C': { label:'Public Coalition Only',
+      description:'Releasable to soil country and coalition operation organizations; otherwise, not releasable outside the US Government in accordance with (IAW) Section 552 (b)(1) of Title 5 of the US Code.'},
+  'D': { label:'DoD Only',
+      description:'Not releasable outside US Department of Defense (DoD) IAW Section 552 (b) (1) of Title 5 of the US Code.'},
+  'E': { label:'US Government Only',
+      description:'Not releasable outside the US Government IAW Section 552 (b)(1) of Title 5 of the US Code.'},
+  'F': { label:'No Foreign',
+      description:'Not releasable to foreign nationals and not releasable outside the US Government IAW Section 552 (b)(1) of Title 5 of the US Code.'},
+  'G': { label:'Federal, State, Local Only',
+      description:'Releasable to Federal, State, and Local governments; otherwise, not releasable outside the US Government IAW Section 552 (b) (1) of Title 5 of the US Code.'},
+  'H': { label:'US Only',
+      description:'Releasable to soil country only; otherwise, not releasable outside the US Government IAW Section 552 (b)(1) of Title 5 of the US Code.'},
+  'J': { label:'Contingent',
+      description:'Contingency Assignment - The record contains unified commander comments only; not releasable to foreign nationals unless formally coordinated; otherwise, not releasable outside the US Government IAW Section 552 (b)(1) of Title 5 of the US Code.'},
+  'K': { label:'Permanent assignment.',
+      description:'Permanent assignment. Available for contingency use within the theater after coordination with and approval of the cognizant unified commander - releasable to soil nation; otherwise, not releasable outside the US Government IAW Section 552 (b)(1) of Title 5 of the US Code.'},
+  'M': { label:'Coalition',
+      description:'Releasable to coalition operation organizations only; otherwise, not releasable outside the U.S. Government IAW Section 552 (b) (1) of Title 5 of the U.S. Code.'},
+  'N': { label:'NATO Only',
+      description:'Releasable to NATO; otherwise, not releasable outside the U.S. Government IAW Section 552 (b)(1) of Title 5 of the U.S. Code.'},
+  'O': { label:'Proprietary Commerical Only',
+      description:'Proprietary for commercial use only.'},
+  'P': { label:'Proprietary US Only',
+      description:'Proprietary; otherwise, not releasable outside the U.S. Government IAW Section 552 (b)(1) of Title 5 of the U.S. Code.'},
+  'Z': { label:'Releasable CCEB Only',
+      description:'Releasable to Australia, Canada, New Zealand, and United Kingdom (CCEB) organizations only; otherwise, not releasable outside the U.S. Government IAW Section 552 (b) (1) of Title 5 of the U.S. Code.'}
+    };
+
+    var getSHC = function( entry ){
+      if( entry == null || entry == undefined ){
+        return 'UNK';
+      }
+      if( entry.length < 2 ){
+        return 'UNK';
+      }
+      var code = entry.charAt(1);
+      if( !specialHandlingCodes.hasOwnProperty(code) ){
+        return 'UNK';
+      }
+      var res = specialHandlingCodes[code];
+      return res;
+    }
   var SFAFDictionaryModule =   {
      'modulation':modulation,
-     'antenna':antenna
+     'antenna':antenna,
+     'specialHandlingCodes':specialHandlingCodes,
+     'getSHC' : getSHC
    };
+
   if ( typeof module === 'object' && module && typeof module.exports === 'object' ) {
     module.exports = SFAFDictionaryModule;
   } else {
