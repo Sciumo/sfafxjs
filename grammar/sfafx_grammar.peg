@@ -1,0 +1,198 @@
+{
+ console.log("SFAFx PEG v0.0.1");
+
+  var FIRSTX = parseInt("A00",16);
+  function makeRecord( val, entry, occur, text ){
+    val["sfaf"] = {};
+    if( occur == null ){
+       val["sfaf"][entry] = { entry: text };
+    } else {
+      val["sfaf"][entry] = {};
+      val["sfaf"][entry]["occur"] = {};
+      val["sfaf"][entry]["occur"][occur] = { entry: text };
+    }
+    return val;
+  }
+  function mergeObj( target, source ){
+    for (var attrname in source) {
+      // existing properties become order dependent arrays
+      if( target.hasOwnProperty(attrname) ){
+        if( !Array.isArray(target[attrname]) ){
+          if( target[attrname] instanceof Object ) {
+            target[attrname] = mergeObj(target[attrname],source[attrname]);
+          }else{
+            target[attrname] = [target[attrname]].concat(source[attrname]);
+          }
+        }else{
+          target[attrname] = target[attrname].concat(source[attrname]);
+        }
+      } else {
+        target[attrname] = source[attrname];
+      }
+    }
+    return target;
+  }
+  function merge( obj, entries ){
+    if( entries == null ) return obj;
+    var i = 0, len = entries.length;
+    for(; i < len; i++ ){
+      mergeObj(obj, entries[i] );
+    }
+    return obj;
+  }
+
+  //Frequency multiples for normalizing frequency to megahertz
+  var freqMultiple = { 'K': 0.001, 'M': 1.0, 'G':1000.0, 'T':1000000.0 }
+  var dms = /([0-9]{2})([0-9]{2})([0-9X]{2})([nsNS])([0-9]{3})([0-9]{2})([0-9X]{2})([ewEW])/
+  var regCenterF = /([KMGT])([\.0-9]+)/;
+  var regBand = /([KMGT])([\.0-9]+)\-([KMGT])([\.0-9]+)/;
+  var regDefBand = /([KMGT])([\.0-9]+)\-([\.0-9]+)/;
+  var regRejF = /([KMGT])([\.0-9]+)\(([\.0-9]+)\)/;
+  var regRadius = /([0-9]+)([BTbt])?.*/;
+
+  var recs = [];
+  var rec = {};
+
+  var dmsToDD = function(dms){
+  var sign = 1.0;
+  if( dms["dir"] == "S" || dms["dir"] == "W" ){
+    sign = -1.0;
+  }
+  var dd = dms["min"]*60.0 + dms["sec"];
+  dd = sign * (dms["deg"] + dd/3600.0);
+  return dd
+  }
+
+  var parseDMS = function(e){
+    var d = dms.exec(e);
+    d[2] = d[2].replace("X","0");
+    d[6] = d[6].replace("X","0");
+    var latlon = {
+      "lat": {
+        "deg": parseInt(d[1]), "min": parseInt(d[2]), "sec":parseInt(d[3]), "dir": d[4].toUpperCase()
+      },
+      "lon": {
+        "deg": parseInt(d[5]), "min": parseInt(d[6]), "sec":parseInt(d[7]), "dir": d[8].toUpperCase()
+      }
+    }
+     latlon['lat']['dec'] = dmsToDD(latlon['lat'])
+     latlon['lon']['dec'] = dmsToDD(latlon['lon'])
+     latlon['coord'] = [latlon['lat']['dec'],latlon['lon']['dec']];
+     return latlon
+   };
+
+   var onSerial = function(entry,rec){
+     rec["serial"] = entry["entry"];
+   }
+
+   var onDMS = function(entry,rec){
+      rec['latlon'] = parseDMS(entry["entry"])
+   }
+
+   var onRadius = function(entry,rec){
+      var r = entry["entry"];
+      var rk = regRadius.exec(r);
+      if( rk == null ){
+        return;
+      }
+      rec['radius'] = parseInt(rk[1],10);
+   }
+
+   var onFreq = function(entry,rec){
+    var entry = entry["entry"];
+    var band = regBand.exec(entry);
+    var f = 0.0;
+    var freqs = {};
+    if( band == null ){
+      band = regDefBand.exec(entry);
+      if( band == null ){
+       var band = regRejF.exec(entry);
+       if( band == null ){
+         band = regCenterF.exec(entry);
+         if( band == null ){
+           return res;
+         }
+       }
+       freqs["frequency"] = freqMultiple[band[1]] * parseFloat(band[2]);
+       if( band.length > 3 ){
+         freqs["rejected"] = freqMultiple[band[1]] * parseFloat(band[3]);
+       }
+     }else{
+       var mult = freqMultiple[band[1]];
+       freqs["low"] = mult * parseFloat(band[2]);
+       freqs["high"] = mult * parseFloat(band[3]);
+       freqs["band"] = freqs["low"] + "," + freqs["high"];
+     }
+   }else{
+     var mult = freqMultiple[band[1]];
+     freqs["low"] = mult * parseFloat(band[2]);
+     freqs["high"] = mult * parseFloat(band[3]);
+     freqs["band"] = freqs["low"] + "," + freqs["high"];
+    }
+    rec["freqs"] = freqs;
+    return freqs;
+  }
+
+  var handlers = {};
+  handlers["102"] = onSerial;
+  handlers["110"] = onFreq;
+  handlers["303"] = onDMS;
+  handlers["306"] = onRadius;
+  handlers["403"] = onDMS;
+}
+
+start =
+  record*
+
+record =
+  cls:line005 lines:notline005*
+  { return merge(cls,lines); }
+
+notline005 = !line005 l:line { return l; }
+
+line005 =
+  "005." ws cls:linetext eol
+  { return makeRecord( {classification:cls}, "005", null, cls ); }
+
+transmitter = line303
+
+line102 =
+  item:"102" "." ws t:linetext eol
+  { var obj = { serial:t};
+    return makeRecord( obj, item, null, t ); }
+
+line303 =
+  "303." ws t:linetext eol
+  { var latlon = { transmitter:{location:parseDMS(t)} };
+    return makeRecord( latlon, "303", null, t ); }
+
+line =
+  line102 /
+  line303 /
+  n:integer s:sub? "." ws t:linetext eol?
+  { return makeRecord( {}, n, s, t); }
+
+xline =
+  n:hex s:sub? "." ws t:linetext eol?
+  { return makeRecord( {}, n, s, t ); }
+
+sub =
+  "/" n:integer { return n; }
+
+subh =
+  "/" n:hex { return n; }
+
+eol = [\n]
+
+neol = [^\n]+
+
+ws = [ \t]+
+
+linetext
+  = chars:[^\n]+ {return chars.join("").trim();}
+
+integer "integer"
+  = digits:[0-9]+ { return digits.join(""); }
+
+hex "hex"
+  = hexdigit:[a-zA-Z] digits:[a-zA-Z0-9]* { return hexdigit+digits.join(""); }

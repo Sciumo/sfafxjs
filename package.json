@@ -1,0 +1,31 @@
+{
+  "name": "sfafxjs",
+  "version": "1.0.0",
+  "description": "SFAFx Parser and Libraries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sciumo/sfafxjs.git"
+  },
+  "keywords": [
+    "SFAF",
+    "SFAFX",
+    "MCEB",
+    "Pub7"
+  ],
+  "author": "Eric Lindahl (eric@sciumo.com)",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Sciumo/sfafxjs/issues"
+  },
+  "homepage": "https://github.com/Sciumo/sfafxjs",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-peg": "^2.0.0",
+    "pegjs": "^0.9.0"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "sfafxjs",
+  "homepage": "https://github.com/Sciumo/sfafxjs",
+  "description": "SFAFx Parser and Libraries",
+  "main": "sfafx.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "SFAF",
+    "SFAFx",
+    "Pub7",
+    "MCEB"
+  ],
+  "authors": [
+    "Eric Lindahl (eric@sciumo.com)"
+  ],
+  "license": "LGPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "package.json",
+    "src"
+  ],
+  "devDependencies": {
+    "qunit": "~1.20.0"
+  }
+}
