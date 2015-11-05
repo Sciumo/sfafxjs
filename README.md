@@ -30,3 +30,17 @@ var records = SFAFx.toJSON(document.getElementById('sfaftext').innerText);
 var sfaftxt = SFAFx.toSFAF(records);
 ```
 
+#Tools
+There are a few development tools available for testing and command line usage as we.
+*  `bin/sfaf2json.js` converts a file to JSON and logs to the console.
+*  `bin/json2sfaf.js` converts a file to SFAF and logs to the console.
+
+Because the conversion is invertible, you can do this:
+```shell
+$node sfaf2json.js ../test/af744251.sfaf > temp.json
+$node json2sfaf.js temp.json > temp.sfaf
+$diff temp.sfaf ../test/af744251.sfaf
+```
+#Testing
+In the `/test` directory you will find a few test scripts and a *QUnit* HTML unit test.
+
