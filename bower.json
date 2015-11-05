@@ -24,7 +24,8 @@
     "grammar",
     "package.json",
     "Gruntfile.js",
-    "src"
+    "src",
+    "bin"
   ],
   "devDependencies": {
     "qunit": "~1.20.0"

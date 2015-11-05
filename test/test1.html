@@ -187,7 +187,7 @@
       var records2 = SFAFx.toJSON(sfaftxt);
       assert.ok( records2, "Reparsed OK");
       assert.deepEqual( records, records2, "Deep compare of reparsed SFAF record identical");
-
+      assert.equal( originalData.localeCompare(sfaftxt), 0, "SFAF text localeCompare == 0");
     });
     QUnit.test( "SFAFx.dictionary", function(assert){
       assert.ok( SFAFx.dictionary, "dictionary exists");

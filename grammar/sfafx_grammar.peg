@@ -1,5 +1,4 @@
 {
- console.log("SFAFx PEG v0.0.1");
   if( typeof SFAFx_Dictionary == "undefined" || SFAFx_Dictionary == null ){
     console.log( "!SFAFx_Dictionary required to decode");
   }
@@ -447,7 +446,8 @@ line =
   rxantennas /
   sfafplus /
   n:integer s:sub? "." ws t:linetext eol?
-  { return makeRecord( {}, n, s, t); }
+  { return makeRecord( {}, n, s, t); } /
+  eol { return null; }
 
 xline =
   n:hex s:sub? "." ws t:linetext eol?

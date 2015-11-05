@@ -86,7 +86,6 @@
     var grouplow = range[0];
     var grouphigh = range[1];
     var groupsize = grouphigh-grouplow;
-    console.log("group range:" + range );
     for( var groupidx = 0; groupidx <= groupsize; groupidx++ ){
       var fkey = keys[idx+groupidx];
       var fkeyval = parseInt(fkey);
@@ -96,7 +95,6 @@
         break;
       }
     }
-    console.log("lgroup:" + JSON.stringify(lgroup,null,2) );
     sz = lgroup.length;
     var gend = idx + sz;
     var n = 0;
