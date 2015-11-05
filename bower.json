@@ -21,7 +21,9 @@
     "node_modules",
     "bower_components",
     "test",
+    "grammar",
     "package.json",
+    "Gruntfile.js",
     "src"
   ],
   "devDependencies": {
