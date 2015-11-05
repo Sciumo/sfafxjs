@@ -23,8 +23,6 @@
    return clone(obj);
   }
 
-  console.log( JSON.stringify( dict("modulation","modtype", "A")));
-
   function makeRecord( val, entry, occur, text ){
     val["sfaf"] = {};
     if( occur == null ){
@@ -249,7 +247,7 @@ line306 =
     { var obj = { transmitter:{ location:{radius:onRadius(t)}}};
       return makeRecord( obj, "306", null, t ); }
 
-antennas =
+txantennas =
   line354 /
   line355 /
   line356 /
@@ -263,43 +261,43 @@ antennas =
 
 line354 =
   "354" s:sub? "." ws t:linetext eol
-    {  return makeSubRecord( { name: t }, "354", s, t, "antennas" ); }
+    {  return makeSubRecord( { name: t }, "354", s, t, "txantennas" ); }
 
 line355 =
   "355" s:sub? "." ws t:linetext eol
-    {  return makeSubRecord( { nomenclature:t }, "355", s, t, "antennas" ); }
+    {  return makeSubRecord( { nomenclature:t }, "355", s, t, "txantennas" ); }
 
 line356 =
   "356" s:sub? "." ws t:number eol
-    {  return makeSubRecord( { height: parseFloat(t) }, "356", s, t, "antennas" ); }
+    {  return makeSubRecord( { height: parseFloat(t) }, "356", s, t, "txantennas" ); }
 
 line357 =
   "357" s:sub? "." ws t:number eol
-    {  return makeSubRecord( { gain: t }, "357", s, t, "antennas" ); }
+    {  return makeSubRecord( { gain: t }, "357", s, t, "txantennas" ); }
 
 line358 =
   "358" s:sub? "." ws t:number eol
-    {  return makeSubRecord( { elevation: parseFloat(t) }, "358", s, t, "antennas" ); }
+    {  return makeSubRecord( { elevation: parseFloat(t) }, "358", s, t, "txantennas" ); }
 
 line359 =
   "359" s:sub? "." ws t:number eol
-    {  return makeSubRecord( {feedpointheight:parseFloat(t)}, "359", s, t, "antennas" ); }
+    {  return makeSubRecord( {feedpointheight:parseFloat(t)}, "359", s, t, "txantennas" ); }
 
 line360 =
   "360" s:sub? "." ws t:number eol
-    {  return makeSubRecord( {beamwidth:{horizontal:parseFloat(t)}}, "360", s, t, "antennas" ); }
+    {  return makeSubRecord( {beamwidth:{horizontal:parseFloat(t)}}, "360", s, t, "txantennas" ); }
 
 line361 =
   "361" s:sub? "." ws t:number eol
-    {  return makeSubRecord( {beamwidth:{vertical:parseFloat(t)}}, "361", s, t, "antennas" ); }
+    {  return makeSubRecord( {beamwidth:{vertical:parseFloat(t)}}, "361", s, t, "txantennas" ); }
 
 line362 =
   "362" s:sub? "." ws t:linetext eol
-    {  return makeSubRecord( { orientation:t }, "362", s, t, "antennas" ); }
+    {  return makeSubRecord( { orientation:t }, "362", s, t, "txantennas" ); }
 
 line363 =
   "363" s:sub? "." ws t:linetext eol
-    {  return makeSubRecord( { polarization: dict("antenna","polarization",t) }, "363", s, t, "antennas" ); }
+    {  return makeSubRecord( { polarization: dict("antenna","polarization",t) }, "363", s, t, "txantennas" ); }
 
 receivers =
   line400 /
@@ -338,6 +336,104 @@ line443 =
   item:"443" s:sub? "." ws t:linetext eol
   {  return makeSubRecord( { equipmentcertid:t }, "443", s, t, "receivers" ); }
 
+rxantennas =
+  line454 /
+  line455 /
+  line456 /
+  line457 /
+  line458 /
+  line459 /
+  line460 /
+  line461 /
+  line462 /
+  line463
+
+line454 =
+  "454" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { name: t }, "454", s, t, "rxantennas" ); }
+
+line455 =
+  "455" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { nomenclature:t }, "455", s, t, "rxantennas" ); }
+
+line456 =
+  "456" s:sub? "." ws t:number eol
+    {  return makeSubRecord( { height: parseFloat(t) }, "456", s, t, "rxantennas" ); }
+
+line457 =
+  "357" s:sub? "." ws t:number eol
+    {  return makeSubRecord( { gain: t }, "457", s, t, "rxantennas" ); }
+
+line458 =
+  "358" s:sub? "." ws t:number eol
+    {  return makeSubRecord( { elevation: parseFloat(t) }, "458", s, t, "rxantennas" ); }
+
+line459 =
+  "459" s:sub? "." ws t:number eol
+    {  return makeSubRecord( {feedpointheight:parseFloat(t)}, "459", s, t, "rxantennas" ); }
+
+line460 =
+  "460" s:sub? "." ws t:number eol
+    {  return makeSubRecord( {beamwidth:{horizontal:parseFloat(t)}}, "460", s, t, "rxantennas" ); }
+
+line461 =
+  "461" s:sub? "." ws t:number eol
+    {  return makeSubRecord( {beamwidth:{vertical:parseFloat(t)}}, "461", s, t, "rxantennas" ); }
+
+line462 =
+  "462" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { orientation:t }, "462", s, t, "rxantennas" ); }
+
+line463 =
+  "463" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { polarization: dict("antenna","polarization",t) }, "463", s, t, "rxantennas" ); }
+
+sfafplus =
+  item:"199" s:sub? "." ws link:linkage eol
+  {  return makeSubRecord( { link:link.link }, "199", s, link.text, "linkage" ); }
+
+//199/2.   T/02(A/02)R00[TR]R/02(A/01)R05(E/01,E/03)
+linkage =
+  tx:linktxnode dir:linkdir rx:linkrxnode ed:linkemission
+  { return { text: tx.text+dir.text+rx.text+ed.text,
+      link: { txconfig:tx.config, dir:dir.dir, rxconfig:rx.config, emission:ed.ed } } }
+
+linktxnode = tx:linkrxtx "(" ant:linkant ")" loc:linkloc
+  { return { text: tx.text + "(" + ant.text + ")" + loc.text, config:{ tx:tx.ed, ant:ant.ed, loc:loc.ed } }; }
+
+linkrxnode = rx:linkrxtx "(" ant:linkant ")" loc:linkloc
+  { return { text: rx.text + "(" + ant.text + ")" + loc.text, config:{ rx:rx.ed, ant:ant.ed, loc:loc.ed } }; }
+
+linkrxtx = linkrx / linktx
+
+linkrx =
+  "R/" ed:linklist { return { text:"R/" + ed, ed:ed }; }
+
+linktx =
+  "T/" ed:linklist { return { text:"T/" + ed, ed:ed }; }
+
+linkant =
+  "A/" ed:linklist { return { text:"A/" + ed, ed:ed }; }
+
+linkloc = "R" loc:int2 { return { text:"R"+loc, ed:loc }; }
+
+linkdir =
+  "[T]" { return { text:"[T]", dir:"tx" }; } /
+  "[R]" { return { text:"[R]", dir:"rx" }; } /
+  "[TR]" { return { text:"[TR]", dir:"txrx" }; }
+
+linkemission =
+  "(E/" ed:linklist ")" { return { text:"(E/" + ed + ")", ed:ed }; }
+
+linklist =
+  "XX" { return "XX"; } /
+  elm:linkelem { return elm; } /
+  first:linkelem + rest:("," linkelem)+ { return first.join("") + rest.join(""); }
+
+linkelem =
+  num:integer { return num; } /
+  low:integer "-" high:integer { return low.join("") + "-" + high.join(""); }
+
 line =
   line102 /
   docket /
@@ -346,8 +442,10 @@ line =
   line113 /
   line114 /
   transmitter /
+  txantennas /
   receivers /
-  antennas /
+  rxantennas /
+  sfafplus /
   n:integer s:sub? "." ws t:linetext eol?
   { return makeRecord( {}, n, s, t); }
 
@@ -370,9 +468,9 @@ ws = [ \t]+
 linetext
   = chars:[^\n]+ {return chars.join("").trim();}
 
-int2 = num:([0-9][0-9]) { return num.join(""); }
+int2 = d1:[0-9] d2:[0-9] { return d1+d2; }
 
-int4 = num:([0-9][0-9][0-9][0-9]) { return num.join(""); }
+int4 = d1:[0-9] d2:[0-9] d3:[0-9] d4:[0-9] { return d1+d2+d3+d4; }
 
 emissiondesignator =
    whole:integer unit:unitdesignator frac:integer cls:emissionclass
@@ -428,10 +526,8 @@ number "number"
 integer "integer"
   = digits:[0-9]+ { return digits.join(""); }
 
-
 float "float"
   = digits:[0-9]+ "." frac:[0-9]+ { return digits.join("") + "." + frac.join(""); }
-
 
 hex1 = [A-Z0-9]
 

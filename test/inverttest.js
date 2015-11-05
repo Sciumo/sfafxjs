@@ -22,8 +22,9 @@ for( ; i < len; i++ ){
   if( o != s ){
     equal = false;
     console.log( "diff " + i + " " + o + " " + s );
-    console.log( "Original:" + sfafxout.substr(i,10) + "...");
-    console.log( "Generated:" + sfaftxt.substr(i,10) + "...");
+    if( i > 10 ) i -= 10;
+    console.log( "Original:" + sfafxout.substr(i,20) + "...");
+    console.log( "Generated:" + sfaftxt.substr(i,20) + "...");
     break;
   }
 }

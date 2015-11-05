@@ -10,7 +10,17 @@
     }
     return keys.sort();
   }
-  var groups = { '113' : ['113','114','115'] };
+  var groups = {
+     '113' : [113,115],
+     '340' : [340,349],
+     '354' : [354,374],
+     '355' : [354,374],
+     '400' : [400,408],
+     '401' : [401,408],
+     '402' : [402,408],
+     '440' : [440,443],
+     '441' : [441,443],
+  };
   var result = "";
   var pad0 = function( i ){
     if( i < 10 ){
@@ -69,22 +79,27 @@
   }
 
   // a grouped set of items, with grouped occurs
-  var onGroup = function( keys, rec, idx, group ){
+  var onGroup = function( keys, rec, idx, range ){
     var sz = 0;
+    var key;
     var lgroup = [];
-    for( var groupidx = 0; groupidx < group.length; groupidx++ ){
-      var groupkey = group[groupidx];
+    var grouplow = range[0];
+    var grouphigh = range[1];
+    var groupsize = grouphigh-grouplow;
+    console.log("group range:" + range );
+    for( var groupidx = 0; groupidx <= groupsize; groupidx++ ){
       var fkey = keys[idx+groupidx];
-      if( fkey === groupkey ){
+      var fkeyval = parseInt(fkey);
+      if( fkeyval <= grouphigh ){
         lgroup.push(fkey);
       }else{
         break;
       }
     }
+    console.log("lgroup:" + JSON.stringify(lgroup,null,2) );
     sz = lgroup.length;
     var gend = idx + sz;
     var n = 0;
-    var key;
     for( var gidx in lgroup ){
       key = lgroup[gidx];
       n += onEntry( key, rec[key] );
