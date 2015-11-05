@@ -28,10 +28,22 @@ module.exports = function(grunt) {
       }
     },
 
+    uglify: {
+        options: {
+          mangle: false
+        },
+        sfafxmin: {
+          files: {
+            'sfafx.min.js': ['sfafx.js']
+          }
+        }
+      }
+
   });
 
   grunt.loadNpmTasks('grunt-peg');
-	grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.registerTask('grammar', ['peg:sfafx_parser']);
-  grunt.registerTask('dist', ['grammar', 'concat:dist']);
+  grunt.registerTask('dist', ['grammar', 'concat:dist','uglify:sfafxmin']);
 };

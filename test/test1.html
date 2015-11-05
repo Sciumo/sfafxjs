@@ -11,6 +11,7 @@
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
+  <h3>SFAF Data</h3>
 <div class="data" id="record1">005.     UA
 010.     M
 102.     AF  744251
@@ -28,6 +29,12 @@
 113.     ALB
 114.     2K04A2A
 115.     W400
+113/02.     ALB
+114/02.     600H00P0N
+115/02.     W6
+113/03.     ML
+114/03.     6K00A3E
+115/03.     W10
 117.     58
 118.     E
 130.     1HX
@@ -47,6 +54,7 @@
 301.     CAPE ROMANZOF
 303.     614726N1655811W
 304.     CZF
+306.     46B
 340.     G,AN/URN-005
 343.     J/F 12/04752
 357.     2
@@ -79,6 +87,9 @@
 956.     RAB
 958.     A
 </div>
+<p/>
+<h3>SFAFx JSON</h3>
+<div class="data" id="sfafx"></div>
   <script src="../bower_components/qunit/qunit/qunit.js"></script>
   <script src="../sfafx.js"></script>
   <script>
@@ -87,6 +98,12 @@
       var diff = Math.abs(actual-expected);
       return diff < error;
     }
+    var modtype = {
+       A : { type: 'amplitude', desc:'Double sideband'},
+       P : { type: 'pulse', desc:'Sequence of unmodulated pulses.'},
+       L : { type: 'pulse', desc:'Modulated in width/duration.'}
+    };
+
 
     QUnit.config.reorder = false;
     var record1Elem, record1Data, record1;
@@ -94,6 +111,7 @@
       assert.ok( SFAFx, "SFAFx exists");
       assert.ok( SFAFx.toJSON, "SFAFx.toJSON exists");
       assert.ok( SFAFx.toSFAF, "SFAFx.toSFAF exists");
+      assert.ok( SFAFx.dictionary, "SFAFx.dictionary exists");
       record1Elem = document.getElementById('record1');
       assert.ok( record1Elem, "Record 1 element exists");
       record1Data = record1Elem.innerText;
@@ -104,6 +122,8 @@
       var data = document.getElementById('record1').innerText;
       assert.ok( data, "Record1 SFAF data exists");
       var records = SFAFx.toJSON(data);
+      var sfafxdiv = document.getElementById('sfafx');
+      sfafxdiv.innerText = JSON.stringify(records,null,2);
       assert.ok( records, "Records parsed" );
       assert.ok( Array.isArray(records), "Records is array" );
       assert.ok( records.length > 0, "Records has length > 0" );
@@ -112,16 +132,24 @@
       assert.ok( record1.sfaf, "has sfaf property");
       assert.ok( record1.classification, "has classification property");
       assert.ok( record1.serial, "has serial property");
+      assert.ok( record1.authorization, "has authorization property");
+      assert.ok( record1.authorization.date, "has authorization.date property");
+      var authdate = new Date(1974,6,22,0,0,0);
+      assert.deepEqual( record1.authorization.date, authdate, "has auth JavaScript date of " + authdate );
       assert.ok( record1.transmitter, "has transmitter property");
       assert.ok( record1.transmitter.location, "has transmitter.location property");
       assert.ok( record1.transmitter.location.lat, "has transmitter.location.lat property");
       assert.ok( record1.transmitter.location.lon, "has transmitter.location.lon property");
       assert.ok( record1.transmitter.location.coord, "has transmitter.location.coord property");
+      assert.ok( record1.transmitter.location.radius, "has transmitter.location.radius property");
+      assert.equal( record1.transmitter.location.radius, 46, "has radius 46");
       var expCoord = [61.79055555555556, -165.96972222222223];
       assert.ok( approx(record1.transmitter.location.coord[0],expCoord[0]), "transmitter.location.coord[0] ~ " + expCoord[0]);
       assert.ok( approx(record1.transmitter.location.coord[1],expCoord[1]), "transmitter.location.coord[1] ~ " + expCoord[1]);
       assert.equal( record1.serial, "AF  744251", "serial property == AF  744251");
       assert.equal( record1.classification, "UA", "classification == UA");
+      assert.ok( record1.transmitter.freqband.frequency, "has transmitter.freqband.frequency");
+      assert.ok( approx(record1.transmitter.freqband.frequency,0.275), "transmitter.freqband.frequency ~ " + 0.275);
       assert.ok( record1.sfaf["103"], "103 exists");
       assert.ok( record1.sfaf["103"].entry, "103 entry exists");
       assert.ok( record1.sfaf["103"].occur, "103 occur exists");
@@ -133,6 +161,8 @@
       assert.ok( record1.sfaf["520"].entry.length == 2, 'sfaf["520"].entry is an array of length 2');
       assert.equal( record1.sfaf["520"].entry[1], "SECOND LINE OF TEXT", 'sfaf["520"].entry[1] == SECOND LINE OF TEXT');
       assert.equal( record1.sfaf["958"].entry, "A", 'sfaf["958"].entry == A');
+      assert.deepEqual( record1.transmitter['01'].emissiondesignator.modulation.type, modtype['A'], "sfaf.transmitter['01'].emissiondesignator.modulatype.type == A: { type: 'amplitude', desc:'Double sideband'}");
+      assert.deepEqual( record1.transmitter['02'].emissiondesignator.modulation.type, modtype['P'], "sfaf.transmitter['02'].emissiondesignator.modulatype.type == P : { type: 'pulse', desc:'Sequence of unmodulated pulses.'}");
     });
     QUnit.test( "SFAFx.toSFAF", function(assert){
       var originalData = document.getElementById('record1').innerText;
@@ -149,6 +179,26 @@
       var records2 = SFAFx.toJSON(sfaftxt);
       assert.ok( records2, "Reparsed OK");
       assert.deepEqual( records, records2, "Deep compare of reparsed SFAF record identical");
+
+    });
+    QUnit.test( "SFAFx.dictionary", function(assert){
+      assert.ok( SFAFx.dictionary, "dictionary exists");
+      assert.ok( SFAFx.dictionary.modulation, "modulation exists");
+      assert.ok( SFAFx.dictionary.modulation.modtype, "modulation type exists");
+      assert.ok( SFAFx.dictionary.modulation.modinformation, "modinformation type exists");
+      assert.ok( SFAFx.dictionary.modulation.moddetail, "moddetail type exists");
+      assert.ok( SFAFx.dictionary.modulation.modmux, "modmux type exists");
+      assert.ok( SFAFx.dictionary.modulation.modtype.A, "modulation type A exists");
+      assert.deepEqual( SFAFx.dictionary.modulation.modtype.A, modtype.A, "modulation type A type: 'amplitude', desc:'Double sideband'");
+      assert.deepEqual( SFAFx.dictionary.modulation.modtype.L, modtype.L, "modulation type L Pulse Modulated in width/duration");
+      assert.ok( SFAFx.dictionary.modulation.modnature, "modulation nature exists");
+      assert.ok( SFAFx.dictionary.modulation.modnature['7'], "modulation nature 7 exists");
+      var entries = {
+        '3' : { card:'single', encoding:'analogue', desc: 'A single channel containing analogue information' },
+        '7' : { card:'multiple', encoding:'digital', desc: 'Two or more channels containing quantized or digital information' }
+      };
+      assert.deepEqual( SFAFx.dictionary.modulation.modnature['3'], entries['3'], "modulation nature 3 card:'single', encoding:'analogue', desc: 'A single channel containing analogue information'");
+      assert.deepEqual( SFAFx.dictionary.modulation.modnature['7'], entries['7'], "modulation nature 7 card:'multiple', encoding:'digital', desc: 'Two or more channels containing quantized or digital information'");
     });
   </script>
 </body>

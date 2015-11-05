@@ -1,7 +1,30 @@
 {
  console.log("SFAFx PEG v0.0.1");
-
+  if( typeof SFAFx_Dictionary == "undefined" || SFAFx_Dictionary == null ){
+    console.log( "!SFAFx_Dictionary required to decode");
+  }
+  var sfafxdict = SFAFx_Dictionary;
   var FIRSTX = parseInt("A00",16);
+
+  function clone(obj){
+    return JSON.parse(JSON.stringify(obj));
+  }
+
+  function dict( cls, type, subtype ){
+   if( !sfafxdict.hasOwnProperty(cls) ) return { 'error':cls + " " + type + " " + subtype };
+   var dictcls = sfafxdict[cls];
+   if( !dictcls.hasOwnProperty(type) ) return { 'error':cls + " " + type + " " + subtype };
+   var dicttype = dictcls[type];
+   if( subtype == null || subtype == undefined ){
+     return clone(dicttype);
+   }
+   if( !dicttype.hasOwnProperty(subtype) ) return { 'error':cls + " " + type + " " + subtype };
+   var obj = dicttype[subtype];
+   return clone(obj);
+  }
+
+  console.log( JSON.stringify( dict("modulation","modtype", "A")));
+
   function makeRecord( val, entry, occur, text ){
     val["sfaf"] = {};
     if( occur == null ){
@@ -13,6 +36,16 @@
     }
     return val;
   }
+  function makeSubRecord( val, entry, occur, text, key ){
+    var sub = occur;
+    if( sub == null ) sub = "01";
+    var obj = {};
+    obj[sub] = val;
+    var rec = {};
+    rec[key] = obj;
+    return makeRecord( rec, entry, occur, text );
+ }
+
   function mergeObj( target, source ){
     for (var attrname in source) {
       // existing properties become order dependent arrays
@@ -64,6 +97,7 @@
   }
 
   var parseDMS = function(e){
+    try {
     var d = dms.exec(e);
     d[2] = d[2].replace("X","0");
     d[6] = d[6].replace("X","0");
@@ -79,27 +113,29 @@
      latlon['lon']['dec'] = dmsToDD(latlon['lon'])
      latlon['coord'] = [latlon['lat']['dec'],latlon['lon']['dec']];
      return latlon
+    }catch(e){
+     return { "error": e + "" };
+    }
    };
-
-   var onSerial = function(entry,rec){
-     rec["serial"] = entry["entry"];
-   }
 
    var onDMS = function(entry,rec){
       rec['latlon'] = parseDMS(entry["entry"])
    }
 
-   var onRadius = function(entry,rec){
-      var r = entry["entry"];
+   var onRadius = function(r){
+   try{
       var rk = regRadius.exec(r);
       if( rk == null ){
         return;
       }
-      rec['radius'] = parseInt(rk[1],10);
+      return parseInt(rk[1],10);
+    }catch(e){
+      return { "error": e + "" };
+    }
    }
 
-   var onFreq = function(entry,rec){
-    var entry = entry["entry"];
+   var onFreq = function(entry){
+   try{
     var band = regBand.exec(entry);
     var f = 0.0;
     var freqs = {};
@@ -129,20 +165,15 @@
      freqs["high"] = mult * parseFloat(band[3]);
      freqs["band"] = freqs["low"] + "," + freqs["high"];
     }
-    rec["freqs"] = freqs;
     return freqs;
+    }catch(e){
+      return { "error": e + "" };
+    }
   }
-
-  var handlers = {};
-  handlers["102"] = onSerial;
-  handlers["110"] = onFreq;
-  handlers["303"] = onDMS;
-  handlers["306"] = onRadius;
-  handlers["403"] = onDMS;
 }
 
 start =
-  record*
+  recs:record* { return recs; }
 
 record =
   cls:line005 lines:notline005*
@@ -154,21 +185,169 @@ line005 =
   "005." ws cls:linetext eol
   { return makeRecord( {classification:cls}, "005", null, cls ); }
 
-transmitter = line303
+transmitter =
+   line303 /
+   line306
 
 line102 =
-  item:"102" "." ws t:linetext eol
+  item:"102." ws t:linetext eol
   { var obj = { serial:t};
-    return makeRecord( obj, item, null, t ); }
+    return makeRecord( obj, "102", null, t ); }
+
+docket =
+  line103Orig /
+  line10302 /
+  line103Docket
+
+line103Orig =
+  item:"103." ws t:linetext eol
+  { var obj = { docket:{ current: t } };
+    return makeRecord( obj, "103", null, t ); }
+
+line10302 =
+  item:"103/02." ws t:linetext eol
+  { var obj = { docket:{ original: t } };
+    return makeRecord( obj, "103", "02", t ); }
+
+line103Docket =
+  item:"103" s:sub "." ws t:linetext eol
+  { var obj = { docket: { previous:t } };
+    return makeRecord( obj, "103", s, t );   }
+
+line107 =
+  item:"107." ws t:yyyymmdd ws? eol
+  { var obj = { authorization:t};
+    return makeRecord( obj, "107", null, t.text ); }
+
+line110 =
+  "110." ws t:linetext eol
+    { var obj = { transmitter: { freqband:onFreq(t) } };
+      return makeRecord( obj, "110", null, t ); }
+
+line111 =
+  "111" s:sub? "." ws t:linetext eol
+    { var obj = { transmitter: { excludedband:onFreq(t) } };
+      return makeRecord( obj, "110", s, t ); }
+
+line113 =
+  "113" s:sub? "." ws t:linetext eol
+    { var obj = { stationclass:t };
+      return makeSubRecord( obj, "113", s, t, "transmitter" ); }
+
+line114 =
+  "114" s:sub? "." ws emission:emissiondesignator ws? eol
+    { var obj = { emissiondesignator:emission.designator };
+      return makeSubRecord( obj, "114", s, emission.text, "transmitter" ); }
 
 line303 =
   "303." ws t:linetext eol
   { var latlon = { transmitter:{location:parseDMS(t)} };
     return makeRecord( latlon, "303", null, t ); }
 
+line306 =
+  "306." ws t:linetext eol
+    { var obj = { transmitter:{ location:{radius:onRadius(t)}}};
+      return makeRecord( obj, "306", null, t ); }
+
+antennas =
+  line354 /
+  line355 /
+  line356 /
+  line357 /
+  line358 /
+  line359 /
+  line360 /
+  line361 /
+  line362 /
+  line363
+
+line354 =
+  "354" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { name: t }, "354", s, t, "antennas" ); }
+
+line355 =
+  "355" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { nomenclature:t }, "355", s, t, "antennas" ); }
+
+line356 =
+  "356" s:sub? "." ws t:number eol
+    {  return makeSubRecord( { height: parseFloat(t) }, "356", s, t, "antennas" ); }
+
+line357 =
+  "357" s:sub? "." ws t:number eol
+    {  return makeSubRecord( { gain: t }, "357", s, t, "antennas" ); }
+
+line358 =
+  "358" s:sub? "." ws t:number eol
+    {  return makeSubRecord( { elevation: parseFloat(t) }, "358", s, t, "antennas" ); }
+
+line359 =
+  "359" s:sub? "." ws t:number eol
+    {  return makeSubRecord( {feedpointheight:parseFloat(t)}, "359", s, t, "antennas" ); }
+
+line360 =
+  "360" s:sub? "." ws t:number eol
+    {  return makeSubRecord( {beamwidth:{horizontal:parseFloat(t)}}, "360", s, t, "antennas" ); }
+
+line361 =
+  "361" s:sub? "." ws t:number eol
+    {  return makeSubRecord( {beamwidth:{vertical:parseFloat(t)}}, "361", s, t, "antennas" ); }
+
+line362 =
+  "362" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { orientation:t }, "362", s, t, "antennas" ); }
+
+line363 =
+  "363" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { polarization: dict("antenna","polarization",t) }, "363", s, t, "antennas" ); }
+
+receivers =
+  line400 /
+  line401 /
+  line402 /
+  line403 /
+  line404 /
+  line406 /
+  line443
+
+line400 =
+  "400" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { stateloc: t }, "400", s, t, "receivers" ); }
+
+line401 =
+  "401" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { antennaloc: t }, "401", s, t, "receivers" ); }
+
+line402 =
+  "402" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { control: t }, "402", s, t, "receivers" ); }
+
+line403 =
+  "403" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( {location:parseDMS(t)}, "403", s, t, "receivers" ); }
+
+line404 =
+  "404" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( {callsign:t}, "404", s, t, "receivers" ); }
+
+line406 =
+  "406" s:sub? "." ws t:linetext eol
+    {  return makeSubRecord( { radius: onRadius(t) }, "406", s, t, "receivers" ); }
+
+line443 =
+  item:"443" s:sub? "." ws t:linetext eol
+  {  return makeSubRecord( { equipmentcertid:t }, "443", s, t, "receivers" ); }
+
 line =
   line102 /
-  line303 /
+  docket /
+  line107 /
+  line110 /
+  line113 /
+  line114 /
+  transmitter /
+  receivers /
+  antennas /
   n:integer s:sub? "." ws t:linetext eol?
   { return makeRecord( {}, n, s, t); }
 
@@ -191,8 +370,70 @@ ws = [ \t]+
 linetext
   = chars:[^\n]+ {return chars.join("").trim();}
 
+int2 = num:([0-9][0-9]) { return num.join(""); }
+
+int4 = num:([0-9][0-9][0-9][0-9]) { return num.join(""); }
+
+emissiondesignator =
+   whole:integer unit:unitdesignator frac:integer cls:emissionclass
+   { var t = [whole,unit.text,frac,cls.text].join("");
+     var freq = parseInt( whole + "." + frac ) * unit.mult;
+     return { text:t, designator: { entry:t, frequency:freq, modulation:cls.modulation } }
+   }
+
+emissionclass =
+  emissionclass3 /
+  emissionclass4 /
+  emissionclass5
+
+emissionclass3 =
+    type:hex1 nature:hex1 info:hex1
+    { return { text: type+nature+info,
+        modulation: { type:dict("modulation","modtype",type),
+               nature:dict("modulation","modnature",nature),
+               information:dict("modulation","modinformation",info) } } }
+
+emissionclass4 =
+    type:hex1 nature:hex1 info:hex1 detail:hex1
+    { return { text: type+nature+info+detail,
+        modulation: { type:dict("modulation","modtype",type),
+               nature:dict("modulation","modnature",nature),
+               information:dict("modulation","modinformation",info),
+               detail:dict("modulation","moddetail",detail)  } } }
+
+emissionclass5 =
+    type:hex1 nature:hex1 info:hex1 detail:hex1 mux:hex1
+    { return { text: type+nature+info+detail+mux,
+        modulation: { type:dict("modulation","modtype",type),
+               nature:dict("modulation","modnature",nature),
+               information:dict("modulation","modinformation",info),
+               detail:dict("modulation","moddetail",detail),
+               multiplex:dict("modulation","modmux",mux)  } } }
+
+unitdesignator = unitH / unitK / unitM / unitG
+
+unitH = "H" { return { text:'H', mult:0.000001}; }
+unitK = "K" { return { text:'K', mult:0.001}; }
+unitM = "M" { return { text:'M', mult:1.0}; }
+unitG = "G" { return { text:'G', mult:1000.0}; }
+unitT = "T" { return { text:'T', mult:1000000.0}; }
+
+yyyymmdd = yyyy:int4 mm:int2 dd:int2
+  { var iyy = parseInt(yyyy), imm = parseInt(mm), idd = parseInt(dd);
+    return { text:yyyy+mm+dd, yyyy:iyy, mm:imm, dd:idd, date: new Date(iyy,imm-1,idd,0,0,0) }; }
+
+number "number"
+  = float / integer
+
 integer "integer"
   = digits:[0-9]+ { return digits.join(""); }
+
+
+float "float"
+  = digits:[0-9]+ "." frac:[0-9]+ { return digits.join("") + "." + frac.join(""); }
+
+
+hex1 = [A-Z0-9]
 
 hex "hex"
   = hexdigit:[a-zA-Z] digits:[a-zA-Z0-9]* { return hexdigit+digits.join(""); }
