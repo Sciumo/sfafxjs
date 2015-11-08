@@ -37,7 +37,7 @@ var sfaftxt = SFAFx.toSFAF(records);
 ```
 
 #Tools
-There are a few development tools available for testing and command line usage as we.
+There are a few development tools available for testing and command line usage as well.
 *  `bin/sfaf2json.js` converts a file to JSON and logs to the console.
 *  `bin/json2sfaf.js` converts a file to SFAF and logs to the console.
 
