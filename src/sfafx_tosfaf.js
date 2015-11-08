@@ -1,6 +1,7 @@
 'use strict';
 
-(function(window) {
+(function(SFAFx) {
+
   var toSortedKeys = function( obj ){
     var keys = [];
     for( var key in obj ){
@@ -10,6 +11,7 @@
     }
     return keys.sort();
   }
+
   var groups = {
      '113' : [113,115],
      '340' : [340,349],
@@ -144,10 +146,10 @@
     }
     return result;
   }
-  var toSFAFmodule =   { 'toSFAF':toSFAF, 'toSFAFRec':toSFAFRec };
-  if ( typeof module === 'object' && module && typeof module.exports === 'object' ) {
-    module.exports = toSFAFmodule;
-  } else {
-    window.SFAFx_toSFAF = toSFAFmodule;
-  }
-})(this);
+
+
+  SFAFx.toSFAF = toSFAF;
+  SFAFx.toSortedKeys = toSortedKeys;
+  SFAFx.toSFAFRec = toSFAFRec;
+
+})(SFAFx);

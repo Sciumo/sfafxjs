@@ -1,6 +1,41 @@
 //SFAFxJS https://github.com/Sciumo/sfafxjs
 
-sfafx_parser = (function() {
+/*!
+ * SFAFx JS SFAF Parser and Library
+ * Eric Lindahl, Sciumo Inc. (c) 2015 LGPL License
+ * Version: 0.1.2
+ * Last build: Sun Nov 08 2015 14:44:44
+ */
+
+// Module systems magic dance
+// Don't use strict mode for this function, so it can assign to global
+;(function(root, definition) {
+    // RequireJS
+    if (typeof define === 'function' && define.amd) {
+        define(definition);
+    // CommonJS
+    } else if (typeof exports === 'object') {
+        var self = definition();
+        // Use Node.js's `module.exports`. This supports both `require('xregexp')` and
+        // `require('xregexp').XRegExp`
+        (typeof module === 'object' ? (module.exports = self) : exports).SFAFx = self;
+    // <script>
+    } else {
+        // Create global
+        root.SFAFx = definition();
+    }
+}(this, function() {
+
+
+var SFAFx = (function(){
+  var sfafx = {}
+  sfafx.toJSON = function( sfafxtxt ){
+    return sfafx.sfafx_parser.parse(sfafxtxt);
+  }
+  return sfafx;
+}());
+
+SFAFx.sfafx_parser = (function(SFAFx) {
   "use strict";
 
   /*
@@ -466,7 +501,7 @@ sfafx_parser = (function() {
     }
 
     function peg$parsestart() {
-      var s0, s1, s2;
+      var s0, s1, s2, s3;
 
       s0 = peg$currPos;
       s1 = [];
@@ -476,10 +511,30 @@ sfafx_parser = (function() {
         s2 = peg$parserecord();
       }
       if (s1 !== peg$FAILED) {
-        peg$savedPos = s0;
-        s1 = peg$c0(s1);
+        s2 = [];
+        s3 = peg$parsews();
+        if (s3 === peg$FAILED) {
+          s3 = peg$parseeol();
+        }
+        while (s3 !== peg$FAILED) {
+          s2.push(s3);
+          s3 = peg$parsews();
+          if (s3 === peg$FAILED) {
+            s3 = peg$parseeol();
+          }
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c0(s1);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
       }
-      s0 = s1;
 
       return s0;
     }
@@ -4427,10 +4482,10 @@ sfafx_parser = (function() {
     }
 
 
-      if( typeof SFAFx_Dictionary == "undefined" || SFAFx_Dictionary == null ){
-        console.log( "!SFAFx_Dictionary required to decode");
+      if( typeof SFAFx == "undefined" || SFAFx == null ){
+        console.log( "!SFAFx required to decode");
       }
-      var sfafxdict = SFAFx_Dictionary;
+      var sfafxdict = SFAFx.dictionary;
       var FIRSTX = parseInt("A00",16);
 
       function clone(obj){
@@ -4620,11 +4675,13 @@ sfafx_parser = (function() {
   return {
     SyntaxError: peg$SyntaxError,
     parse:       peg$parse
-  };
-})();
+    };
+  })(SFAFx);
 'use strict';
-
-(function(window) {
+/**
+ * SFAFx Dictionary Addon Module
+ */ 
+(function(SFAFx) {
 
   var modulation = {};
 /*
@@ -4854,17 +4911,13 @@ var modmux = modulation["modmux"] =
      'specialHandlingCodes':specialHandlingCodes,
      'getSHC' : getSHC
    };
-
-  if ( typeof module === 'object' && module && typeof module.exports === 'object' ) {
-    module.exports = SFAFDictionaryModule;
-  } else {
-    window.SFAFx_Dictionary = SFAFDictionaryModule;
-  }
-})(this);
+   SFAFx.dictionary = SFAFDictionaryModule;
+})(SFAFx);
 
 'use strict';
 
-(function(window) {
+(function(SFAFx) {
+
   var toSortedKeys = function( obj ){
     var keys = [];
     for( var key in obj ){
@@ -4874,6 +4927,7 @@ var modmux = modulation["modmux"] =
     }
     return keys.sort();
   }
+
   var groups = {
      '113' : [113,115],
      '340' : [340,349],
@@ -5008,23 +5062,15 @@ var modmux = modulation["modmux"] =
     }
     return result;
   }
-  var toSFAFmodule =   { 'toSFAF':toSFAF, 'toSFAFRec':toSFAFRec };
-  if ( typeof module === 'object' && module && typeof module.exports === 'object' ) {
-    module.exports = toSFAFmodule;
-  } else {
-    window.SFAFx_toSFAF = toSFAFmodule;
-  }
-})(this);
 
 
-var SFAFx = (function(){
-  var sfafx = {}
-  sfafx.parser = sfafx_parser;
-  sfafx.toSFAF = SFAFx_toSFAF.toSFAF;
-  sfafx.toSFAFRec = SFAFx_toSFAF.toSFAFRec;
-  sfafx.dictionary = SFAFx_Dictionary;
-  sfafx.toJSON = function( sfafxtxt ){
-    return sfafx_parser.parse(sfafxtxt);
-  }
-  return sfafx;
-}());
+  SFAFx.toSFAF = toSFAF;
+  SFAFx.toSortedKeys = toSortedKeys;
+  SFAFx.toSFAFRec = toSFAFRec;
+
+})(SFAFx);
+
+//SFAFx outro
+return SFAFx;
+
+}));

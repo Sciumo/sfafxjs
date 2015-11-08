@@ -464,7 +464,7 @@ sfafx_parser = (function() {
     }
 
     function peg$parsestart() {
-      var s0, s1, s2;
+      var s0, s1, s2, s3;
 
       s0 = peg$currPos;
       s1 = [];
@@ -474,10 +474,30 @@ sfafx_parser = (function() {
         s2 = peg$parserecord();
       }
       if (s1 !== peg$FAILED) {
-        peg$savedPos = s0;
-        s1 = peg$c0(s1);
+        s2 = [];
+        s3 = peg$parsews();
+        if (s3 === peg$FAILED) {
+          s3 = peg$parseeol();
+        }
+        while (s3 !== peg$FAILED) {
+          s2.push(s3);
+          s3 = peg$parsews();
+          if (s3 === peg$FAILED) {
+            s3 = peg$parseeol();
+          }
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c0(s1);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
       }
-      s0 = s1;
 
       return s0;
     }
@@ -4425,10 +4445,10 @@ sfafx_parser = (function() {
     }
 
 
-      if( typeof SFAFx_Dictionary == "undefined" || SFAFx_Dictionary == null ){
-        console.log( "!SFAFx_Dictionary required to decode");
+      if( typeof SFAFx == "undefined" || SFAFx == null ){
+        console.log( "!SFAFx required to decode");
       }
-      var sfafxdict = SFAFx_Dictionary;
+      var sfafxdict = SFAFx.dictionary;
       var FIRSTX = parseInt("A00",16);
 
       function clone(obj){

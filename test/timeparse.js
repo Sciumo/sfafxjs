@@ -1,9 +1,6 @@
 var peg = require('pegjs');
 var fs = require('fs');
-var sfafxgrammar = fs.readFileSync('../grammar/sfafx_grammar.peg','utf8');
-var sfafxparse = peg.buildParser(sfafxgrammar);
-SFAFx_Dictionary = require('../src/sfafx_dict');
-SFAFx_toSFAF = require('../src/sfafx_tosfaf');
+var SFAFx = require('../sfafx.js');
 console.log( "reading..." + process.argv[2] );
 var sfaftxt = fs.readFileSync(process.argv[2],'utf8');
 console.log( "read " + sfaftxt.length + " bytes ");
@@ -19,7 +16,7 @@ SFAFx_Parse_Time = function(){
   }
 }
 try{
-   var records = sfafxparse.parse(sfaftxt);
+   var records = SFAFx.toJSON(sfaftxt);
 }catch( e ){
   console.log( "parse exception");
   console.log( e );

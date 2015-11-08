@@ -1,31 +1,32 @@
 var peg = require('pegjs');
 var fs = require('fs');
-SFAFx_toSFAF = require('../src/sfafx_tosfaf');
-SFAFx_Dictionary = require('../src/sfafx_dict');
-var sfafxgrammar = fs.readFileSync('../grammar/sfafx_grammar.peg','utf8');
-console.log(sfafxgrammar);
-var sfafxparse = peg.buildParser(sfafxgrammar);
-var sfaftxt = fs.readFileSync('af744251.sfaf','utf8');
-console.log(sfaftxt);
-var records = sfafxparse.parse(sfaftxt);
-console.log('=====');
-console.log(JSON.stringify(records,null,2));
-console.log('=====');
-var sfafxout = SFAFx_toSFAF.toSFAF(records);
-console.log(sfafxout);
-console.log( sfafxout.length + " " + sfaftxt.length  + " lengths equal:" + (sfafxout.length == sfaftxt.length));
+var SFAFx = require('../sfafx.js');
+var fname = (process.argv.length < 3)?'af744251.sfaf':process.argv[2];
+console.log( "reading " + fname );
+var sfafxtxt = fs.readFileSync(fname,'utf8');
+console.log(sfafxtxt);
+var records = SFAFx.toJSON(sfafxtxt);
+console.log( "Records read: " + records.length );
+var sfafxout = SFAFx.toSFAF(records);
+var lendiff = (sfafxout.length - sfafxtxt.length);
+console.log( sfafxout.length + " " + sfafxtxt.length  + " lengths difference:" + lendiff );
 var equal = true;
-var i = 0, len = sfafxout.length;
+var i = 0, len = (lendiff != 0 ? sfafxout.length : sfafxtxt.length);
 for( ; i < len; i++ ){
-  var o = sfafxout[i];
-  var s = sfaftxt[i];
+  var o = sfafxtxt[i];
+  var s = sfafxout[i];
   if( o != s ){
     equal = false;
     console.log( "diff " + i + " " + o + " " + s );
-    if( i > 10 ) i -= 10;
-    console.log( "Original:" + sfafxout.substr(i,20) + "...");
-    console.log( "Generated:" + sfaftxt.substr(i,20) + "...");
+    if( i > 20 ) i -= 20;
+    console.log( "Original:" + sfafxout.substr(i,30).replace('\n', '\\n') + "...");
+    console.log( "Generated:" + sfafxtxt.substr(i,30).replace('\n', '\\n') + "...");
     break;
   }
 }
 console.log( "Output are equal? " + equal );
+if( lendiff > 0 ){
+  console.log( "Extra generated:" + sfafxout.substr(sfafxtxt.length).replace('\n', '\\n') + "...");
+}else if( lendiff < 0 ){
+  console.log( "Unparsed original:" + sfafxtxt.substr(sfafxout.length).replace('\n', '\\n') + "...");
+}

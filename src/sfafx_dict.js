@@ -1,6 +1,8 @@
 'use strict';
-
-(function(window) {
+/**
+ * SFAFx Dictionary Addon Module
+ */ 
+(function(SFAFx) {
 
   var modulation = {};
 /*
@@ -230,10 +232,5 @@ var modmux = modulation["modmux"] =
      'specialHandlingCodes':specialHandlingCodes,
      'getSHC' : getSHC
    };
-
-  if ( typeof module === 'object' && module && typeof module.exports === 'object' ) {
-    module.exports = SFAFDictionaryModule;
-  } else {
-    window.SFAFx_Dictionary = SFAFDictionaryModule;
-  }
-})(this);
+   SFAFx.dictionary = SFAFDictionaryModule;
+})(SFAFx);

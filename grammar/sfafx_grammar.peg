@@ -1,8 +1,8 @@
 {
-  if( typeof SFAFx_Dictionary == "undefined" || SFAFx_Dictionary == null ){
-    console.log( "!SFAFx_Dictionary required to decode");
+  if( typeof SFAFx == "undefined" || SFAFx == null ){
+    console.log( "!SFAFx required to decode");
   }
-  var sfafxdict = SFAFx_Dictionary;
+  var sfafxdict = SFAFx.dictionary;
   var FIRSTX = parseInt("A00",16);
 
   function clone(obj){
@@ -170,7 +170,7 @@
 }
 
 start =
-  recs:record* { return recs; }
+  recs:record* (ws / eol)* { return recs; }
 
 record =
   cls:line005 lines:notline005*
