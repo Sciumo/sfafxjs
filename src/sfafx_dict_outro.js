@@ -39,6 +39,7 @@
   var entryKeys = [];
   var typeModel = {};
   var types = [];
+  var required = [];
 
   MCEBPub7Entries.forEach( function(entry){
         entryMap[entry.DataNumberSFAFItem] = entry;
@@ -52,8 +53,10 @@
         }
         if( entry.OccurrencesMaximum > 1 && entry.OccurrencesMaximum < 30 ){
           typeModel[type].Group[entry.DataNumberSFAFItem] = { Title:entry.Title };
-        }else{
-          typeModel[type][entry.DataNumberSFAFItem] = { Title:entry.Title };
+        }
+        typeModel[type][entry.DataNumberSFAFItem] = { Title:entry.Title };
+        if( entry.Required ){
+          required.push(entry.DataNumberSFAFItem);
         }
       });
 
@@ -127,6 +130,7 @@
      'getMaxOccurrences' : getMaxOccurrences,
      'types': types,
      'typeModel': typeModel,
+     'required': required,
      'bsearch' : binarySearch
    };
 

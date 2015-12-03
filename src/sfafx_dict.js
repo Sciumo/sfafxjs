@@ -247,7 +247,7 @@ var modmux = modulation["modmux"] =
     "Column": "sfaf.security_classification",
     "DBType": "str(10)",
     "Group": "",
-    "Description": "Data Item 005 has two parts. Part one contains a 2-letter designator representing the security classification of the record and the record special handling instructions. The second part of the item contains a 10-character field containing the record declassification instructions. The record declassification instructions must always be entered if the first character of the security classification is a �C,� �S,� or �T.�"
+    "Description": "Data Item 005 has two parts. Part one contains a 2-letter designator representing the security classification of the record and the record special handling instructions. The second part of the item contains a 10-character field containing the record declassification instructions. The record declassification instructions must always be entered if the first character of the security classification is a C, S, or T."
   },
   {
     "DataNumberSFAFItem": 6,
@@ -3334,6 +3334,7 @@ var modmux = modulation["modmux"] =
   var entryKeys = [];
   var typeModel = {};
   var types = [];
+  var required = [];
 
   MCEBPub7Entries.forEach( function(entry){
         entryMap[entry.DataNumberSFAFItem] = entry;
@@ -3347,8 +3348,10 @@ var modmux = modulation["modmux"] =
         }
         if( entry.OccurrencesMaximum > 1 && entry.OccurrencesMaximum < 30 ){
           typeModel[type].Group[entry.DataNumberSFAFItem] = { Title:entry.Title };
-        }else{
-          typeModel[type][entry.DataNumberSFAFItem] = { Title:entry.Title };
+        }
+        typeModel[type][entry.DataNumberSFAFItem] = { Title:entry.Title };
+        if( entry.Required ){
+          required.push(entry.DataNumberSFAFItem);
         }
       });
 
@@ -3422,6 +3425,7 @@ var modmux = modulation["modmux"] =
      'getMaxOccurrences' : getMaxOccurrences,
      'types': types,
      'typeModel': typeModel,
+     'required': required,
      'bsearch' : binarySearch
    };
 
