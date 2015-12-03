@@ -23,9 +23,13 @@
   },
   "homepage": "https://github.com/Sciumo/sfafxjs",
   "devDependencies": {
+    "csvtojson": "^0.4.5",
     "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.7.0",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-uglify": "^0.10.0",
+    "grunt-csv-json": "^0.1.0",
+    "grunt-execute": "^0.2.2",
     "grunt-peg": "^2.0.0",
     "grunt-replace": "^0.11.0",
     "pegjs": "^0.9.0"

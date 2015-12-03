@@ -12,17 +12,32 @@
     return keys.sort();
   }
 
-  var groups = {
-     '113' : [113,115],
-     '340' : [340,349],
-     '354' : [354,374],
-     '355' : [354,374],
-     '400' : [400,408],
-     '401' : [401,408],
-     '402' : [402,408],
-     '440' : [440,443],
-     '441' : [441,443],
-  };
+  /**
+   * TODO this should be in the dictionary
+   */
+  var groups = [
+     [113,118, "Transmitter"],
+     [340,343, "Equipment"],
+     [354,360, "Antenna"],
+     [400,408, "Receiver Location"],
+     [440,443, "Receiver Equipment"]
+  ];
+
+  var groupAtKey = function( key ){
+    if( key ){
+      var idx = parseInt(key);
+      for( var i  = 0; i < groups.length; i++ ){
+        var group = groups[i];
+        if( idx > group[1] ) continue;
+        if( idx >= group[0] ){
+          return group;
+        }
+        return null;
+      }
+    }
+    return null;
+  }
+
   var result = "";
   var pad0 = function( i ){
     if( i < 10 ){
@@ -38,7 +53,12 @@
           result += key  + ".     " + entry[eidx] + "\n";
         }
       }else{
-        result += key  + ".     " + entry + "\n";
+        entry = entry.trim();
+        if( entry.length > 0 ){
+          result += key  + ".     " + entry + "\n";
+        }else{
+          return 0;
+        }
       }
       return 1;
     }
@@ -46,15 +66,20 @@
   }
   var onOccurEntry = function(occuritem,occurkey,key){
     if( occuritem != undefined && occuritem != null && occuritem.hasOwnProperty("entry") ){
-      result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
-      return 1;
+      var entry = occuritem["entry"].trim();
+      if( entry.length > 0 ){
+        result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
+        return 1;
+      }
     }
     return 0;
   }
   var onOccur = function(item,occurkey,key){
     if( item && item.hasOwnProperty('occur') ){
       var occur = item['occur'];
-      return onOccurEntry( occur[occurkey], occurkey,key );
+      if( occur.hasOwnProperty(occurkey) ){
+        return onOccurEntry( occur[occurkey], occurkey,key );
+      }
     }
     return 0;
   }
@@ -70,8 +95,9 @@
   }
   var onKey = function( keys, rec, idx ){
     var key = keys[idx];
-    if( groups.hasOwnProperty(key) ){
-      return onGroup( keys, rec, idx, groups[key] );
+    var group = groupAtKey(key);
+    if( group ){
+      return onGroup( keys, rec, idx, group );
     }
     var item = rec[ key ];
     if( item != null && item != undefined ){
@@ -136,8 +162,7 @@
     }
     if( !Array.isArray(sfaf) ){
       if( !sfaf.hasOwnProperty('sfaf') ) return null;
-      sfaf = sfaf.sfaf;
-      if( !Array.isArray(sfaf) ) return null;
+      sfaf = [sfaf];
     }
     var i = 0, len = sfaf.length;
     result = "";
@@ -147,9 +172,90 @@
     return result;
   }
 
+  var nextEntry = function( key ){
+    var idx = parseInt(key);
+    return pad0(++idx);
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of next entry to add
+   */
+  var addEntryAt = function( sfafx, key ){
+    if( sfafx.hasOwnProperty(key) ){
+      if( Array.isArray(sfafx[key].entry) ){
+        sfafx[key].entry.push('');
+      }else{
+        sfafx[key].entry = [sfafx[key].entry,''];
+      }
+    }else{
+      sfafx[key] = { entry:''};
+    }
+    return sfafx[key];
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of next entry to add
+   */
+  var addNextEntryAt = function( sfafx, key ){
+    var next = nextEntry(key);
+
+  }
+
+  /**
+   * sfafx : SFAFx JSON object
+   * key: key of entry to add occurence to
+   */
+  var addOccurenceAt = function( sfafx, key ){
+
+  }
+
+  /**
+   * sfafx : SFAFx JSON object
+   * key: key of entry to add occurence group to
+   */
+  var addOccurenceGroupAt = function( sfafx, key ){
+
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of entry to remove
+   */
+  var removeEntryAt = function( sfafx, key ){
+
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of entry to remove
+   */
+  var removeOccurenceAt = function( sfafx, key ){
+
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of entry to remove
+   */
+  var removeOccurenceGroupAt = function( sfafx, key ){
+
+  }
+
 
   SFAFx.toSFAF = toSFAF;
   SFAFx.toSortedKeys = toSortedKeys;
   SFAFx.toSFAFRec = toSFAFRec;
+  SFAFx.groupAtKey = groupAtKey;
+  SFAFx.addNextEntryAt = addNextEntryAt;
+  SFAFx.addOccurenceAt = addOccurenceAt;
+  SFAFx.addOccurenceGroupAt = addOccurenceGroupAt;
+  SFAFx.addEntryAt = addEntryAt;
+  SFAFx.removeOccurenceAt = removeOccurenceAt;
+  SFAFx.removeOccurenceGroupAt = removeOccurenceGroupAt;
+  SFAFx.removeEntryAt = removeEntryAt;
+  SFAFx.pad0 = pad0;
+  SFAFx.nextEntry = nextEntry;
 
 })(SFAFx);

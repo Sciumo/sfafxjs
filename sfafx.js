@@ -4,7 +4,7 @@
  * SFAFx JS SFAF Parser and Library
  * Eric Lindahl, Sciumo Inc. (c) 2015 LGPL License
  * Version: 0.1.2
- * Last build: Sun Nov 08 2015 14:44:44
+ * Last build: Wed Dec 02 2015 20:12:52
  */
 
 // Module systems magic dance
@@ -117,203 +117,216 @@ SFAFx.sfafx_parser = (function(SFAFx) {
         peg$c33 = { type: "literal", value: "114", description: "\"114\"" },
         peg$c34 = function(s, emission) { var obj = { emissiondesignator:emission.designator };
               return makeSubRecord( obj, "114", s, emission.text, "transmitter" ); },
-        peg$c35 = "303.",
-        peg$c36 = { type: "literal", value: "303.", description: "\"303.\"" },
-        peg$c37 = function(t) { var latlon = { transmitter:{location:parseDMS(t)} };
+        peg$c35 = "115",
+        peg$c36 = { type: "literal", value: "115", description: "\"115\"" },
+        peg$c37 = function(s, t) { var obj = { power:t };
+              return makeSubRecord( obj, "115", s, t, "transmitter" ); },
+        peg$c38 = "303.",
+        peg$c39 = { type: "literal", value: "303.", description: "\"303.\"" },
+        peg$c40 = function(t) { var latlon = { transmitter:{location:parseDMS(t)} };
             return makeRecord( latlon, "303", null, t ); },
-        peg$c38 = "306.",
-        peg$c39 = { type: "literal", value: "306.", description: "\"306.\"" },
-        peg$c40 = function(t) { var obj = { transmitter:{ location:{radius:onRadius(t)}}};
+        peg$c41 = "306.",
+        peg$c42 = { type: "literal", value: "306.", description: "\"306.\"" },
+        peg$c43 = function(t) { var obj = { transmitter:{ location:{radius:onRadius(t)}}};
               return makeRecord( obj, "306", null, t ); },
-        peg$c41 = "354",
-        peg$c42 = { type: "literal", value: "354", description: "\"354\"" },
-        peg$c43 = function(s, t) {  return makeSubRecord( { name: t }, "354", s, t, "txantennas" ); },
-        peg$c44 = "355",
-        peg$c45 = { type: "literal", value: "355", description: "\"355\"" },
-        peg$c46 = function(s, t) {  return makeSubRecord( { nomenclature:t }, "355", s, t, "txantennas" ); },
-        peg$c47 = "356",
-        peg$c48 = { type: "literal", value: "356", description: "\"356\"" },
-        peg$c49 = function(s, t) {  return makeSubRecord( { height: parseFloat(t) }, "356", s, t, "txantennas" ); },
-        peg$c50 = "357",
-        peg$c51 = { type: "literal", value: "357", description: "\"357\"" },
-        peg$c52 = function(s, t) {  return makeSubRecord( { gain: t }, "357", s, t, "txantennas" ); },
-        peg$c53 = "358",
-        peg$c54 = { type: "literal", value: "358", description: "\"358\"" },
-        peg$c55 = function(s, t) {  return makeSubRecord( { elevation: parseFloat(t) }, "358", s, t, "txantennas" ); },
-        peg$c56 = "359",
-        peg$c57 = { type: "literal", value: "359", description: "\"359\"" },
-        peg$c58 = function(s, t) {  return makeSubRecord( {feedpointheight:parseFloat(t)}, "359", s, t, "txantennas" ); },
-        peg$c59 = "360",
-        peg$c60 = { type: "literal", value: "360", description: "\"360\"" },
-        peg$c61 = function(s, t) {  return makeSubRecord( {beamwidth:{horizontal:parseFloat(t)}}, "360", s, t, "txantennas" ); },
-        peg$c62 = "361",
-        peg$c63 = { type: "literal", value: "361", description: "\"361\"" },
-        peg$c64 = function(s, t) {  return makeSubRecord( {beamwidth:{vertical:parseFloat(t)}}, "361", s, t, "txantennas" ); },
-        peg$c65 = "362",
-        peg$c66 = { type: "literal", value: "362", description: "\"362\"" },
-        peg$c67 = function(s, t) {  return makeSubRecord( { orientation:t }, "362", s, t, "txantennas" ); },
-        peg$c68 = "363",
-        peg$c69 = { type: "literal", value: "363", description: "\"363\"" },
-        peg$c70 = function(s, t) {  return makeSubRecord( { polarization: dict("antenna","polarization",t) }, "363", s, t, "txantennas" ); },
-        peg$c71 = "400",
-        peg$c72 = { type: "literal", value: "400", description: "\"400\"" },
-        peg$c73 = function(s, t) {  return makeSubRecord( { stateloc: t }, "400", s, t, "receivers" ); },
-        peg$c74 = "401",
-        peg$c75 = { type: "literal", value: "401", description: "\"401\"" },
-        peg$c76 = function(s, t) {  return makeSubRecord( { antennaloc: t }, "401", s, t, "receivers" ); },
-        peg$c77 = "402",
-        peg$c78 = { type: "literal", value: "402", description: "\"402\"" },
-        peg$c79 = function(s, t) {  return makeSubRecord( { control: t }, "402", s, t, "receivers" ); },
-        peg$c80 = "403",
-        peg$c81 = { type: "literal", value: "403", description: "\"403\"" },
-        peg$c82 = function(s, t) {  return makeSubRecord( {location:parseDMS(t)}, "403", s, t, "receivers" ); },
-        peg$c83 = "404",
-        peg$c84 = { type: "literal", value: "404", description: "\"404\"" },
-        peg$c85 = function(s, t) {  return makeSubRecord( {callsign:t}, "404", s, t, "receivers" ); },
-        peg$c86 = "406",
-        peg$c87 = { type: "literal", value: "406", description: "\"406\"" },
-        peg$c88 = function(s, t) {  return makeSubRecord( { radius: onRadius(t) }, "406", s, t, "receivers" ); },
-        peg$c89 = "443",
-        peg$c90 = { type: "literal", value: "443", description: "\"443\"" },
-        peg$c91 = function(item, s, t) {  return makeSubRecord( { equipmentcertid:t }, "443", s, t, "receivers" ); },
-        peg$c92 = "454",
-        peg$c93 = { type: "literal", value: "454", description: "\"454\"" },
-        peg$c94 = function(s, t) {  return makeSubRecord( { name: t }, "454", s, t, "rxantennas" ); },
-        peg$c95 = "455",
-        peg$c96 = { type: "literal", value: "455", description: "\"455\"" },
-        peg$c97 = function(s, t) {  return makeSubRecord( { nomenclature:t }, "455", s, t, "rxantennas" ); },
-        peg$c98 = "456",
-        peg$c99 = { type: "literal", value: "456", description: "\"456\"" },
-        peg$c100 = function(s, t) {  return makeSubRecord( { height: parseFloat(t) }, "456", s, t, "rxantennas" ); },
-        peg$c101 = function(s, t) {  return makeSubRecord( { gain: t }, "457", s, t, "rxantennas" ); },
-        peg$c102 = function(s, t) {  return makeSubRecord( { elevation: parseFloat(t) }, "458", s, t, "rxantennas" ); },
-        peg$c103 = "459",
-        peg$c104 = { type: "literal", value: "459", description: "\"459\"" },
-        peg$c105 = function(s, t) {  return makeSubRecord( {feedpointheight:parseFloat(t)}, "459", s, t, "rxantennas" ); },
-        peg$c106 = "460",
-        peg$c107 = { type: "literal", value: "460", description: "\"460\"" },
-        peg$c108 = function(s, t) {  return makeSubRecord( {beamwidth:{horizontal:parseFloat(t)}}, "460", s, t, "rxantennas" ); },
-        peg$c109 = "461",
-        peg$c110 = { type: "literal", value: "461", description: "\"461\"" },
-        peg$c111 = function(s, t) {  return makeSubRecord( {beamwidth:{vertical:parseFloat(t)}}, "461", s, t, "rxantennas" ); },
-        peg$c112 = "462",
-        peg$c113 = { type: "literal", value: "462", description: "\"462\"" },
-        peg$c114 = function(s, t) {  return makeSubRecord( { orientation:t }, "462", s, t, "rxantennas" ); },
-        peg$c115 = "463",
-        peg$c116 = { type: "literal", value: "463", description: "\"463\"" },
-        peg$c117 = function(s, t) {  return makeSubRecord( { polarization: dict("antenna","polarization",t) }, "463", s, t, "rxantennas" ); },
-        peg$c118 = "199",
-        peg$c119 = { type: "literal", value: "199", description: "\"199\"" },
-        peg$c120 = function(item, s, link) {  return makeSubRecord( { link:link.link }, "199", s, link.text, "linkage" ); },
-        peg$c121 = function(tx, dir, rx, ed) { return { text: tx.text+dir.text+rx.text+ed.text,
-              link: { txconfig:tx.config, dir:dir.dir, rxconfig:rx.config, emission:ed.ed } } },
-        peg$c122 = "(",
-        peg$c123 = { type: "literal", value: "(", description: "\"(\"" },
-        peg$c124 = ")",
-        peg$c125 = { type: "literal", value: ")", description: "\")\"" },
-        peg$c126 = function(tx, ant, loc) { return { text: tx.text + "(" + ant.text + ")" + loc.text, config:{ tx:tx.ed, ant:ant.ed, loc:loc.ed } }; },
-        peg$c127 = function(rx, ant, loc) { return { text: rx.text + "(" + ant.text + ")" + loc.text, config:{ rx:rx.ed, ant:ant.ed, loc:loc.ed } }; },
-        peg$c128 = "R/",
-        peg$c129 = { type: "literal", value: "R/", description: "\"R/\"" },
-        peg$c130 = function(ed) { return { text:"R/" + ed, ed:ed }; },
-        peg$c131 = "T/",
-        peg$c132 = { type: "literal", value: "T/", description: "\"T/\"" },
-        peg$c133 = function(ed) { return { text:"T/" + ed, ed:ed }; },
-        peg$c134 = "A/",
-        peg$c135 = { type: "literal", value: "A/", description: "\"A/\"" },
-        peg$c136 = function(ed) { return { text:"A/" + ed, ed:ed }; },
-        peg$c137 = "R",
-        peg$c138 = { type: "literal", value: "R", description: "\"R\"" },
-        peg$c139 = function(loc) { return { text:"R"+loc, ed:loc }; },
-        peg$c140 = "[T]",
-        peg$c141 = { type: "literal", value: "[T]", description: "\"[T]\"" },
-        peg$c142 = function() { return { text:"[T]", dir:"tx" }; },
-        peg$c143 = "[R]",
-        peg$c144 = { type: "literal", value: "[R]", description: "\"[R]\"" },
-        peg$c145 = function() { return { text:"[R]", dir:"rx" }; },
-        peg$c146 = "[TR]",
-        peg$c147 = { type: "literal", value: "[TR]", description: "\"[TR]\"" },
-        peg$c148 = function() { return { text:"[TR]", dir:"txrx" }; },
-        peg$c149 = "(E/",
-        peg$c150 = { type: "literal", value: "(E/", description: "\"(E/\"" },
-        peg$c151 = function(ed) { return { text:"(E/" + ed + ")", ed:ed }; },
-        peg$c152 = "XX",
-        peg$c153 = { type: "literal", value: "XX", description: "\"XX\"" },
-        peg$c154 = function() { return "XX"; },
-        peg$c155 = function(elm) { return elm; },
-        peg$c156 = ",",
-        peg$c157 = { type: "literal", value: ",", description: "\",\"" },
-        peg$c158 = function(first, rest) { return first.join("") + rest.join(""); },
-        peg$c159 = function(num) { return num; },
-        peg$c160 = "-",
-        peg$c161 = { type: "literal", value: "-", description: "\"-\"" },
-        peg$c162 = function(low, high) { return low.join("") + "-" + high.join(""); },
-        peg$c163 = function(n, s, t) { return makeRecord( {}, n, s, t); },
-        peg$c164 = function() { return null; },
-        peg$c165 = function(n, s, t) { return makeRecord( {}, n, s, t ); },
-        peg$c166 = "/",
-        peg$c167 = { type: "literal", value: "/", description: "\"/\"" },
-        peg$c168 = function(n) { return n; },
-        peg$c169 = /^[\n]/,
-        peg$c170 = { type: "class", value: "[\\n]", description: "[\\n]" },
-        peg$c171 = /^[^\n]/,
-        peg$c172 = { type: "class", value: "[^\\n]", description: "[^\\n]" },
-        peg$c173 = /^[ \t]/,
-        peg$c174 = { type: "class", value: "[ \\t]", description: "[ \\t]" },
-        peg$c175 = function(chars) {return chars.join("").trim();},
-        peg$c176 = /^[0-9]/,
-        peg$c177 = { type: "class", value: "[0-9]", description: "[0-9]" },
-        peg$c178 = function(d1, d2) { return d1+d2; },
-        peg$c179 = function(d1, d2, d3, d4) { return d1+d2+d3+d4; },
-        peg$c180 = function(whole, unit, frac, cls) { var t = [whole,unit.text,frac,cls.text].join("");
+        peg$c44 = "354",
+        peg$c45 = { type: "literal", value: "354", description: "\"354\"" },
+        peg$c46 = function(s, t) {  return makeSubRecord( { name: t }, "354", s, t, "txantennas" ); },
+        peg$c47 = "355",
+        peg$c48 = { type: "literal", value: "355", description: "\"355\"" },
+        peg$c49 = function(s, t) {  return makeSubRecord( { nomenclature:t }, "355", s, t, "txantennas" ); },
+        peg$c50 = "356",
+        peg$c51 = { type: "literal", value: "356", description: "\"356\"" },
+        peg$c52 = function(s, t) {  return makeSubRecord( { height: parseFloat(t) }, "356", s, t, "txantennas" ); },
+        peg$c53 = "357",
+        peg$c54 = { type: "literal", value: "357", description: "\"357\"" },
+        peg$c55 = function(s, t) {  return makeSubRecord( { gain: t }, "357", s, t, "txantennas" ); },
+        peg$c56 = "358",
+        peg$c57 = { type: "literal", value: "358", description: "\"358\"" },
+        peg$c58 = function(s, t) {  return makeSubRecord( { elevation: parseFloat(t) }, "358", s, t, "txantennas" ); },
+        peg$c59 = "359",
+        peg$c60 = { type: "literal", value: "359", description: "\"359\"" },
+        peg$c61 = function(s, t) {  return makeSubRecord( {feedpointheight:parseFloat(t)}, "359", s, t, "txantennas" ); },
+        peg$c62 = "360",
+        peg$c63 = { type: "literal", value: "360", description: "\"360\"" },
+        peg$c64 = function(s, t) {  return makeSubRecord( {beamwidth:{horizontal:parseFloat(t)}}, "360", s, t, "txantennas" ); },
+        peg$c65 = "361",
+        peg$c66 = { type: "literal", value: "361", description: "\"361\"" },
+        peg$c67 = function(s, t) {  return makeSubRecord( {beamwidth:{vertical:parseFloat(t)}}, "361", s, t, "txantennas" ); },
+        peg$c68 = "362",
+        peg$c69 = { type: "literal", value: "362", description: "\"362\"" },
+        peg$c70 = function(s, t) {  return makeSubRecord( { orientation:t }, "362", s, t, "txantennas" ); },
+        peg$c71 = "363",
+        peg$c72 = { type: "literal", value: "363", description: "\"363\"" },
+        peg$c73 = function(s, t) {  return makeSubRecord( { polarization: dict("antenna","polarization",t) }, "363", s, t, "txantennas" ); },
+        peg$c74 = "400",
+        peg$c75 = { type: "literal", value: "400", description: "\"400\"" },
+        peg$c76 = function(s, t) {  return makeSubRecord( { stateloc: t }, "400", s, t, "receivers" ); },
+        peg$c77 = "401",
+        peg$c78 = { type: "literal", value: "401", description: "\"401\"" },
+        peg$c79 = function(s, t) {  return makeSubRecord( { antennaloc: t }, "401", s, t, "receivers" ); },
+        peg$c80 = "402",
+        peg$c81 = { type: "literal", value: "402", description: "\"402\"" },
+        peg$c82 = function(s, t) {  return makeSubRecord( { control: t }, "402", s, t, "receivers" ); },
+        peg$c83 = "403",
+        peg$c84 = { type: "literal", value: "403", description: "\"403\"" },
+        peg$c85 = function(s, t) {  return makeSubRecord( {location:parseDMS(t)}, "403", s, t, "receivers" ); },
+        peg$c86 = "404",
+        peg$c87 = { type: "literal", value: "404", description: "\"404\"" },
+        peg$c88 = function(s, t) {  return makeSubRecord( {callsign:t}, "404", s, t, "receivers" ); },
+        peg$c89 = "406",
+        peg$c90 = { type: "literal", value: "406", description: "\"406\"" },
+        peg$c91 = function(s, t) {  return makeSubRecord( { radius: onRadius(t) }, "406", s, t, "receivers" ); },
+        peg$c92 = "443",
+        peg$c93 = { type: "literal", value: "443", description: "\"443\"" },
+        peg$c94 = function(item, s, t) {  return makeSubRecord( { equipmentcertid:t }, "443", s, t, "receivers" ); },
+        peg$c95 = "454",
+        peg$c96 = { type: "literal", value: "454", description: "\"454\"" },
+        peg$c97 = function(s, t) {  return makeSubRecord( { name: t }, "454", s, t, "rxantennas" ); },
+        peg$c98 = "455",
+        peg$c99 = { type: "literal", value: "455", description: "\"455\"" },
+        peg$c100 = function(s, t) {  return makeSubRecord( { nomenclature:t }, "455", s, t, "rxantennas" ); },
+        peg$c101 = "456",
+        peg$c102 = { type: "literal", value: "456", description: "\"456\"" },
+        peg$c103 = function(s, t) {  return makeSubRecord( { height: parseFloat(t) }, "456", s, t, "rxantennas" ); },
+        peg$c104 = function(s, t) {  return makeSubRecord( { gain: t }, "457", s, t, "rxantennas" ); },
+        peg$c105 = function(s, t) {  return makeSubRecord( { elevation: parseFloat(t) }, "458", s, t, "rxantennas" ); },
+        peg$c106 = "459",
+        peg$c107 = { type: "literal", value: "459", description: "\"459\"" },
+        peg$c108 = function(s, t) {  return makeSubRecord( {feedpointheight:parseFloat(t)}, "459", s, t, "rxantennas" ); },
+        peg$c109 = "460",
+        peg$c110 = { type: "literal", value: "460", description: "\"460\"" },
+        peg$c111 = function(s, t) {  return makeSubRecord( {beamwidth:{horizontal:parseFloat(t)}}, "460", s, t, "rxantennas" ); },
+        peg$c112 = "461",
+        peg$c113 = { type: "literal", value: "461", description: "\"461\"" },
+        peg$c114 = function(s, t) {  return makeSubRecord( {beamwidth:{vertical:parseFloat(t)}}, "461", s, t, "rxantennas" ); },
+        peg$c115 = "462",
+        peg$c116 = { type: "literal", value: "462", description: "\"462\"" },
+        peg$c117 = function(s, t) {  return makeSubRecord( { orientation:t }, "462", s, t, "rxantennas" ); },
+        peg$c118 = "463",
+        peg$c119 = { type: "literal", value: "463", description: "\"463\"" },
+        peg$c120 = function(s, t) {  return makeSubRecord( { polarization: dict("antenna","polarization",t) }, "463", s, t, "rxantennas" ); },
+        peg$c121 = "199",
+        peg$c122 = { type: "literal", value: "199", description: "\"199\"" },
+        peg$c123 = function(item, s, link) {  return makeSubRecord( { link:link.link }, "199", s, link.text, "linkage" ); },
+        peg$c124 = function(tx, dir, rx) { return { text: tx.text+dir.text+rx.text+ed.text,
+              link: { txconfig:tx.config, dir:dir.dir, rxconfig:rx.config } } },
+        peg$c125 = "ALL",
+        peg$c126 = { type: "literal", value: "ALL", description: "\"ALL\"" },
+        peg$c127 = function() { return { text: "ALL",
+            link: { txconfig: {equipment:"ALL", antenna:"ALL", location:"ALL", emission:"ALL"} ,
+                    dir:"txrx",
+                    rxconfig: {equipment:"ALL", antenna:"ALL", location:"ALL", emission:"ALL"} } }},
+        peg$c128 = "[T]",
+        peg$c129 = { type: "literal", value: "[T]", description: "\"[T]\"" },
+        peg$c130 = function(tx) { return { text:tx.text+"[T]", config:tx.ed } },
+        peg$c131 = "[R]",
+        peg$c132 = { type: "literal", value: "[R]", description: "\"[R]\"" },
+        peg$c133 = function(rx) { return { text:rx.text+"[R]", config:rx.ed } },
+        peg$c134 = "(",
+        peg$c135 = { type: "literal", value: "(", description: "\"(\"" },
+        peg$c136 = ")",
+        peg$c137 = { type: "literal", value: ")", description: "\")\"" },
+        peg$c138 = function(tx, ant, loc) { return { text: tx.text + "(" + ant.text + ")" + loc.text, config:{ tx:tx.ed, ant:ant.ed, loc:loc.ed } }; },
+        peg$c139 = function(rx, ant, loc) { return { text: rx.text + "(" + ant.text + ")" + loc.text, config:{ rx:rx.ed, ant:ant.ed, loc:loc.ed } }; },
+        peg$c140 = "R/",
+        peg$c141 = { type: "literal", value: "R/", description: "\"R/\"" },
+        peg$c142 = function(ed) { return { text:"R/" + ed, ed:ed }; },
+        peg$c143 = "T/",
+        peg$c144 = { type: "literal", value: "T/", description: "\"T/\"" },
+        peg$c145 = function(ed) { return { text:"T/" + ed, ed:ed }; },
+        peg$c146 = "A/",
+        peg$c147 = { type: "literal", value: "A/", description: "\"A/\"" },
+        peg$c148 = function(ed) { return { text:"A/" + ed, ed:ed }; },
+        peg$c149 = "R",
+        peg$c150 = { type: "literal", value: "R", description: "\"R\"" },
+        peg$c151 = function(loc) { return { text:"R"+loc, ed:loc }; },
+        peg$c152 = function() { return { text:"[T]", dir:"tx" }; },
+        peg$c153 = function() { return { text:"[R]", dir:"rx" }; },
+        peg$c154 = "[B]",
+        peg$c155 = { type: "literal", value: "[B]", description: "\"[B]\"" },
+        peg$c156 = function() { return { text:"[B]", dir:"txrx" }; },
+        peg$c157 = "(E/",
+        peg$c158 = { type: "literal", value: "(E/", description: "\"(E/\"" },
+        peg$c159 = function(ed) { return { text:"(E/" + ed + ")", ed:ed }; },
+        peg$c160 = "XX",
+        peg$c161 = { type: "literal", value: "XX", description: "\"XX\"" },
+        peg$c162 = function() { return "XX"; },
+        peg$c163 = function(elm) { return elm; },
+        peg$c164 = ",",
+        peg$c165 = { type: "literal", value: ",", description: "\",\"" },
+        peg$c166 = function(first, rest) { return first.join("") + rest.join(""); },
+        peg$c167 = function(num) { return num; },
+        peg$c168 = "-",
+        peg$c169 = { type: "literal", value: "-", description: "\"-\"" },
+        peg$c170 = function(low, high) { return low.join("") + "-" + high.join(""); },
+        peg$c171 = function(n, s, t) { return makeRecord( {}, n, s, t); },
+        peg$c172 = function(n, s) { return null; },
+        peg$c173 = function() { return null; },
+        peg$c174 = function(n, s, t) { return makeRecord( {}, n, s, t ); },
+        peg$c175 = "/",
+        peg$c176 = { type: "literal", value: "/", description: "\"/\"" },
+        peg$c177 = function(n) { return n; },
+        peg$c178 = /^[\n]/,
+        peg$c179 = { type: "class", value: "[\\n]", description: "[\\n]" },
+        peg$c180 = /^[^\n]/,
+        peg$c181 = { type: "class", value: "[^\\n]", description: "[^\\n]" },
+        peg$c182 = /^[ \t]/,
+        peg$c183 = { type: "class", value: "[ \\t]", description: "[ \\t]" },
+        peg$c184 = function(chars) {return chars.join("").trim();},
+        peg$c185 = /^[0-9]/,
+        peg$c186 = { type: "class", value: "[0-9]", description: "[0-9]" },
+        peg$c187 = function(d1, d2) { return d1+d2; },
+        peg$c188 = function(d1, d2, d3, d4) { return d1+d2+d3+d4; },
+        peg$c189 = function(whole, unit, frac, cls) { var t = [whole,unit.text,frac,cls.text].join("");
              var freq = parseInt( whole + "." + frac ) * unit.mult;
              return { text:t, designator: { entry:t, frequency:freq, modulation:cls.modulation } }
            },
-        peg$c181 = function(type, nature, info) { return { text: type+nature+info,
+        peg$c190 = function(type, nature, info) { return { text: type+nature+info,
                 modulation: { type:dict("modulation","modtype",type),
                        nature:dict("modulation","modnature",nature),
                        information:dict("modulation","modinformation",info) } } },
-        peg$c182 = function(type, nature, info, detail) { return { text: type+nature+info+detail,
+        peg$c191 = function(type, nature, info, detail) { return { text: type+nature+info+detail,
                 modulation: { type:dict("modulation","modtype",type),
                        nature:dict("modulation","modnature",nature),
                        information:dict("modulation","modinformation",info),
                        detail:dict("modulation","moddetail",detail)  } } },
-        peg$c183 = function(type, nature, info, detail, mux) { return { text: type+nature+info+detail+mux,
+        peg$c192 = function(type, nature, info, detail, mux) { return { text: type+nature+info+detail+mux,
                 modulation: { type:dict("modulation","modtype",type),
                        nature:dict("modulation","modnature",nature),
                        information:dict("modulation","modinformation",info),
                        detail:dict("modulation","moddetail",detail),
                        multiplex:dict("modulation","modmux",mux)  } } },
-        peg$c184 = "H",
-        peg$c185 = { type: "literal", value: "H", description: "\"H\"" },
-        peg$c186 = function() { return { text:'H', mult:0.000001}; },
-        peg$c187 = "K",
-        peg$c188 = { type: "literal", value: "K", description: "\"K\"" },
-        peg$c189 = function() { return { text:'K', mult:0.001}; },
-        peg$c190 = "M",
-        peg$c191 = { type: "literal", value: "M", description: "\"M\"" },
-        peg$c192 = function() { return { text:'M', mult:1.0}; },
-        peg$c193 = "G",
-        peg$c194 = { type: "literal", value: "G", description: "\"G\"" },
-        peg$c195 = function() { return { text:'G', mult:1000.0}; },
-        peg$c196 = "T",
-        peg$c197 = { type: "literal", value: "T", description: "\"T\"" },
-        peg$c198 = function() { return { text:'T', mult:1000000.0}; },
-        peg$c199 = function(yyyy, mm, dd) { var iyy = parseInt(yyyy), imm = parseInt(mm), idd = parseInt(dd);
+        peg$c193 = "H",
+        peg$c194 = { type: "literal", value: "H", description: "\"H\"" },
+        peg$c195 = function() { return { text:'H', mult:0.000001}; },
+        peg$c196 = "K",
+        peg$c197 = { type: "literal", value: "K", description: "\"K\"" },
+        peg$c198 = function() { return { text:'K', mult:0.001}; },
+        peg$c199 = "M",
+        peg$c200 = { type: "literal", value: "M", description: "\"M\"" },
+        peg$c201 = function() { return { text:'M', mult:1.0}; },
+        peg$c202 = "G",
+        peg$c203 = { type: "literal", value: "G", description: "\"G\"" },
+        peg$c204 = function() { return { text:'G', mult:1000.0}; },
+        peg$c205 = "T",
+        peg$c206 = { type: "literal", value: "T", description: "\"T\"" },
+        peg$c207 = function() { return { text:'T', mult:1000000.0}; },
+        peg$c208 = function(yyyy, mm, dd) { var iyy = parseInt(yyyy), imm = parseInt(mm), idd = parseInt(dd);
             return { text:yyyy+mm+dd, yyyy:iyy, mm:imm, dd:idd, date: new Date(iyy,imm-1,idd,0,0,0) }; },
-        peg$c200 = { type: "other", description: "number" },
-        peg$c201 = { type: "other", description: "integer" },
-        peg$c202 = function(digits) { return digits.join(""); },
-        peg$c203 = { type: "other", description: "float" },
-        peg$c204 = function(digits, frac) { return digits.join("") + "." + frac.join(""); },
-        peg$c205 = /^[A-Z0-9]/,
-        peg$c206 = { type: "class", value: "[A-Z0-9]", description: "[A-Z0-9]" },
-        peg$c207 = { type: "other", description: "hex" },
-        peg$c208 = /^[a-zA-Z]/,
-        peg$c209 = { type: "class", value: "[a-zA-Z]", description: "[a-zA-Z]" },
-        peg$c210 = /^[a-zA-Z0-9]/,
-        peg$c211 = { type: "class", value: "[a-zA-Z0-9]", description: "[a-zA-Z0-9]" },
-        peg$c212 = function(hexdigit, digits) { return hexdigit+digits.join(""); },
+        peg$c209 = { type: "other", description: "number" },
+        peg$c210 = { type: "other", description: "integer" },
+        peg$c211 = function(digits) { return digits.join(""); },
+        peg$c212 = { type: "other", description: "float" },
+        peg$c213 = function(digits, frac) { return digits.join("") + "." + frac.join(""); },
+        peg$c214 = /^[A-Z0-9]/,
+        peg$c215 = { type: "class", value: "[A-Z0-9]", description: "[A-Z0-9]" },
+        peg$c216 = { type: "other", description: "hex" },
+        peg$c217 = /^[a-zA-Z]/,
+        peg$c218 = { type: "class", value: "[a-zA-Z]", description: "[a-zA-Z]" },
+        peg$c219 = /^[a-zA-Z0-9]/,
+        peg$c220 = { type: "class", value: "[a-zA-Z0-9]", description: "[a-zA-Z0-9]" },
+        peg$c221 = function(hexdigit, digits) { return hexdigit+digits.join(""); },
 
         peg$currPos          = 0,
         peg$savedPos         = 0,
@@ -1000,6 +1013,20 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
+    function peg$parseemission() {
+      var s0;
+
+      s0 = peg$parseline113();
+      if (s0 === peg$FAILED) {
+        s0 = peg$parseline114();
+        if (s0 === peg$FAILED) {
+          s0 = peg$parseline115();
+        }
+      }
+
+      return s0;
+    }
+
     function peg$parseline113() {
       var s0, s1, s2, s3, s4, s5, s6;
 
@@ -1133,16 +1160,78 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
+    function peg$parseline115() {
+      var s0, s1, s2, s3, s4, s5, s6;
+
+      s0 = peg$currPos;
+      if (input.substr(peg$currPos, 3) === peg$c35) {
+        s1 = peg$c35;
+        peg$currPos += 3;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c36); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parsesub();
+        if (s2 === peg$FAILED) {
+          s2 = null;
+        }
+        if (s2 !== peg$FAILED) {
+          if (input.charCodeAt(peg$currPos) === 46) {
+            s3 = peg$c17;
+            peg$currPos++;
+          } else {
+            s3 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c18); }
+          }
+          if (s3 !== peg$FAILED) {
+            s4 = peg$parsews();
+            if (s4 !== peg$FAILED) {
+              s5 = peg$parselinetext();
+              if (s5 !== peg$FAILED) {
+                s6 = peg$parseeol();
+                if (s6 !== peg$FAILED) {
+                  peg$savedPos = s0;
+                  s1 = peg$c37(s2, s5);
+                  s0 = s1;
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
     function peg$parseline303() {
       var s0, s1, s2, s3, s4;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 4) === peg$c35) {
-        s1 = peg$c35;
+      if (input.substr(peg$currPos, 4) === peg$c38) {
+        s1 = peg$c38;
         peg$currPos += 4;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c36); }
+        if (peg$silentFails === 0) { peg$fail(peg$c39); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parsews();
@@ -1152,7 +1241,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
             s4 = peg$parseeol();
             if (s4 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c37(s3);
+              s1 = peg$c40(s3);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -1178,12 +1267,12 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2, s3, s4;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 4) === peg$c38) {
-        s1 = peg$c38;
+      if (input.substr(peg$currPos, 4) === peg$c41) {
+        s1 = peg$c41;
         peg$currPos += 4;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c39); }
+        if (peg$silentFails === 0) { peg$fail(peg$c42); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parsews();
@@ -1193,7 +1282,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
             s4 = peg$parseeol();
             if (s4 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c40(s3);
+              s1 = peg$c43(s3);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -1251,68 +1340,6 @@ SFAFx.sfafx_parser = (function(SFAFx) {
     }
 
     function peg$parseline354() {
-      var s0, s1, s2, s3, s4, s5, s6;
-
-      s0 = peg$currPos;
-      if (input.substr(peg$currPos, 3) === peg$c41) {
-        s1 = peg$c41;
-        peg$currPos += 3;
-      } else {
-        s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c42); }
-      }
-      if (s1 !== peg$FAILED) {
-        s2 = peg$parsesub();
-        if (s2 === peg$FAILED) {
-          s2 = null;
-        }
-        if (s2 !== peg$FAILED) {
-          if (input.charCodeAt(peg$currPos) === 46) {
-            s3 = peg$c17;
-            peg$currPos++;
-          } else {
-            s3 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c18); }
-          }
-          if (s3 !== peg$FAILED) {
-            s4 = peg$parsews();
-            if (s4 !== peg$FAILED) {
-              s5 = peg$parselinetext();
-              if (s5 !== peg$FAILED) {
-                s6 = peg$parseeol();
-                if (s6 !== peg$FAILED) {
-                  peg$savedPos = s0;
-                  s1 = peg$c43(s2, s5);
-                  s0 = s1;
-                } else {
-                  peg$currPos = s0;
-                  s0 = peg$FAILED;
-                }
-              } else {
-                peg$currPos = s0;
-                s0 = peg$FAILED;
-              }
-            } else {
-              peg$currPos = s0;
-              s0 = peg$FAILED;
-            }
-          } else {
-            peg$currPos = s0;
-            s0 = peg$FAILED;
-          }
-        } else {
-          peg$currPos = s0;
-          s0 = peg$FAILED;
-        }
-      } else {
-        peg$currPos = s0;
-        s0 = peg$FAILED;
-      }
-
-      return s0;
-    }
-
-    function peg$parseline355() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1374,7 +1401,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline356() {
+    function peg$parseline355() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1401,7 +1428,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
           if (s3 !== peg$FAILED) {
             s4 = peg$parsews();
             if (s4 !== peg$FAILED) {
-              s5 = peg$parsenumber();
+              s5 = peg$parselinetext();
               if (s5 !== peg$FAILED) {
                 s6 = peg$parseeol();
                 if (s6 !== peg$FAILED) {
@@ -1436,7 +1463,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline357() {
+    function peg$parseline356() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1498,7 +1525,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline358() {
+    function peg$parseline357() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1560,7 +1587,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline359() {
+    function peg$parseline358() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1622,7 +1649,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline360() {
+    function peg$parseline359() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1684,7 +1711,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline361() {
+    function peg$parseline360() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1746,7 +1773,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline362() {
+    function peg$parseline361() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1773,7 +1800,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
           if (s3 !== peg$FAILED) {
             s4 = peg$parsews();
             if (s4 !== peg$FAILED) {
-              s5 = peg$parselinetext();
+              s5 = peg$parsenumber();
               if (s5 !== peg$FAILED) {
                 s6 = peg$parseeol();
                 if (s6 !== peg$FAILED) {
@@ -1808,7 +1835,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline363() {
+    function peg$parseline362() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1870,33 +1897,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parsereceivers() {
-      var s0;
-
-      s0 = peg$parseline400();
-      if (s0 === peg$FAILED) {
-        s0 = peg$parseline401();
-        if (s0 === peg$FAILED) {
-          s0 = peg$parseline402();
-          if (s0 === peg$FAILED) {
-            s0 = peg$parseline403();
-            if (s0 === peg$FAILED) {
-              s0 = peg$parseline404();
-              if (s0 === peg$FAILED) {
-                s0 = peg$parseline406();
-                if (s0 === peg$FAILED) {
-                  s0 = peg$parseline443();
-                }
-              }
-            }
-          }
-        }
-      }
-
-      return s0;
-    }
-
-    function peg$parseline400() {
+    function peg$parseline363() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -1958,7 +1959,33 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline401() {
+    function peg$parsereceivers() {
+      var s0;
+
+      s0 = peg$parseline400();
+      if (s0 === peg$FAILED) {
+        s0 = peg$parseline401();
+        if (s0 === peg$FAILED) {
+          s0 = peg$parseline402();
+          if (s0 === peg$FAILED) {
+            s0 = peg$parseline403();
+            if (s0 === peg$FAILED) {
+              s0 = peg$parseline404();
+              if (s0 === peg$FAILED) {
+                s0 = peg$parseline406();
+                if (s0 === peg$FAILED) {
+                  s0 = peg$parseline443();
+                }
+              }
+            }
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parseline400() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2020,7 +2047,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline402() {
+    function peg$parseline401() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2082,7 +2109,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline403() {
+    function peg$parseline402() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2144,7 +2171,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline404() {
+    function peg$parseline403() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2206,7 +2233,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline406() {
+    function peg$parseline404() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2268,7 +2295,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline443() {
+    function peg$parseline406() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2300,7 +2327,69 @@ SFAFx.sfafx_parser = (function(SFAFx) {
                 s6 = peg$parseeol();
                 if (s6 !== peg$FAILED) {
                   peg$savedPos = s0;
-                  s1 = peg$c91(s1, s2, s5);
+                  s1 = peg$c91(s2, s5);
+                  s0 = s1;
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseline443() {
+      var s0, s1, s2, s3, s4, s5, s6;
+
+      s0 = peg$currPos;
+      if (input.substr(peg$currPos, 3) === peg$c92) {
+        s1 = peg$c92;
+        peg$currPos += 3;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c93); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parsesub();
+        if (s2 === peg$FAILED) {
+          s2 = null;
+        }
+        if (s2 !== peg$FAILED) {
+          if (input.charCodeAt(peg$currPos) === 46) {
+            s3 = peg$c17;
+            peg$currPos++;
+          } else {
+            s3 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c18); }
+          }
+          if (s3 !== peg$FAILED) {
+            s4 = peg$parsews();
+            if (s4 !== peg$FAILED) {
+              s5 = peg$parselinetext();
+              if (s5 !== peg$FAILED) {
+                s6 = peg$parseeol();
+                if (s6 !== peg$FAILED) {
+                  peg$savedPos = s0;
+                  s1 = peg$c94(s1, s2, s5);
                   s0 = s1;
                 } else {
                   peg$currPos = s0;
@@ -2369,68 +2458,6 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 3) === peg$c92) {
-        s1 = peg$c92;
-        peg$currPos += 3;
-      } else {
-        s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c93); }
-      }
-      if (s1 !== peg$FAILED) {
-        s2 = peg$parsesub();
-        if (s2 === peg$FAILED) {
-          s2 = null;
-        }
-        if (s2 !== peg$FAILED) {
-          if (input.charCodeAt(peg$currPos) === 46) {
-            s3 = peg$c17;
-            peg$currPos++;
-          } else {
-            s3 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c18); }
-          }
-          if (s3 !== peg$FAILED) {
-            s4 = peg$parsews();
-            if (s4 !== peg$FAILED) {
-              s5 = peg$parselinetext();
-              if (s5 !== peg$FAILED) {
-                s6 = peg$parseeol();
-                if (s6 !== peg$FAILED) {
-                  peg$savedPos = s0;
-                  s1 = peg$c94(s2, s5);
-                  s0 = s1;
-                } else {
-                  peg$currPos = s0;
-                  s0 = peg$FAILED;
-                }
-              } else {
-                peg$currPos = s0;
-                s0 = peg$FAILED;
-              }
-            } else {
-              peg$currPos = s0;
-              s0 = peg$FAILED;
-            }
-          } else {
-            peg$currPos = s0;
-            s0 = peg$FAILED;
-          }
-        } else {
-          peg$currPos = s0;
-          s0 = peg$FAILED;
-        }
-      } else {
-        peg$currPos = s0;
-        s0 = peg$FAILED;
-      }
-
-      return s0;
-    }
-
-    function peg$parseline455() {
-      var s0, s1, s2, s3, s4, s5, s6;
-
-      s0 = peg$currPos;
       if (input.substr(peg$currPos, 3) === peg$c95) {
         s1 = peg$c95;
         peg$currPos += 3;
@@ -2489,7 +2516,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline456() {
+    function peg$parseline455() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2516,7 +2543,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
           if (s3 !== peg$FAILED) {
             s4 = peg$parsews();
             if (s4 !== peg$FAILED) {
-              s5 = peg$parsenumber();
+              s5 = peg$parselinetext();
               if (s5 !== peg$FAILED) {
                 s6 = peg$parseeol();
                 if (s6 !== peg$FAILED) {
@@ -2551,16 +2578,16 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline457() {
+    function peg$parseline456() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 3) === peg$c50) {
-        s1 = peg$c50;
+      if (input.substr(peg$currPos, 3) === peg$c101) {
+        s1 = peg$c101;
         peg$currPos += 3;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c51); }
+        if (peg$silentFails === 0) { peg$fail(peg$c102); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parsesub();
@@ -2583,7 +2610,69 @@ SFAFx.sfafx_parser = (function(SFAFx) {
                 s6 = peg$parseeol();
                 if (s6 !== peg$FAILED) {
                   peg$savedPos = s0;
-                  s1 = peg$c101(s2, s5);
+                  s1 = peg$c103(s2, s5);
+                  s0 = s1;
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseline457() {
+      var s0, s1, s2, s3, s4, s5, s6;
+
+      s0 = peg$currPos;
+      if (input.substr(peg$currPos, 3) === peg$c53) {
+        s1 = peg$c53;
+        peg$currPos += 3;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c54); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parsesub();
+        if (s2 === peg$FAILED) {
+          s2 = null;
+        }
+        if (s2 !== peg$FAILED) {
+          if (input.charCodeAt(peg$currPos) === 46) {
+            s3 = peg$c17;
+            peg$currPos++;
+          } else {
+            s3 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c18); }
+          }
+          if (s3 !== peg$FAILED) {
+            s4 = peg$parsews();
+            if (s4 !== peg$FAILED) {
+              s5 = peg$parsenumber();
+              if (s5 !== peg$FAILED) {
+                s6 = peg$parseeol();
+                if (s6 !== peg$FAILED) {
+                  peg$savedPos = s0;
+                  s1 = peg$c104(s2, s5);
                   s0 = s1;
                 } else {
                   peg$currPos = s0;
@@ -2617,74 +2706,12 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 3) === peg$c53) {
-        s1 = peg$c53;
+      if (input.substr(peg$currPos, 3) === peg$c56) {
+        s1 = peg$c56;
         peg$currPos += 3;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c54); }
-      }
-      if (s1 !== peg$FAILED) {
-        s2 = peg$parsesub();
-        if (s2 === peg$FAILED) {
-          s2 = null;
-        }
-        if (s2 !== peg$FAILED) {
-          if (input.charCodeAt(peg$currPos) === 46) {
-            s3 = peg$c17;
-            peg$currPos++;
-          } else {
-            s3 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c18); }
-          }
-          if (s3 !== peg$FAILED) {
-            s4 = peg$parsews();
-            if (s4 !== peg$FAILED) {
-              s5 = peg$parsenumber();
-              if (s5 !== peg$FAILED) {
-                s6 = peg$parseeol();
-                if (s6 !== peg$FAILED) {
-                  peg$savedPos = s0;
-                  s1 = peg$c102(s2, s5);
-                  s0 = s1;
-                } else {
-                  peg$currPos = s0;
-                  s0 = peg$FAILED;
-                }
-              } else {
-                peg$currPos = s0;
-                s0 = peg$FAILED;
-              }
-            } else {
-              peg$currPos = s0;
-              s0 = peg$FAILED;
-            }
-          } else {
-            peg$currPos = s0;
-            s0 = peg$FAILED;
-          }
-        } else {
-          peg$currPos = s0;
-          s0 = peg$FAILED;
-        }
-      } else {
-        peg$currPos = s0;
-        s0 = peg$FAILED;
-      }
-
-      return s0;
-    }
-
-    function peg$parseline459() {
-      var s0, s1, s2, s3, s4, s5, s6;
-
-      s0 = peg$currPos;
-      if (input.substr(peg$currPos, 3) === peg$c103) {
-        s1 = peg$c103;
-        peg$currPos += 3;
-      } else {
-        s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c104); }
+        if (peg$silentFails === 0) { peg$fail(peg$c57); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parsesub();
@@ -2737,7 +2764,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline460() {
+    function peg$parseline459() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2799,7 +2826,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline461() {
+    function peg$parseline460() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2861,7 +2888,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline462() {
+    function peg$parseline461() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2888,7 +2915,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
           if (s3 !== peg$FAILED) {
             s4 = peg$parsews();
             if (s4 !== peg$FAILED) {
-              s5 = peg$parselinetext();
+              s5 = peg$parsenumber();
               if (s5 !== peg$FAILED) {
                 s6 = peg$parseeol();
                 if (s6 !== peg$FAILED) {
@@ -2923,7 +2950,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseline463() {
+    function peg$parseline462() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -2985,7 +3012,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parsesfafplus() {
+    function peg$parseline463() {
       var s0, s1, s2, s3, s4, s5, s6;
 
       s0 = peg$currPos;
@@ -3012,12 +3039,74 @@ SFAFx.sfafx_parser = (function(SFAFx) {
           if (s3 !== peg$FAILED) {
             s4 = peg$parsews();
             if (s4 !== peg$FAILED) {
+              s5 = peg$parselinetext();
+              if (s5 !== peg$FAILED) {
+                s6 = peg$parseeol();
+                if (s6 !== peg$FAILED) {
+                  peg$savedPos = s0;
+                  s1 = peg$c120(s2, s5);
+                  s0 = s1;
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseline199() {
+      var s0, s1, s2, s3, s4, s5, s6;
+
+      s0 = peg$currPos;
+      if (input.substr(peg$currPos, 3) === peg$c121) {
+        s1 = peg$c121;
+        peg$currPos += 3;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c122); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parsesub();
+        if (s2 === peg$FAILED) {
+          s2 = null;
+        }
+        if (s2 !== peg$FAILED) {
+          if (input.charCodeAt(peg$currPos) === 46) {
+            s3 = peg$c17;
+            peg$currPos++;
+          } else {
+            s3 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c18); }
+          }
+          if (s3 !== peg$FAILED) {
+            s4 = peg$parsews();
+            if (s4 !== peg$FAILED) {
               s5 = peg$parselinkage();
               if (s5 !== peg$FAILED) {
                 s6 = peg$parseeol();
                 if (s6 !== peg$FAILED) {
                   peg$savedPos = s0;
-                  s1 = peg$c120(s1, s2, s5);
+                  s1 = peg$c123(s1, s2, s5);
                   s0 = s1;
                 } else {
                   peg$currPos = s0;
@@ -3048,7 +3137,24 @@ SFAFx.sfafx_parser = (function(SFAFx) {
     }
 
     function peg$parselinkage() {
-      var s0, s1, s2, s3, s4;
+      var s0;
+
+      s0 = peg$parselinkall();
+      if (s0 === peg$FAILED) {
+        s0 = peg$parselinkagetxrx();
+        if (s0 === peg$FAILED) {
+          s0 = peg$parselinkagetx();
+          if (s0 === peg$FAILED) {
+            s0 = peg$parselinkagerx();
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parselinkagetxrx() {
+      var s0, s1, s2, s3;
 
       s0 = peg$currPos;
       s1 = peg$parselinktxnode();
@@ -3057,19 +3163,91 @@ SFAFx.sfafx_parser = (function(SFAFx) {
         if (s2 !== peg$FAILED) {
           s3 = peg$parselinkrxnode();
           if (s3 !== peg$FAILED) {
-            s4 = peg$parselinkemission();
-            if (s4 !== peg$FAILED) {
-              peg$savedPos = s0;
-              s1 = peg$c121(s1, s2, s3, s4);
-              s0 = s1;
-            } else {
-              peg$currPos = s0;
-              s0 = peg$FAILED;
-            }
+            peg$savedPos = s0;
+            s1 = peg$c124(s1, s2, s3);
+            s0 = s1;
           } else {
             peg$currPos = s0;
             s0 = peg$FAILED;
           }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parselinkall() {
+      var s0, s1;
+
+      s0 = peg$currPos;
+      if (input.substr(peg$currPos, 3) === peg$c125) {
+        s1 = peg$c125;
+        peg$currPos += 3;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c126); }
+      }
+      if (s1 !== peg$FAILED) {
+        peg$savedPos = s0;
+        s1 = peg$c127();
+      }
+      s0 = s1;
+
+      return s0;
+    }
+
+    function peg$parselinkagetx() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      s1 = peg$parselinktxnode();
+      if (s1 !== peg$FAILED) {
+        if (input.substr(peg$currPos, 3) === peg$c128) {
+          s2 = peg$c128;
+          peg$currPos += 3;
+        } else {
+          s2 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c129); }
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c130(s1);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parselinkagerx() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      s1 = peg$parselinkrxnode();
+      if (s1 !== peg$FAILED) {
+        if (input.substr(peg$currPos, 3) === peg$c131) {
+          s2 = peg$c131;
+          peg$currPos += 3;
+        } else {
+          s2 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c132); }
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c133(s1);
+          s0 = s1;
         } else {
           peg$currPos = s0;
           s0 = peg$FAILED;
@@ -3089,27 +3267,27 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       s1 = peg$parselinkrxtx();
       if (s1 !== peg$FAILED) {
         if (input.charCodeAt(peg$currPos) === 40) {
-          s2 = peg$c122;
+          s2 = peg$c134;
           peg$currPos++;
         } else {
           s2 = peg$FAILED;
-          if (peg$silentFails === 0) { peg$fail(peg$c123); }
+          if (peg$silentFails === 0) { peg$fail(peg$c135); }
         }
         if (s2 !== peg$FAILED) {
           s3 = peg$parselinkant();
           if (s3 !== peg$FAILED) {
             if (input.charCodeAt(peg$currPos) === 41) {
-              s4 = peg$c124;
+              s4 = peg$c136;
               peg$currPos++;
             } else {
               s4 = peg$FAILED;
-              if (peg$silentFails === 0) { peg$fail(peg$c125); }
+              if (peg$silentFails === 0) { peg$fail(peg$c137); }
             }
             if (s4 !== peg$FAILED) {
               s5 = peg$parselinkloc();
               if (s5 !== peg$FAILED) {
                 peg$savedPos = s0;
-                s1 = peg$c126(s1, s3, s5);
+                s1 = peg$c138(s1, s3, s5);
                 s0 = s1;
               } else {
                 peg$currPos = s0;
@@ -3142,27 +3320,27 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       s1 = peg$parselinkrxtx();
       if (s1 !== peg$FAILED) {
         if (input.charCodeAt(peg$currPos) === 40) {
-          s2 = peg$c122;
+          s2 = peg$c134;
           peg$currPos++;
         } else {
           s2 = peg$FAILED;
-          if (peg$silentFails === 0) { peg$fail(peg$c123); }
+          if (peg$silentFails === 0) { peg$fail(peg$c135); }
         }
         if (s2 !== peg$FAILED) {
           s3 = peg$parselinkant();
           if (s3 !== peg$FAILED) {
             if (input.charCodeAt(peg$currPos) === 41) {
-              s4 = peg$c124;
+              s4 = peg$c136;
               peg$currPos++;
             } else {
               s4 = peg$FAILED;
-              if (peg$silentFails === 0) { peg$fail(peg$c125); }
+              if (peg$silentFails === 0) { peg$fail(peg$c137); }
             }
             if (s4 !== peg$FAILED) {
               s5 = peg$parselinkloc();
               if (s5 !== peg$FAILED) {
                 peg$savedPos = s0;
-                s1 = peg$c127(s1, s3, s5);
+                s1 = peg$c139(s1, s3, s5);
                 s0 = s1;
               } else {
                 peg$currPos = s0;
@@ -3203,18 +3381,18 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 2) === peg$c128) {
-        s1 = peg$c128;
+      if (input.substr(peg$currPos, 2) === peg$c140) {
+        s1 = peg$c140;
         peg$currPos += 2;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c129); }
+        if (peg$silentFails === 0) { peg$fail(peg$c141); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parselinklist();
         if (s2 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c130(s2);
+          s1 = peg$c142(s2);
           s0 = s1;
         } else {
           peg$currPos = s0;
@@ -3232,18 +3410,18 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 2) === peg$c131) {
-        s1 = peg$c131;
+      if (input.substr(peg$currPos, 2) === peg$c143) {
+        s1 = peg$c143;
         peg$currPos += 2;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c132); }
+        if (peg$silentFails === 0) { peg$fail(peg$c144); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parselinklist();
         if (s2 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c133(s2);
+          s1 = peg$c145(s2);
           s0 = s1;
         } else {
           peg$currPos = s0;
@@ -3261,18 +3439,18 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 2) === peg$c134) {
-        s1 = peg$c134;
+      if (input.substr(peg$currPos, 2) === peg$c146) {
+        s1 = peg$c146;
         peg$currPos += 2;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c135); }
+        if (peg$silentFails === 0) { peg$fail(peg$c147); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parselinklist();
         if (s2 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c136(s2);
+          s1 = peg$c148(s2);
           s0 = s1;
         } else {
           peg$currPos = s0;
@@ -3291,17 +3469,17 @@ SFAFx.sfafx_parser = (function(SFAFx) {
 
       s0 = peg$currPos;
       if (input.charCodeAt(peg$currPos) === 82) {
-        s1 = peg$c137;
+        s1 = peg$c149;
         peg$currPos++;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c138); }
+        if (peg$silentFails === 0) { peg$fail(peg$c150); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parseint2();
         if (s2 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c139(s2);
+          s1 = peg$c151(s2);
           s0 = s1;
         } else {
           peg$currPos = s0;
@@ -3319,44 +3497,44 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 3) === peg$c140) {
-        s1 = peg$c140;
+      if (input.substr(peg$currPos, 3) === peg$c128) {
+        s1 = peg$c128;
         peg$currPos += 3;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c141); }
+        if (peg$silentFails === 0) { peg$fail(peg$c129); }
       }
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
-        s1 = peg$c142();
+        s1 = peg$c152();
       }
       s0 = s1;
       if (s0 === peg$FAILED) {
         s0 = peg$currPos;
-        if (input.substr(peg$currPos, 3) === peg$c143) {
-          s1 = peg$c143;
+        if (input.substr(peg$currPos, 3) === peg$c131) {
+          s1 = peg$c131;
           peg$currPos += 3;
         } else {
           s1 = peg$FAILED;
-          if (peg$silentFails === 0) { peg$fail(peg$c144); }
+          if (peg$silentFails === 0) { peg$fail(peg$c132); }
         }
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c145();
+          s1 = peg$c153();
         }
         s0 = s1;
         if (s0 === peg$FAILED) {
           s0 = peg$currPos;
-          if (input.substr(peg$currPos, 4) === peg$c146) {
-            s1 = peg$c146;
-            peg$currPos += 4;
+          if (input.substr(peg$currPos, 3) === peg$c154) {
+            s1 = peg$c154;
+            peg$currPos += 3;
           } else {
             s1 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c147); }
+            if (peg$silentFails === 0) { peg$fail(peg$c155); }
           }
           if (s1 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c148();
+            s1 = peg$c156();
           }
           s0 = s1;
         }
@@ -3369,26 +3547,26 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2, s3;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 3) === peg$c149) {
-        s1 = peg$c149;
+      if (input.substr(peg$currPos, 3) === peg$c157) {
+        s1 = peg$c157;
         peg$currPos += 3;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c150); }
+        if (peg$silentFails === 0) { peg$fail(peg$c158); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parselinklist();
         if (s2 !== peg$FAILED) {
           if (input.charCodeAt(peg$currPos) === 41) {
-            s3 = peg$c124;
+            s3 = peg$c136;
             peg$currPos++;
           } else {
             s3 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c125); }
+            if (peg$silentFails === 0) { peg$fail(peg$c137); }
           }
           if (s3 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c151(s2);
+            s1 = peg$c159(s2);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -3410,16 +3588,16 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2, s3, s4, s5;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 2) === peg$c152) {
-        s1 = peg$c152;
+      if (input.substr(peg$currPos, 2) === peg$c160) {
+        s1 = peg$c160;
         peg$currPos += 2;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c153); }
+        if (peg$silentFails === 0) { peg$fail(peg$c161); }
       }
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
-        s1 = peg$c154();
+        s1 = peg$c162();
       }
       s0 = s1;
       if (s0 === peg$FAILED) {
@@ -3427,7 +3605,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
         s1 = peg$parselinkelem();
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c155(s1);
+          s1 = peg$c163(s1);
         }
         s0 = s1;
         if (s0 === peg$FAILED) {
@@ -3446,11 +3624,11 @@ SFAFx.sfafx_parser = (function(SFAFx) {
             s2 = [];
             s3 = peg$currPos;
             if (input.charCodeAt(peg$currPos) === 44) {
-              s4 = peg$c156;
+              s4 = peg$c164;
               peg$currPos++;
             } else {
               s4 = peg$FAILED;
-              if (peg$silentFails === 0) { peg$fail(peg$c157); }
+              if (peg$silentFails === 0) { peg$fail(peg$c165); }
             }
             if (s4 !== peg$FAILED) {
               s5 = peg$parselinkelem();
@@ -3470,11 +3648,11 @@ SFAFx.sfafx_parser = (function(SFAFx) {
                 s2.push(s3);
                 s3 = peg$currPos;
                 if (input.charCodeAt(peg$currPos) === 44) {
-                  s4 = peg$c156;
+                  s4 = peg$c164;
                   peg$currPos++;
                 } else {
                   s4 = peg$FAILED;
-                  if (peg$silentFails === 0) { peg$fail(peg$c157); }
+                  if (peg$silentFails === 0) { peg$fail(peg$c165); }
                 }
                 if (s4 !== peg$FAILED) {
                   s5 = peg$parselinkelem();
@@ -3495,7 +3673,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
             }
             if (s2 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c158(s1, s2);
+              s1 = peg$c166(s1, s2);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -3518,7 +3696,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       s1 = peg$parseinteger();
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
-        s1 = peg$c159(s1);
+        s1 = peg$c167(s1);
       }
       s0 = s1;
       if (s0 === peg$FAILED) {
@@ -3526,17 +3704,17 @@ SFAFx.sfafx_parser = (function(SFAFx) {
         s1 = peg$parseinteger();
         if (s1 !== peg$FAILED) {
           if (input.charCodeAt(peg$currPos) === 45) {
-            s2 = peg$c160;
+            s2 = peg$c168;
             peg$currPos++;
           } else {
             s2 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c161); }
+            if (peg$silentFails === 0) { peg$fail(peg$c169); }
           }
           if (s2 !== peg$FAILED) {
             s3 = peg$parseinteger();
             if (s3 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c162(s1, s3);
+              s1 = peg$c170(s1, s3);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -3566,19 +3744,70 @@ SFAFx.sfafx_parser = (function(SFAFx) {
           if (s0 === peg$FAILED) {
             s0 = peg$parseline110();
             if (s0 === peg$FAILED) {
-              s0 = peg$parseline113();
+              s0 = peg$parseemission();
               if (s0 === peg$FAILED) {
-                s0 = peg$parseline114();
+                s0 = peg$parsetransmitter();
                 if (s0 === peg$FAILED) {
-                  s0 = peg$parsetransmitter();
+                  s0 = peg$parsetxantennas();
                   if (s0 === peg$FAILED) {
-                    s0 = peg$parsetxantennas();
+                    s0 = peg$parsereceivers();
                     if (s0 === peg$FAILED) {
-                      s0 = peg$parsereceivers();
+                      s0 = peg$parserxantennas();
                       if (s0 === peg$FAILED) {
-                        s0 = peg$parserxantennas();
+                        s0 = peg$parseline199();
                         if (s0 === peg$FAILED) {
-                          s0 = peg$parsesfafplus();
+                          s0 = peg$currPos;
+                          s1 = peg$parseinteger();
+                          if (s1 !== peg$FAILED) {
+                            s2 = peg$parsesub();
+                            if (s2 === peg$FAILED) {
+                              s2 = null;
+                            }
+                            if (s2 !== peg$FAILED) {
+                              if (input.charCodeAt(peg$currPos) === 46) {
+                                s3 = peg$c17;
+                                peg$currPos++;
+                              } else {
+                                s3 = peg$FAILED;
+                                if (peg$silentFails === 0) { peg$fail(peg$c18); }
+                              }
+                              if (s3 !== peg$FAILED) {
+                                s4 = peg$parsews();
+                                if (s4 !== peg$FAILED) {
+                                  s5 = peg$parselinetext();
+                                  if (s5 !== peg$FAILED) {
+                                    s6 = peg$parseeol();
+                                    if (s6 === peg$FAILED) {
+                                      s6 = null;
+                                    }
+                                    if (s6 !== peg$FAILED) {
+                                      peg$savedPos = s0;
+                                      s1 = peg$c171(s1, s2, s5);
+                                      s0 = s1;
+                                    } else {
+                                      peg$currPos = s0;
+                                      s0 = peg$FAILED;
+                                    }
+                                  } else {
+                                    peg$currPos = s0;
+                                    s0 = peg$FAILED;
+                                  }
+                                } else {
+                                  peg$currPos = s0;
+                                  s0 = peg$FAILED;
+                                }
+                              } else {
+                                peg$currPos = s0;
+                                s0 = peg$FAILED;
+                              }
+                            } else {
+                              peg$currPos = s0;
+                              s0 = peg$FAILED;
+                            }
+                          } else {
+                            peg$currPos = s0;
+                            s0 = peg$FAILED;
+                          }
                           if (s0 === peg$FAILED) {
                             s0 = peg$currPos;
                             s1 = peg$parseinteger();
@@ -3596,22 +3825,21 @@ SFAFx.sfafx_parser = (function(SFAFx) {
                                   if (peg$silentFails === 0) { peg$fail(peg$c18); }
                                 }
                                 if (s3 !== peg$FAILED) {
-                                  s4 = peg$parsews();
+                                  s4 = [];
+                                  s5 = peg$parsews();
+                                  while (s5 !== peg$FAILED) {
+                                    s4.push(s5);
+                                    s5 = peg$parsews();
+                                  }
                                   if (s4 !== peg$FAILED) {
-                                    s5 = peg$parselinetext();
+                                    s5 = peg$parseeol();
+                                    if (s5 === peg$FAILED) {
+                                      s5 = null;
+                                    }
                                     if (s5 !== peg$FAILED) {
-                                      s6 = peg$parseeol();
-                                      if (s6 === peg$FAILED) {
-                                        s6 = null;
-                                      }
-                                      if (s6 !== peg$FAILED) {
-                                        peg$savedPos = s0;
-                                        s1 = peg$c163(s1, s2, s5);
-                                        s0 = s1;
-                                      } else {
-                                        peg$currPos = s0;
-                                        s0 = peg$FAILED;
-                                      }
+                                      peg$savedPos = s0;
+                                      s1 = peg$c172(s1, s2);
+                                      s0 = s1;
                                     } else {
                                       peg$currPos = s0;
                                       s0 = peg$FAILED;
@@ -3637,7 +3865,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
                               s1 = peg$parseeol();
                               if (s1 !== peg$FAILED) {
                                 peg$savedPos = s0;
-                                s1 = peg$c164();
+                                s1 = peg$c173();
                               }
                               s0 = s1;
                             }
@@ -3685,7 +3913,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
                 }
                 if (s6 !== peg$FAILED) {
                   peg$savedPos = s0;
-                  s1 = peg$c165(s1, s2, s5);
+                  s1 = peg$c174(s1, s2, s5);
                   s0 = s1;
                 } else {
                   peg$currPos = s0;
@@ -3720,17 +3948,17 @@ SFAFx.sfafx_parser = (function(SFAFx) {
 
       s0 = peg$currPos;
       if (input.charCodeAt(peg$currPos) === 47) {
-        s1 = peg$c166;
+        s1 = peg$c175;
         peg$currPos++;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c167); }
+        if (peg$silentFails === 0) { peg$fail(peg$c176); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parseinteger();
         if (s2 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c168(s2);
+          s1 = peg$c177(s2);
           s0 = s1;
         } else {
           peg$currPos = s0;
@@ -3749,17 +3977,17 @@ SFAFx.sfafx_parser = (function(SFAFx) {
 
       s0 = peg$currPos;
       if (input.charCodeAt(peg$currPos) === 47) {
-        s1 = peg$c166;
+        s1 = peg$c175;
         peg$currPos++;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c167); }
+        if (peg$silentFails === 0) { peg$fail(peg$c176); }
       }
       if (s1 !== peg$FAILED) {
         s2 = peg$parsehex();
         if (s2 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c168(s2);
+          s1 = peg$c177(s2);
           s0 = s1;
         } else {
           peg$currPos = s0;
@@ -3776,12 +4004,12 @@ SFAFx.sfafx_parser = (function(SFAFx) {
     function peg$parseeol() {
       var s0;
 
-      if (peg$c169.test(input.charAt(peg$currPos))) {
+      if (peg$c178.test(input.charAt(peg$currPos))) {
         s0 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s0 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c170); }
+        if (peg$silentFails === 0) { peg$fail(peg$c179); }
       }
 
       return s0;
@@ -3791,22 +4019,22 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1;
 
       s0 = [];
-      if (peg$c171.test(input.charAt(peg$currPos))) {
+      if (peg$c180.test(input.charAt(peg$currPos))) {
         s1 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c172); }
+        if (peg$silentFails === 0) { peg$fail(peg$c181); }
       }
       if (s1 !== peg$FAILED) {
         while (s1 !== peg$FAILED) {
           s0.push(s1);
-          if (peg$c171.test(input.charAt(peg$currPos))) {
+          if (peg$c180.test(input.charAt(peg$currPos))) {
             s1 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s1 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c172); }
+            if (peg$silentFails === 0) { peg$fail(peg$c181); }
           }
         }
       } else {
@@ -3820,22 +4048,22 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1;
 
       s0 = [];
-      if (peg$c173.test(input.charAt(peg$currPos))) {
+      if (peg$c182.test(input.charAt(peg$currPos))) {
         s1 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c174); }
+        if (peg$silentFails === 0) { peg$fail(peg$c183); }
       }
       if (s1 !== peg$FAILED) {
         while (s1 !== peg$FAILED) {
           s0.push(s1);
-          if (peg$c173.test(input.charAt(peg$currPos))) {
+          if (peg$c182.test(input.charAt(peg$currPos))) {
             s1 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s1 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c174); }
+            if (peg$silentFails === 0) { peg$fail(peg$c183); }
           }
         }
       } else {
@@ -3850,22 +4078,22 @@ SFAFx.sfafx_parser = (function(SFAFx) {
 
       s0 = peg$currPos;
       s1 = [];
-      if (peg$c171.test(input.charAt(peg$currPos))) {
+      if (peg$c180.test(input.charAt(peg$currPos))) {
         s2 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s2 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c172); }
+        if (peg$silentFails === 0) { peg$fail(peg$c181); }
       }
       if (s2 !== peg$FAILED) {
         while (s2 !== peg$FAILED) {
           s1.push(s2);
-          if (peg$c171.test(input.charAt(peg$currPos))) {
+          if (peg$c180.test(input.charAt(peg$currPos))) {
             s2 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s2 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c172); }
+            if (peg$silentFails === 0) { peg$fail(peg$c181); }
           }
         }
       } else {
@@ -3873,7 +4101,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       }
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
-        s1 = peg$c175(s1);
+        s1 = peg$c184(s1);
       }
       s0 = s1;
 
@@ -3884,24 +4112,24 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2;
 
       s0 = peg$currPos;
-      if (peg$c176.test(input.charAt(peg$currPos))) {
+      if (peg$c185.test(input.charAt(peg$currPos))) {
         s1 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c177); }
+        if (peg$silentFails === 0) { peg$fail(peg$c186); }
       }
       if (s1 !== peg$FAILED) {
-        if (peg$c176.test(input.charAt(peg$currPos))) {
+        if (peg$c185.test(input.charAt(peg$currPos))) {
           s2 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s2 = peg$FAILED;
-          if (peg$silentFails === 0) { peg$fail(peg$c177); }
+          if (peg$silentFails === 0) { peg$fail(peg$c186); }
         }
         if (s2 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c178(s1, s2);
+          s1 = peg$c187(s1, s2);
           s0 = s1;
         } else {
           peg$currPos = s0;
@@ -3919,40 +4147,40 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       var s0, s1, s2, s3, s4;
 
       s0 = peg$currPos;
-      if (peg$c176.test(input.charAt(peg$currPos))) {
+      if (peg$c185.test(input.charAt(peg$currPos))) {
         s1 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c177); }
+        if (peg$silentFails === 0) { peg$fail(peg$c186); }
       }
       if (s1 !== peg$FAILED) {
-        if (peg$c176.test(input.charAt(peg$currPos))) {
+        if (peg$c185.test(input.charAt(peg$currPos))) {
           s2 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s2 = peg$FAILED;
-          if (peg$silentFails === 0) { peg$fail(peg$c177); }
+          if (peg$silentFails === 0) { peg$fail(peg$c186); }
         }
         if (s2 !== peg$FAILED) {
-          if (peg$c176.test(input.charAt(peg$currPos))) {
+          if (peg$c185.test(input.charAt(peg$currPos))) {
             s3 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s3 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c177); }
+            if (peg$silentFails === 0) { peg$fail(peg$c186); }
           }
           if (s3 !== peg$FAILED) {
-            if (peg$c176.test(input.charAt(peg$currPos))) {
+            if (peg$c185.test(input.charAt(peg$currPos))) {
               s4 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s4 = peg$FAILED;
-              if (peg$silentFails === 0) { peg$fail(peg$c177); }
+              if (peg$silentFails === 0) { peg$fail(peg$c186); }
             }
             if (s4 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c179(s1, s2, s3, s4);
+              s1 = peg$c188(s1, s2, s3, s4);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -3987,7 +4215,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
             s4 = peg$parseemissionclass();
             if (s4 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c180(s1, s2, s3, s4);
+              s1 = peg$c189(s1, s2, s3, s4);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -4034,7 +4262,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
           s3 = peg$parsehex1();
           if (s3 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c181(s1, s2, s3);
+            s1 = peg$c190(s1, s2, s3);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -4065,7 +4293,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
             s4 = peg$parsehex1();
             if (s4 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c182(s1, s2, s3, s4);
+              s1 = peg$c191(s1, s2, s3, s4);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -4102,7 +4330,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
               s5 = peg$parsehex1();
               if (s5 !== peg$FAILED) {
                 peg$savedPos = s0;
-                s1 = peg$c183(s1, s2, s3, s4, s5);
+                s1 = peg$c192(s1, s2, s3, s4, s5);
                 s0 = s1;
               } else {
                 peg$currPos = s0;
@@ -4150,66 +4378,6 @@ SFAFx.sfafx_parser = (function(SFAFx) {
 
       s0 = peg$currPos;
       if (input.charCodeAt(peg$currPos) === 72) {
-        s1 = peg$c184;
-        peg$currPos++;
-      } else {
-        s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c185); }
-      }
-      if (s1 !== peg$FAILED) {
-        peg$savedPos = s0;
-        s1 = peg$c186();
-      }
-      s0 = s1;
-
-      return s0;
-    }
-
-    function peg$parseunitK() {
-      var s0, s1;
-
-      s0 = peg$currPos;
-      if (input.charCodeAt(peg$currPos) === 75) {
-        s1 = peg$c187;
-        peg$currPos++;
-      } else {
-        s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c188); }
-      }
-      if (s1 !== peg$FAILED) {
-        peg$savedPos = s0;
-        s1 = peg$c189();
-      }
-      s0 = s1;
-
-      return s0;
-    }
-
-    function peg$parseunitM() {
-      var s0, s1;
-
-      s0 = peg$currPos;
-      if (input.charCodeAt(peg$currPos) === 77) {
-        s1 = peg$c190;
-        peg$currPos++;
-      } else {
-        s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c191); }
-      }
-      if (s1 !== peg$FAILED) {
-        peg$savedPos = s0;
-        s1 = peg$c192();
-      }
-      s0 = s1;
-
-      return s0;
-    }
-
-    function peg$parseunitG() {
-      var s0, s1;
-
-      s0 = peg$currPos;
-      if (input.charCodeAt(peg$currPos) === 71) {
         s1 = peg$c193;
         peg$currPos++;
       } else {
@@ -4225,11 +4393,11 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       return s0;
     }
 
-    function peg$parseunitT() {
+    function peg$parseunitK() {
       var s0, s1;
 
       s0 = peg$currPos;
-      if (input.charCodeAt(peg$currPos) === 84) {
+      if (input.charCodeAt(peg$currPos) === 75) {
         s1 = peg$c196;
         peg$currPos++;
       } else {
@@ -4239,6 +4407,66 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
         s1 = peg$c198();
+      }
+      s0 = s1;
+
+      return s0;
+    }
+
+    function peg$parseunitM() {
+      var s0, s1;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 77) {
+        s1 = peg$c199;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c200); }
+      }
+      if (s1 !== peg$FAILED) {
+        peg$savedPos = s0;
+        s1 = peg$c201();
+      }
+      s0 = s1;
+
+      return s0;
+    }
+
+    function peg$parseunitG() {
+      var s0, s1;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 71) {
+        s1 = peg$c202;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c203); }
+      }
+      if (s1 !== peg$FAILED) {
+        peg$savedPos = s0;
+        s1 = peg$c204();
+      }
+      s0 = s1;
+
+      return s0;
+    }
+
+    function peg$parseunitT() {
+      var s0, s1;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 84) {
+        s1 = peg$c205;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c206); }
+      }
+      if (s1 !== peg$FAILED) {
+        peg$savedPos = s0;
+        s1 = peg$c207();
       }
       s0 = s1;
 
@@ -4256,7 +4484,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
           s3 = peg$parseint2();
           if (s3 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c199(s1, s2, s3);
+            s1 = peg$c208(s1, s2, s3);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -4285,7 +4513,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       peg$silentFails--;
       if (s0 === peg$FAILED) {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c200); }
+        if (peg$silentFails === 0) { peg$fail(peg$c209); }
       }
 
       return s0;
@@ -4297,22 +4525,22 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       peg$silentFails++;
       s0 = peg$currPos;
       s1 = [];
-      if (peg$c176.test(input.charAt(peg$currPos))) {
+      if (peg$c185.test(input.charAt(peg$currPos))) {
         s2 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s2 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c177); }
+        if (peg$silentFails === 0) { peg$fail(peg$c186); }
       }
       if (s2 !== peg$FAILED) {
         while (s2 !== peg$FAILED) {
           s1.push(s2);
-          if (peg$c176.test(input.charAt(peg$currPos))) {
+          if (peg$c185.test(input.charAt(peg$currPos))) {
             s2 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s2 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c177); }
+            if (peg$silentFails === 0) { peg$fail(peg$c186); }
           }
         }
       } else {
@@ -4320,13 +4548,13 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       }
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
-        s1 = peg$c202(s1);
+        s1 = peg$c211(s1);
       }
       s0 = s1;
       peg$silentFails--;
       if (s0 === peg$FAILED) {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c201); }
+        if (peg$silentFails === 0) { peg$fail(peg$c210); }
       }
 
       return s0;
@@ -4338,22 +4566,22 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       peg$silentFails++;
       s0 = peg$currPos;
       s1 = [];
-      if (peg$c176.test(input.charAt(peg$currPos))) {
+      if (peg$c185.test(input.charAt(peg$currPos))) {
         s2 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s2 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c177); }
+        if (peg$silentFails === 0) { peg$fail(peg$c186); }
       }
       if (s2 !== peg$FAILED) {
         while (s2 !== peg$FAILED) {
           s1.push(s2);
-          if (peg$c176.test(input.charAt(peg$currPos))) {
+          if (peg$c185.test(input.charAt(peg$currPos))) {
             s2 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s2 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c177); }
+            if (peg$silentFails === 0) { peg$fail(peg$c186); }
           }
         }
       } else {
@@ -4369,22 +4597,22 @@ SFAFx.sfafx_parser = (function(SFAFx) {
         }
         if (s2 !== peg$FAILED) {
           s3 = [];
-          if (peg$c176.test(input.charAt(peg$currPos))) {
+          if (peg$c185.test(input.charAt(peg$currPos))) {
             s4 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s4 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c177); }
+            if (peg$silentFails === 0) { peg$fail(peg$c186); }
           }
           if (s4 !== peg$FAILED) {
             while (s4 !== peg$FAILED) {
               s3.push(s4);
-              if (peg$c176.test(input.charAt(peg$currPos))) {
+              if (peg$c185.test(input.charAt(peg$currPos))) {
                 s4 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s4 = peg$FAILED;
-                if (peg$silentFails === 0) { peg$fail(peg$c177); }
+                if (peg$silentFails === 0) { peg$fail(peg$c186); }
               }
             }
           } else {
@@ -4392,7 +4620,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
           }
           if (s3 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c204(s1, s3);
+            s1 = peg$c213(s1, s3);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -4409,7 +4637,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       peg$silentFails--;
       if (s0 === peg$FAILED) {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c203); }
+        if (peg$silentFails === 0) { peg$fail(peg$c212); }
       }
 
       return s0;
@@ -4418,12 +4646,12 @@ SFAFx.sfafx_parser = (function(SFAFx) {
     function peg$parsehex1() {
       var s0;
 
-      if (peg$c205.test(input.charAt(peg$currPos))) {
+      if (peg$c214.test(input.charAt(peg$currPos))) {
         s0 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s0 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c206); }
+        if (peg$silentFails === 0) { peg$fail(peg$c215); }
       }
 
       return s0;
@@ -4434,35 +4662,35 @@ SFAFx.sfafx_parser = (function(SFAFx) {
 
       peg$silentFails++;
       s0 = peg$currPos;
-      if (peg$c208.test(input.charAt(peg$currPos))) {
+      if (peg$c217.test(input.charAt(peg$currPos))) {
         s1 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c209); }
+        if (peg$silentFails === 0) { peg$fail(peg$c218); }
       }
       if (s1 !== peg$FAILED) {
         s2 = [];
-        if (peg$c210.test(input.charAt(peg$currPos))) {
+        if (peg$c219.test(input.charAt(peg$currPos))) {
           s3 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s3 = peg$FAILED;
-          if (peg$silentFails === 0) { peg$fail(peg$c211); }
+          if (peg$silentFails === 0) { peg$fail(peg$c220); }
         }
         while (s3 !== peg$FAILED) {
           s2.push(s3);
-          if (peg$c210.test(input.charAt(peg$currPos))) {
+          if (peg$c219.test(input.charAt(peg$currPos))) {
             s3 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s3 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c211); }
+            if (peg$silentFails === 0) { peg$fail(peg$c220); }
           }
         }
         if (s2 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c212(s1, s2);
+          s1 = peg$c221(s1, s2);
           s0 = s1;
         } else {
           peg$currPos = s0;
@@ -4475,7 +4703,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
       peg$silentFails--;
       if (s0 === peg$FAILED) {
         s1 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c207); }
+        if (peg$silentFails === 0) { peg$fail(peg$c216); }
       }
 
       return s0;
@@ -4516,6 +4744,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
         }
         return val;
       }
+
       function makeSubRecord( val, entry, occur, text, key ){
         var sub = occur;
         if( sub == null ) sub = "01";
@@ -4545,6 +4774,7 @@ SFAFx.sfafx_parser = (function(SFAFx) {
         }
         return target;
       }
+
       function merge( obj, entries ){
         if( entries == null ) return obj;
         var i = 0, len = entries.length;
@@ -4677,10 +4907,12 @@ SFAFx.sfafx_parser = (function(SFAFx) {
     parse:       peg$parse
     };
   })(SFAFx);
+//SFAFxJS https://github.com/Sciumo/sfafxjs
+
 'use strict';
 /**
  * SFAFx Dictionary Addon Module
- */ 
+ */
 (function(SFAFx) {
 
   var modulation = {};
@@ -4905,12 +5137,3203 @@ var modmux = modulation["modmux"] =
       var res = specialHandlingCodes[code];
       return res;
     }
+
+    var MCEBPub7Entries =
+
+[
+  {
+    "DataNumberSFAFItem": 5,
+    "Type": "Administrative Data",
+    "Title": "Security Classification",
+    "SPECTRUMXXITags": "CLA,CDD,FOIm",
+    "Required": "TRUE",
+    "MaximumLengthsInput": "2,10",
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "CLA,FOICDD,c",
+    "IsArray": "FALSE",
+    "FieldName": 5,
+    "Column": "sfaf.security_classification",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "Data Item 005 has two parts. Part one contains a 2-letter designator representing the security classification of the record and the record special handling instructions. The second part of the item contains a 10-character field containing the record declassification instructions. The record declassification instructions must always be entered if the first character of the security classification is a �C,� �S,� or �T.�"
+  },
+  {
+    "DataNumberSFAFItem": 6,
+    "Type": "Administrative Data",
+    "Title": "SecurityModificationClassification",
+    "SPECTRUMXXITags": "CLA,CDD,FOIm",
+    "Required": "",
+    "MaximumLengthsInput": "2,10",
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "CLA,FOICDD,c",
+    "IsArray": "FALSE",
+    "FieldName": 6,
+    "Column": "sfaf.securitymodificationclassification",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 7,
+    "Type": "Administrative Data",
+    "Title": "Missing Data Indicator",
+    "SPECTRUMXXITags": "MSD",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "MSD",
+    "IsArray": "FALSE",
+    "FieldName": 7,
+    "Column": "sfaf.missing_data_indicator",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 10,
+    "Type": "Administrative Data",
+    "Title": "Type of Action",
+    "SPECTRUMXXITags": "TYP",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "TYP",
+    "IsArray": "FALSE",
+    "FieldName": 10,
+    "Column": "sfaf.type_of_action",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 14,
+    "Type": "Administrative Data",
+    "Title": "Derivative Classification",
+    "SPECTRUMXXITags": "CLF",
+    "Required": "",
+    "MaximumLengthsInput": "8,60",
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y35",
+    "GMFTags": "*CLFb",
+    "IsArray": "TRUE",
+    "FieldName": 14,
+    "Column": "sfaf.derivative_classification",
+    "DBType": "str(60)",
+    "Group": "",
+    "Description": "This data item indicates the date, title, and publishing organization of the source document from which one or more TOP SECRET, SECRET, or CONFIDENTIAL data entries in the record were derived."
+  },
+  {
+    "DataNumberSFAFItem": 15,
+    "Type": "Administrative Data",
+    "Title": "Unclassified Data Fields",
+    "SPECTRUMXXITags": "CLU",
+    "Required": "",
+    "MaximumLengthsInput": 72,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y35",
+    "GMFTags": "*CLU",
+    "IsArray": "FALSE",
+    "FieldName": 15,
+    "Column": "sfaf.unclassified_data_fields",
+    "DBType": "str(72)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 16,
+    "Type": "Administrative Data",
+    "Title": "Extended Declassification Date",
+    "SPECTRUMXXITags": "CDE",
+    "Required": "",
+    "MaximumLengthsInput": 35,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*CDE",
+    "IsArray": "FALSE",
+    "FieldName": 16,
+    "Column": "sfaf.extended_declassification_date",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 17,
+    "Type": "Administrative Data",
+    "Title": "Downgrading Instructions",
+    "SPECTRUMXXITags": "DNG",
+    "Required": "",
+    "MaximumLengthsInput": "1,8",
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*AGN,DNG",
+    "IsArray": "FALSE",
+    "FieldName": 17,
+    "Column": "sfaf.downgrading_instructions",
+    "DBType": "str(1,8)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 18,
+    "Type": "Administrative Data",
+    "Title": "Original Classification Authority",
+    "SPECTRUMXXITags": "OCA",
+    "Required": "",
+    "MaximumLengthsInput": 60,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y35",
+    "GMFTags": "*CLA",
+    "IsArray": "FALSE",
+    "FieldName": 18,
+    "Column": "sfaf.original_classification_authority",
+    "DBType": "str(60)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 19,
+    "Type": "Administrative Data",
+    "Title": "Reason for Classification",
+    "SPECTRUMXXITags": "CLR",
+    "Required": "",
+    "MaximumLengthsInput": 35,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*CLR",
+    "IsArray": "FALSE",
+    "FieldName": 19,
+    "Column": "sfaf.reason_for_classification",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 20,
+    "Type": "Administrative Data",
+    "Title": "Proposal References",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 64,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 20,
+    "Column": "sfaf.proposal_references",
+    "DBType": "str(64)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 102,
+    "Type": "Administrative Data",
+    "Title": "Agency Serial Number",
+    "SPECTRUMXXITags": "SER",
+    "Required": "TRUE",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "SER",
+    "IsArray": "FALSE",
+    "FieldName": 102,
+    "Column": "sfaf.agency_serial_number",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "The agency serial number is required for all types of actions that will be entered into the FRRS central database. The serial number is formatted as AAAAYYNNNN. The agency abbreviation (identifier) for the assignment (as defined in the NTIA Manual or as listed below) is entered in characters 1-4 (AAAA). When AAAA is less than four characters, trailing spaces are required; the next two numbers (YY) identify the calendar year in which the assignment initially is processed; the following four numbers (NNNN) are specified to uniquely identify the assignment. The following are agency serial number identifiers for MILDEP/JFP frequency assignments"
+  },
+  {
+    "DataNumberSFAFItem": 103,
+    "Type": "Administrative Data",
+    "Title": "IRAC Docket Number",
+    "SPECTRUMXXITags": "AUS",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "AUS",
+    "IsArray": "TRUE",
+    "FieldName": 103,
+    "Column": "sfaf.irac_docket_number",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "A reference number assigned by the IRAC to frequency applications submitted to the FAS."
+  },
+  {
+    "DataNumberSFAFItem": 105,
+    "Type": "Administrative Data",
+    "Title": "List Serial Number",
+    "SPECTRUMXXITags": "LSN",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "LSR",
+    "IsArray": "FALSE",
+    "FieldName": 105,
+    "Column": "sfaf.list_serial_number",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "The agency list serial number of a GMF record representing a group or area assignment. It brings into use, by a particular station or stations, a frequency authorized under a group assignment or authorized for communications with nongovernment stations."
+  },
+  {
+    "DataNumberSFAFItem": 106,
+    "Type": "Administrative Data",
+    "Title": "Serial Replaced, Delete Date",
+    "SPECTRUMXXITags": "SRS,SEX",
+    "Required": "",
+    "MaximumLengthsInput": "10,8",
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "SRS,SEX",
+    "IsArray": "FALSE",
+    "FieldName": 106,
+    "Column": "sfaf.serial_replaced_delete_date",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "A record may be deleted from the GMF using Data Item 106 while entering a New or Notification type of action. This is a two-part data item. The first part of the data item is the serial number of the GMF record being deleted and the second part of the data item is the date the record will be automatically deleted from the GMF. This data item is not stored in the database."
+  },
+  {
+    "DataNumberSFAFItem": 107,
+    "Type": "Administrative Data",
+    "Title": "Authorization Date",
+    "SPECTRUMXXITags": "AUD",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "AUD",
+    "IsArray": "FALSE",
+    "FieldName": 107,
+    "Column": "sfaf.authorization_date",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The date (YYYYMMDD) on which a GMF assignment was originally authorized."
+  },
+  {
+    "DataNumberSFAFItem": 108,
+    "Type": "Administrative Data",
+    "Title": "DocketAuthorizationsNumbers of Older",
+    "SPECTRUMXXITags": "DOC",
+    "Required": "",
+    "MaximumLengthsInput": 35,
+    "OccurrencesMaximum": 30,
+    "IRACTo": "Y",
+    "GMFTags": "*DOC",
+    "IsArray": "TRUE",
+    "FieldName": 108,
+    "Column": "sfaf.docketauthorizationsnumbers_of_older",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": "A history of an assignment's previous GMF authorizations. It allows New or Notification type of actions to retain all previously assigned docket numbers, authorization dates, and agency serial numbers."
+  },
+  {
+    "DataNumberSFAFItem": 110,
+    "Type": "Emission Characteristics",
+    "Title": "Frequency(ies)",
+    "SPECTRUMXXITags": "FRQ,FRU",
+    "Required": "TRUE",
+    "MaximumLengthsInput": "11,11-11,11(11)",
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "FRQ,*FRB",
+    "IsArray": "FALSE",
+    "FieldName": 110,
+    "Column": "sfaf.frequencyies",
+    "DBType": "str(11)",
+    "Group": "",
+    "Description": "The frequency band or discrete frequency assigned to the unit and/or required for the equipment described in the assignment. A reference frequency, if included, is the assignment of a suppressed or reduced carrier sideband."
+  },
+  {
+    "DataNumberSFAFItem": 111,
+    "Type": "Emission Characteristics",
+    "Title": "Excluded Frequency Band",
+    "SPECTRUMXXITags": "FBE",
+    "Required": "",
+    "MaximumLengthsInput": 23,
+    "OccurrencesMaximum": 30,
+    "IRACTo": "Y",
+    "GMFTags": "*FBEb",
+    "IsArray": "TRUE",
+    "FieldName": 111,
+    "Column": "sfaf.excluded_frequency_band",
+    "DBType": "str(23)",
+    "Group": "",
+    "Description": "Used in conjunction with a frequency band assignment to designate portions of the band excluded from the assignment."
+  },
+  {
+    "DataNumberSFAFItem": 112,
+    "Type": "Emission Characteristics",
+    "Title": "Frequency Separation Criteria",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 35,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 112,
+    "Column": "sfaf.frequency_separation_criteria",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": "Identifies the required frequency separation between the different radio sets operated at one transmitter or receiver location."
+  },
+  {
+    "DataNumberSFAFItem": 113,
+    "Type": "Emission Characteristics",
+    "Title": "Station Class",
+    "SPECTRUMXXITags": "STC",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "Y",
+    "GMFTags": "STC",
+    "IsArray": "TRUE",
+    "FieldName": 113,
+    "Column": "sfaf.station_class",
+    "DBType": "str(4)",
+    "Group": "Transmitter",
+    "Description": "Identifies the functional use of the assigned frequency at a particular transmitting station. See Annex A to this appendix for a list of acceptable station class symbols and their definitions. The suffix R is included if a station is used primarily as a repeater and operates in the bands 29.89-50 (exclusive Government use), 138-144, 148-149.9, 150.05- 150.8, 162-174, and 406.1-420 MHz."
+  },
+  {
+    "DataNumberSFAFItem": 114,
+    "Type": "Emission Characteristics",
+    "Title": "Emission Designator",
+    "SPECTRUMXXITags": "EMS",
+    "Required": "",
+    "MaximumLengthsInput": 11,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "Y",
+    "GMFTags": "EMS",
+    "IsArray": "TRUE",
+    "FieldName": 114,
+    "Column": "sfaf.emission_designator",
+    "DBType": "str(11)",
+    "Group": "Transmitter",
+    "Description": "Identifies the necessary bandwidth and emission classification symbols. The bandwidth can be determined by using formulas shown in the ITU Radio Regulations, CCIR Recommendations, or the NTIA Manual. Emission classification symbols consist of the three required symbols and the two optional symbols shown in Tables A-B-1 and A-B-2 in Annex B to this appendix."
+  },
+  {
+    "DataNumberSFAFItem": 115,
+    "Type": "Emission Characteristics",
+    "Title": "Transmitter Power",
+    "SPECTRUMXXITags": "PWR",
+    "Required": "",
+    "MaximumLengthsInput": 9,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "Y",
+    "GMFTags": "PWR",
+    "IsArray": "TRUE",
+    "FieldName": 115,
+    "Column": "sfaf.transmitter_power",
+    "DBType": "str(9)",
+    "Group": "Transmitter",
+    "Description": "Identifies the maximum transmitter power output authorized to be used."
+  },
+  {
+    "DataNumberSFAFItem": 116,
+    "Type": "Emission Characteristics",
+    "Title": "Power Type",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 116,
+    "Column": "sfaf.power_type",
+    "DBType": "str(1)",
+    "Group": "Transmitter",
+    "Description": "The power type code for either carrier, mean, or peak envelope power emitted. The power type code will depend on the type of emission of the transmitter equipment."
+  },
+  {
+    "DataNumberSFAFItem": 117,
+    "Type": "Emission Characteristics",
+    "Title": "Effective Radiated Power",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 6,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 117,
+    "Column": "sfaf.effective_radiated_power",
+    "DBType": "str(6)",
+    "Group": "Transmitter",
+    "Description": "The power radiated from the transmitter antenna. It is the sum of the power supplied to the antenna and the gain of the antenna, expressed in dBm."
+  },
+  {
+    "DataNumberSFAFItem": 118,
+    "Type": "Emission Characteristics",
+    "Title": "Power/ERP Augmentation",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 118,
+    "Column": "sfaf.power_erp_augmentation",
+    "DBType": "str(1)",
+    "Group": "Transmitter",
+    "Description": "This is a coded data entry that is used to indicate when either Data Item 115 (Power) or Data Item 117 (ERP) is computer-generated."
+  },
+  {
+    "DataNumberSFAFItem": 130,
+    "Type": "Time/Date Information",
+    "Title": "Time",
+    "SPECTRUMXXITags": "TME",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "TME",
+    "IsArray": "FALSE",
+    "FieldName": 130,
+    "Column": "sfaf.time",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": "The period of time when the frequency will be either guarded (monitored) or used for transmission. The period indicated is not a limitation or a restriction, but rather the period when the frequency must be available to satisfy its operational requirement. The data entered shall indicate (1) whether the frequency is required occasionally or on a regular basis, and (2) whether it is required only during the normal workweek (between 0600 and 1800, Monday through Friday) or for additional periods of time."
+  },
+  {
+    "DataNumberSFAFItem": 131,
+    "Type": "Time/Date Information",
+    "Title": "Percent Time",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 2,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 131,
+    "Column": "sfaf.percent_time",
+    "DBType": "str(2)",
+    "Group": "",
+    "Description": "The percentage of time the transmitter equipment is in use during the scheduled hours of operation."
+  },
+  {
+    "DataNumberSFAFItem": 140,
+    "Type": "Time/Date Information",
+    "Title": "Required Date",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 140,
+    "Column": "sfaf.required_date",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The date a new assignment or modification to an assignment is to be operational."
+  },
+  {
+    "DataNumberSFAFItem": 141,
+    "Type": "Time/Date Information",
+    "Title": "Expiration Date",
+    "SPECTRUMXXITags": "EXD",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "EXD",
+    "IsArray": "FALSE",
+    "FieldName": 141,
+    "Column": "sfaf.expiration_date",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The date when a temporary assignment is to expire. Temporary assignments are not to exceed five years. This data item is blank when Data Item 142 contains data."
+  },
+  {
+    "DataNumberSFAFItem": 142,
+    "Type": "Time/Date Information",
+    "Title": "Review Date",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 142,
+    "Column": "sfaf.review_date",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The date by which the assignment is to be reviewed according to the FRRS review program. If records are processed to IRAC, the review date will be regenerated based on the FAS meeting date plus five years for all assignments except AAG/MAG assignments for which ten years are added to the FAS meeting date."
+  },
+  {
+    "DataNumberSFAFItem": 143,
+    "Type": "Time/Date Information",
+    "Title": "Revision Date",
+    "SPECTRUMXXITags": "RVD",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "RVD",
+    "IsArray": "FALSE",
+    "FieldName": 143,
+    "Column": "sfaf.revision_date",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The date ( YYYYMMDD) on which the GMF frequency assignment was initially approved or most recently revised."
+  },
+  {
+    "DataNumberSFAFItem": 144,
+    "Type": "Time/Date Information",
+    "Title": "Approval Authority Indicator",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 144,
+    "Column": "sfaf.approval_authority_indicator",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": "Indicates whether or not the assignment is to be processed to IRAC for approval."
+  },
+  {
+    "DataNumberSFAFItem": 145,
+    "Type": "Time/Date Information",
+    "Title": "ITU BR Registration",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": "1,20",
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 145,
+    "Column": "sfaf.itu_br_registration",
+    "DBType": "str(20)",
+    "Group": "",
+    "Description": "Indicates the action taken, or to be taken, to register an assignment with the International Telecommunication Union (ITU) Radiocommunication Bureau (BR)."
+  },
+  {
+    "DataNumberSFAFItem": 146,
+    "Type": "Time/Date Information",
+    "Title": "DCS Trunk ID",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 6,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 146,
+    "Column": "sfaf.dcs_trunk_id",
+    "DBType": "str(6)",
+    "Group": "",
+    "Description": "The Defense Communications System (DCS) trunk identifier assigned by DISA. See Chapter 66 of DISAC 310-65-1."
+  },
+  {
+    "DataNumberSFAFItem": 147,
+    "Type": "Time/Date Information",
+    "Title": "Joint Agencies",
+    "SPECTRUMXXITags": "JNT",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "Y",
+    "GMFTags": "*JNT",
+    "IsArray": "TRUE",
+    "FieldName": 147,
+    "Column": "sfaf.joint_agencies",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": "Identifies a joint assignment used by two or more agencies."
+  },
+  {
+    "DataNumberSFAFItem": 151,
+    "Type": "Organizational Information",
+    "Title": "Coordination Indicator",
+    "SPECTRUMXXITags": "ICI",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "ICI",
+    "IsArray": "FALSE",
+    "FieldName": 151,
+    "Column": "sfaf.coordination_indicator",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": "Indicates whether the IRAC is to coordinate the application with the Canadian Government, the Mexican Government, or both. It is also used for EUCOM assignments coordinated with NATO or host nations, or both."
+  },
+  {
+    "DataNumberSFAFItem": 152,
+    "Type": "Organizational Information",
+    "Title": "Coordination Data",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 35,
+    "OccurrencesMaximum": 30,
+    "IRACTo": "Y",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 152,
+    "Column": "sfaf.coordination_data",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": "Comments previously coordinated by the FAS Secretary with Canada and/or Mexico. This is a two-part data item: the first part identifies the country and the second part identifies the comment from that country."
+  },
+  {
+    "DataNumberSFAFItem": 200,
+    "Type": "Organizational Information",
+    "Title": "Agency",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 6,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 200,
+    "Column": "sfaf.agency",
+    "DBType": "str(6)",
+    "Group": "",
+    "Description": "Identifies the agency responsible for managing the frequency assignment. Within the DoD this is normally USA, DON, USAF, or NSA. If an assignment is in joint use by two or more agencies, then both Data Items 147 and 200 must be completed. The responsible DoD agency will be entered as the first data entry in Data Item 147 followed by the other joint agencies."
+  },
+  {
+    "DataNumberSFAFItem": 201,
+    "Type": "Organizational Information",
+    "Title": "Unified Command",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 201,
+    "Column": "sfaf.unified_command",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The unified command (PACOM, EUCOM, SOUTHCOM, CENTCOM, JFMOLANT,NORTHCOM) or designated representative for the area in which the assignment will be used."
+  },
+  {
+    "DataNumberSFAFItem": 202,
+    "Type": "Organizational Information",
+    "Title": "Unified Command Service",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 202,
+    "Column": "sfaf.unified_command_service",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The service-level organization within the unified command area that is responsible for managing the assignment. Within the CONUS, Data Item 202 identifies the Air Force or Army MAJCOM host responsible for the installation listed in Data Item 206."
+  },
+  {
+    "DataNumberSFAFItem": 203,
+    "Type": "Organizational Information",
+    "Title": "Bureau",
+    "SPECTRUMXXITags": "BUR",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "BUR",
+    "IsArray": "FALSE",
+    "FieldName": 203,
+    "Column": "sfaf.bureau",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": "The Bureau to be included in the record."
+  },
+  {
+    "DataNumberSFAFItem": 204,
+    "Type": "Organizational Information",
+    "Title": "Command",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 18,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 204,
+    "Column": "sfaf.command",
+    "DBType": "str(18)",
+    "Group": "",
+    "Description": "The Major Command or other applicable organization frequency management level that is subordinate to the responsible agency identified in Data Item 200."
+  },
+  {
+    "DataNumberSFAFItem": 205,
+    "Type": "Organizational Information",
+    "Title": "Subcommand",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 18,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 205,
+    "Column": "sfaf.subcommand",
+    "DBType": "str(18)",
+    "Group": "",
+    "Description": "The frequency management level between the command (Data Item 204) and the installation frequency manager (Data Item 206), or a level of command below the organization entered in Data Item 204."
+  },
+  {
+    "DataNumberSFAFItem": 206,
+    "Type": "Organizational Information",
+    "Title": "InstallationManager   Frequency",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 18,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 206,
+    "Column": "sfaf.installationmanager_frequency",
+    "DBType": "str(18)",
+    "Group": "",
+    "Description": "Normally indicates the station, base, installation, or fort-level frequency management office responsible for the location of the operating unit."
+  },
+  {
+    "DataNumberSFAFItem": 207,
+    "Type": "Organizational Information",
+    "Title": "Operating Unit",
+    "SPECTRUMXXITags": "",
+    "Required": "TRUE",
+    "MaximumLengthsInput": 18,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 207,
+    "Column": "sfaf.operating_unit",
+    "DBType": "str(18)",
+    "Group": "",
+    "Description": "The name or designation of the organization using the frequency assignment."
+  },
+  {
+    "DataNumberSFAFItem": 208,
+    "Type": "Organizational Information",
+    "Title": "User Net/Code",
+    "SPECTRUMXXITags": "NET",
+    "Required": "",
+    "MaximumLengthsInput": 6,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y5",
+    "GMFTags": "NET",
+    "IsArray": "FALSE",
+    "FieldName": 208,
+    "Column": "sfaf.user_net_code",
+    "DBType": "str(6)",
+    "Group": "",
+    "Description": "A unique code that identifies the specific user of the frequency, i.e., the command, activity, unit, project, etc."
+  },
+  {
+    "DataNumberSFAFItem": 209,
+    "Type": "Organizational Information",
+    "Title": "AreaOtherAFC/DoDOrganizationsAFC",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 18,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 209,
+    "Column": "sfaf.areaotherafc_dodorganizationsafc",
+    "DBType": "str(18)",
+    "Group": "",
+    "Description": "The DoD AFC, COCOM, Service Area Frequency Management Office, or other organization not provided in data items 200-208."
+  },
+  {
+    "DataNumberSFAFItem": 300,
+    "Type": "Transmitter Location Data",
+    "Title": "State/Country",
+    "SPECTRUMXXITags": "XSC",
+    "Required": "TRUE",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "XSC",
+    "IsArray": "FALSE",
+    "FieldName": 300,
+    "Column": "sfaf.tx_state_country",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": "An authorized abbreviation for the state, country, or geographical area in which the transmitting station is located. This data item cannot be changed in an FRRS record containing 144."
+  },
+  {
+    "DataNumberSFAFItem": 301,
+    "Type": "Transmitter Location Data",
+    "Title": "Antenna Location",
+    "SPECTRUMXXITags": "XAL",
+    "Required": "",
+    "MaximumLengthsInput": 24,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "XAL",
+    "IsArray": "FALSE",
+    "FieldName": 301,
+    "Column": "sfaf.antenna_location",
+    "DBType": "str(24)",
+    "Group": "",
+    "Description": "The name of the city, base, or geographical area of operation within which the transmitting antenna is actually located."
+  },
+  {
+    "DataNumberSFAFItem": 302,
+    "Type": "Transmitter Location Data",
+    "Title": "Station Control",
+    "SPECTRUMXXITags": "XRC",
+    "Required": "",
+    "MaximumLengthsInput": 18,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y8",
+    "GMFTags": "XRC",
+    "IsArray": "FALSE",
+    "FieldName": 302,
+    "Column": "sfaf.station_control",
+    "DBType": "str(18)",
+    "Group": "",
+    "Description": "The operating unit that controls, either electrically or administratively, the transmitting station when it is different from the data entered in Data Item 207. This data item is not used by Air Force."
+  },
+  {
+    "DataNumberSFAFItem": 303,
+    "Type": "Transmitter Location Data",
+    "Title": "Antenna Coordinates",
+    "SPECTRUMXXITags": "XLA XLG",
+    "Required": "",
+    "MaximumLengthsInput": 15,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "XLA XLG",
+    "IsArray": "FALSE",
+    "FieldName": 303,
+    "Column": "sfaf.antenna_coordinates",
+    "DBType": "str(15)",
+    "Group": "",
+    "Description": "The World Geodetic System 1984 (WGS 84) datum latitude and longitude (expressed in degrees, minutes, and seconds) of the transmitter antenna location entered in Data Item 301."
+  },
+  {
+    "DataNumberSFAFItem": 304,
+    "Type": "Transmitter Location Data",
+    "Title": "Call Sign",
+    "SPECTRUMXXITags": "XCL",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y8",
+    "GMFTags": "XCL",
+    "IsArray": "FALSE",
+    "FieldName": 304,
+    "Column": "sfaf.call_sign",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "The international call sign assigned to the transmitting station. For navigational aids, this data item is used for the NAVAIDS identifier instead of a call sign."
+  },
+  {
+    "DataNumberSFAFItem": 306,
+    "Type": "Transmitter Location Data",
+    "Title": "Authorized Radius",
+    "SPECTRUMXXITags": "XRD",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*RAD",
+    "IsArray": "FALSE",
+    "FieldName": 306,
+    "Column": "sfaf.authorized_radius",
+    "DBType": "str(5)",
+    "Group": "",
+    "Description": "The area of operation for a portable, mobile, or transportable transmitter station. This area is expressed as a radius in kilometers extending from the geographical coordinates listed in Data Item 303."
+  },
+  {
+    "DataNumberSFAFItem": 315,
+    "Type": "Space Stations",
+    "Title": "Equatorial Inclination Angle",
+    "SPECTRUMXXITags": "XIN",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 315,
+    "Column": "sfaf.station_equatorial_inclination_angle",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": "The angle at which the transmitting NONGEOSTATIONARY satellite's orbit crosses the equator. A nongeostationary satellite is defined as one whose circular orbit does not lie in the plane of the earth's equator and has a specific equatorial inclination, apogee, and perigee."
+  },
+  {
+    "DataNumberSFAFItem": 316,
+    "Type": "Space Stations",
+    "Title": "Apogee",
+    "SPECTRUMXXITags": "XAE",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 316,
+    "Column": "sfaf.station_apogee",
+    "DBType": "str(5)",
+    "Group": "",
+    "Description": "The point in the orbit of a NONGEOSTATIONARY satellite at which it is farthest from the earth."
+  },
+  {
+    "DataNumberSFAFItem": 317,
+    "Type": "Space Stations",
+    "Title": "Perigee",
+    "SPECTRUMXXITags": "XPE",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 317,
+    "Column": "sfaf.station_perigee",
+    "DBType": "str(5)",
+    "Group": "",
+    "Description": "The point in the orbit of a NONGEOSTATIONARY satellite at which it is nearest to earth."
+  },
+  {
+    "DataNumberSFAFItem": 318,
+    "Type": "Space Stations",
+    "Title": "Period of Orbit",
+    "SPECTRUMXXITags": "XPD",
+    "Required": "",
+    "MaximumLengthsInput": 7,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 318,
+    "Column": "sfaf.station_period_of_orbit",
+    "DBType": "str(7)",
+    "Group": "",
+    "Description": "The time it takes for a NONGEOSTATIONARY transmitter satellite to make one complete orbit."
+  },
+  {
+    "DataNumberSFAFItem": 319,
+    "Type": "Space Stations",
+    "Title": "Number of Satellites",
+    "SPECTRUMXXITags": "XNR",
+    "Required": "",
+    "MaximumLengthsInput": 2,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 319,
+    "Column": "sfaf.station_number_of_satellites",
+    "DBType": "str(2)",
+    "Group": "",
+    "Description": "The number of NONGEOSTATIONARY satellite transmitters in a system having similar orbital characteristics."
+  },
+  {
+    "DataNumberSFAFItem": 321,
+    "Type": "Space Stations",
+    "Title": "Power Density",
+    "SPECTRUMXXITags": "SPD",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "SPD",
+    "IsArray": "FALSE",
+    "FieldName": 321,
+    "Column": "sfaf.station_power_density",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": "The maximum power density, per hertz (in dBW), supplied to an earth or space station's antenna or to those of terrestrial stations (including experimental) employing earth or space-station techniques. For frequencies below 15 GHz, the power shall be averaged over the worst 4 kHz band; for frequencies 15 GHz and above, the power shall be averaged over the worst 1 MHz band. The worst 4 kHz and 1 MHz bands are defined as those having the highest power density within the assigned emission bandwidth."
+  },
+  {
+    "DataNumberSFAFItem": 340,
+    "Type": "Transmitter Equipment",
+    "Title": "Equipment Nomenclature",
+    "SPECTRUMXXITags": "XEQ",
+    "Required": "",
+    "MaximumLengthsInput": "1,18",
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "*EQT",
+    "IsArray": "TRUE",
+    "FieldName": 340,
+    "Column": "sfaf.equipment_nomenclature",
+    "DBType": "str(18)",
+    "Group": "Equipment",
+    "Description": "Data Item 340 has two parts. The first part identifies the type of equipment (government, commercial, or unassigned) and the second part identifies either the standard military nomenclature or the commercial make and model number of the equipment at each specific transmitter station location. If both a military nomenclature and a commercial model number are assigned to the same equipment, the military nomenclature will be used.  Input Requirement: This data item is required. Enter the equipment type code followed by the equipment system or component nomenclature for the transmitter location. (If available, the system nomenclature is preferred rather than the component nomenclature; however, either is acceptable. Data items 340 and 343 are interrelated, and an entry in Data Item 340 should be accompanied by a corresponding entry in Data Item 343, if known. If Data Item 343 is known, enter the nomenclature exactly as it is recorded in the Spectrum Certification System (SCS) database or J-12 document DD Form 1494.) Enter one of the following equipment type codes: G - Government nomenclature C - Commercial model number U - Unassigned nomenclature"
+  },
+  {
+    "DataNumberSFAFItem": 341,
+    "Type": "Transmitter Equipment",
+    "Title": "NumberName   of Stations, System",
+    "SPECTRUMXXITags": "NTT,NAM",
+    "Required": "",
+    "MaximumLengthsInput": "5,29",
+    "OccurrencesMaximum": 3,
+    "IRACTo": "Y",
+    "GMFTags": "*NRM",
+    "IsArray": "TRUE",
+    "FieldName": 341,
+    "Column": "sfaf.numbername_of_stations_system",
+    "DBType": "str(29)",
+    "Group": "Equipment",
+    "Description": "A two part data item. The first part identifies the number of transportable, land-mobile and portable-type stations associated with the assignment and the second part identifies the name of the system involved. A station is one or more transmitters or receivers or a combination of transmitters and receivers, including the accessory equipment necessary at one location for carrying on a radio communication service. A system is considered two or more equipment having a common property, usually geographic, administrative, functional, or operational in nature."
+  },
+  {
+    "DataNumberSFAFItem": 342,
+    "Type": "Transmitter Equipment",
+    "Title": "Aircraft Nautical Mile Value",
+    "SPECTRUMXXITags": "XNM",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "*RAD",
+    "IsArray": "FALSE",
+    "FieldName": 342,
+    "Column": "sfaf.aircraft_nautical_mile_value",
+    "DBType": "str(4)",
+    "Group": "Equipment",
+    "Description": "The transmitter radius of aeronautical assignment group frequency area of operation in nautical miles and is computer-generated from Data Item 306."
+  },
+  {
+    "DataNumberSFAFItem": 343,
+    "Type": "Transmitter Equipment",
+    "Title": "Equipment Identification Certification Number",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 15,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "*AGN,JFA",
+    "IsArray": "TRUE",
+    "FieldName": 343,
+    "Column": "sfaf.equipmentidentificationcertificationnumber",
+    "DBType": "str(15)",
+    "Group": "Equipment",
+    "Description": "Indicates the certification number assigned to the transmitter equipment or system by the MCEB J-12 Working Group."
+  },
+  {
+    "DataNumberSFAFItem": 344,
+    "Type": "Transmitter Equipment",
+    "Title": "Off-the-shelf Equipment",
+    "SPECTRUMXXITags": "EQS",
+    "Required": "",
+    "MaximumLengthsInput": 6,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "*EQS",
+    "IsArray": "TRUE",
+    "FieldName": 344,
+    "Column": "sfaf.offtheshelf_equipment",
+    "DBType": "str(6)",
+    "Group": "",
+    "Description": "May be used in frequency bands 29.89-50.00, 150.8-174.0, 406.1- 420.0 and 450-512 MHz for Land Mobile System (LMS) assignments. This data item may also be used in frequency bands 108.000-117.975 and 328.6-335.4 MHz for the following types of assignments: VOR1A, VOR1B, VOR2A, VOR2B, ILSLOC, or ILSGS."
+  },
+  {
+    "DataNumberSFAFItem": 345,
+    "Type": "Transmitter Equipment",
+    "Title": "Radar Tunability",
+    "SPECTRUMXXITags": "TUN",
+    "Required": "",
+    "MaximumLengthsInput": 2,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*EQT",
+    "IsArray": "FALSE",
+    "FieldName": 345,
+    "Column": "sfaf.radar_tunability",
+    "DBType": "str(2)",
+    "Group": "",
+    "Description": "A coded entry describing the tuning capabilities of both pulsed and nonpulsed radars."
+  },
+  {
+    "DataNumberSFAFItem": 346,
+    "Type": "Transmitter Equipment",
+    "Title": "Pulse Duration",
+    "SPECTRUMXXITags": "PDD",
+    "Required": "",
+    "MaximumLengthsInput": "9, 9-9",
+    "OccurrencesMaximum": 30,
+    "IRACTo": "Y",
+    "GMFTags": "*EQT",
+    "IsArray": "TRUE",
+    "FieldName": 346,
+    "Column": "sfaf.pulse_duration",
+    "DBType": "str(9)",
+    "Group": "",
+    "Description": "The width of the transmitted pulse (measured in microseconds or milliseconds at the half-power (3 dB) points) for all equipment using pulsed emission."
+  },
+  {
+    "DataNumberSFAFItem": 347,
+    "Type": "Transmitter Equipment",
+    "Title": "Pulse Repetition Rate",
+    "SPECTRUMXXITags": "PRR",
+    "Required": "",
+    "MaximumLengthsInput": "9, 9-9",
+    "OccurrencesMaximum": 30,
+    "IRACTo": "Y",
+    "GMFTags": "*PRR",
+    "IsArray": "TRUE",
+    "FieldName": 347,
+    "Column": "sfaf.pulse_repetition_rate",
+    "DBType": "str(9)",
+    "Group": "",
+    "Description": "The number of pulses per second (PPS) for all equipment using pulsed emission."
+  },
+  {
+    "DataNumberSFAFItem": 348,
+    "Type": "Transmitter Equipment",
+    "Title": "Intermediate Frequency",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 11,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 348,
+    "Column": "sfaf.intermediate_frequency",
+    "DBType": "str(11)",
+    "Group": "",
+    "Description": "The intermediate frequency (an image frequency at any given point in the tuning range) value resulting from a frequency conversion into a fixed, lower carrier (before demodulation)."
+  },
+  {
+    "DataNumberSFAFItem": 349,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Sidelobe Suppression",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 349,
+    "Column": "sfaf.sidelobe_suppression",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": "Indicates whether a portion of the radiation from an antenna outside of the main beam and usually of much less intensity has been suppressed or eliminated. The suppression or elimination of unwanted signals or interference takes place by means of shielding, filtering, grounding, component relocation, or sometimes redesign of the equipment in use."
+  },
+  {
+    "DataNumberSFAFItem": 354,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Name",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 354,
+    "Column": "",
+    "DBType": "",
+    "Group": "Transmitter Antenna",
+    "Description": "The generic name for the type of antenna normally associated with the transmitter."
+  },
+  {
+    "DataNumberSFAFItem": 355,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Structure Nomenclature",
+    "SPECTRUMXXITags": "XAKXAT",
+    "Required": "",
+    "MaximumLengthsInput": 18,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "YYN",
+    "GMFTags": "*EQTXAD",
+    "IsArray": "TRUE",
+    "FieldName": 355,
+    "Column": "sfaf.antenna_structure_nomenclature",
+    "DBType": "str(18103)",
+    "Group": "Transmitter Antenna",
+    "Description": "The standard military nomenclature or commercial manufacturer's make and model number of the transmitter antennas."
+  },
+  {
+    "DataNumberSFAFItem": 356,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Structure Height",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 356,
+    "Column": "sfaf.antenna_structure_height",
+    "DBType": "str(3)",
+    "Group": "Transmitter Antenna",
+    "Description": "The overall height (in meters) of the transmitter antenna support structure above ground level."
+  },
+  {
+    "DataNumberSFAFItem": 357,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Gain",
+    "SPECTRUMXXITags": "XAG",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "XAD,*EGN, *SGN",
+    "IsArray": "TRUE",
+    "FieldName": 357,
+    "Column": "sfaf.antenna_gain",
+    "DBType": "str(4)",
+    "Group": "Transmitter Antenna",
+    "Description": "The antenna gain, in decibels, with reference to an isotropic source (dBi) in the direction of maximum radiation."
+  },
+  {
+    "DataNumberSFAFItem": 358,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Elevation",
+    "SPECTRUMXXITags": "XSE",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "XAD",
+    "IsArray": "TRUE",
+    "FieldName": 358,
+    "Column": "sfaf.antenna_elevation",
+    "DBType": "str(5)",
+    "Group": "Transmitter Antenna",
+    "Description": "the site's terrain elevation, in meters above mean sea level (AMSL), at the base of a fixed station's transmitter antenna. If the antenna is installed on a structure such as a tower or a building, the site elevation is specified as the ground elevation at the base of the structure."
+  },
+  {
+    "DataNumberSFAFItem": 359,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Feedpoint Height",
+    "SPECTRUMXXITags": "XAH",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "XAD",
+    "IsArray": "TRUE",
+    "FieldName": 359,
+    "Column": "sfaf.antenna_feedpoint_height",
+    "DBType": "str(5)",
+    "Group": "Transmitter Antenna",
+    "Description": "The distance (in meters) between the transmitter antenna's feedpoint and the terrain."
+  },
+  {
+    "DataNumberSFAFItem": 360,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Horizontal Beamwidth",
+    "SPECTRUMXXITags": "XBW",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "XAD,*EBWb,*SBW",
+    "IsArray": "TRUE",
+    "FieldName": 360,
+    "Column": "sfaf.antenna_horizontal_beamwidth",
+    "DBType": "str(4)",
+    "Group": "Transmitter Antenna",
+    "Description": "The angular beamwidth (measured in degrees at the half- power (3 dB) points) of space, earth or terrestrial station antennas (including experimental) employing earth or space-station techniques."
+  },
+  {
+    "DataNumberSFAFItem": 361,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Vertical Beamwidth",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 361,
+    "Column": "sfaf.antenna_vertical_beamwidth",
+    "DBType": "str(3)",
+    "Group": "Transmitter Antenna",
+    "Description": "The transmitter antenna vertical beamwidth, measured in degrees and normally taken as the angle between the half power points (-3 dB points) from the pattern of the antenna."
+  },
+  {
+    "DataNumberSFAFItem": 362,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Orientation",
+    "SPECTRUMXXITags": "XAZ",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 362,
+    "Column": "sfaf.antenna_orientation",
+    "DBType": "str(3)",
+    "Group": "Transmitter Antenna",
+    "Description": "The physical direction or movement of the transmitter antenna. A second entry indicating the azimuth angle of the antenna's main beam may also be given. This second entry, given in degrees clockwise from true north, applies only to earth stations or terrestrial stations employing earth-station techniques."
+  },
+  {
+    "DataNumberSFAFItem": 363,
+    "Type": "Transmitter Antenna Data",
+    "Title": "Antenna Polarization",
+    "SPECTRUMXXITags": "XAP",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 363,
+    "Column": "sfaf.antenna_polarization",
+    "DBType": "str(1)",
+    "Group": "Transmitter Antenna",
+    "Description": "A one-character code indicating the polarization of the electromagnetic radiation from the antenna."
+  },
+  {
+    "DataNumberSFAFItem": 373,
+    "Type": "Transmitter Antenna Data",
+    "Title": "JSC Area Code",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 373,
+    "Column": "sfaf.jsc_area_code",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": "A one-character code computer-generated by the JSC from Data Item 300. It indicates a minor area of the world in which the transmitter is located and is used to reduce computer search time. The list of approved codes are listed in Annex E to this appendix."
+  },
+  {
+    "DataNumberSFAFItem": 374,
+    "Type": "Transmitter Antenna Data",
+    "Title": "ITU Region",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 374,
+    "Column": "sfaf.itu_region",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": "A single integer (1, 2, or 3) indicating an ITU-designated region of the world in which the transmitter is located."
+  },
+  {
+    "DataNumberSFAFItem": 400,
+    "Type": "Receiver Location Data",
+    "Title": "State/Country",
+    "SPECTRUMXXITags": "RSC",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "RSC",
+    "IsArray": "FALSE",
+    "FieldName": 400,
+    "Column": "sfaf.rx_state_country",
+    "DBType": "str(4)",
+    "Group": "Receiver Location",
+    "Description": "Authorized abbreviation for the state, country, or geographical area in which the receiving station is located. The approved list of abbreviations are listed in Annex C to this appendix."
+  },
+  {
+    "DataNumberSFAFItem": 401,
+    "Type": "Receiver Location Data",
+    "Title": "Antenna Location",
+    "SPECTRUMXXITags": "RAL",
+    "Required": "",
+    "MaximumLengthsInput": 24,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "RAL",
+    "IsArray": "FALSE",
+    "FieldName": 401,
+    "Column": "sfaf.rx_antenna_location",
+    "DBType": "str(24)",
+    "Group": "Receiver Location",
+    "Description": "The name of the city, base, or geographical area of operation within which the receiving antenna is actually located."
+  },
+  {
+    "DataNumberSFAFItem": 402,
+    "Type": "Receiver Location Data",
+    "Title": "Receiver Control",
+    "SPECTRUMXXITags": "RRC",
+    "Required": "",
+    "MaximumLengthsInput": 18,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y8",
+    "GMFTags": "RRC",
+    "IsArray": "FALSE",
+    "FieldName": 402,
+    "Column": "sfaf.receiver_control",
+    "DBType": "str(18)",
+    "Group": "Receiver Location",
+    "Description": "The operating unit that controls, either electrically or administratively, the receiver station when it is different from the data entered in Data Item 207. Data Item 402 is not used by the Air Force."
+  },
+  {
+    "DataNumberSFAFItem": 403,
+    "Type": "Receiver Location Data",
+    "Title": "Antenna Coordinates",
+    "SPECTRUMXXITags": "RLA RLG",
+    "Required": "",
+    "MaximumLengthsInput": 15,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "RLA RLG",
+    "IsArray": "FALSE",
+    "FieldName": 403,
+    "Column": "sfaf.rx_antenna_coordinates",
+    "DBType": "str(15)",
+    "Group": "Receiver Location",
+    "Description": "The WGS 84 datum latitude and longitude (expressed in degrees, minutes, and seconds) of the receiver antenna location(s) entered in Data Item 401."
+  },
+  {
+    "DataNumberSFAFItem": 404,
+    "Type": "Receiver Location Data",
+    "Title": "Call Sign",
+    "SPECTRUMXXITags": "RCL",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y8",
+    "GMFTags": "ACL",
+    "IsArray": "FALSE",
+    "FieldName": 404,
+    "Column": "sfaf.rx_call_sign",
+    "DBType": "str(10)",
+    "Group": "Receiver Location",
+    "Description": "The international call sign assigned to the receiving station. For navigational aids, this data item is used for the NAVAIDS identifier instead of a call sign."
+  },
+  {
+    "DataNumberSFAFItem": 406,
+    "Type": "Receiver Location Data",
+    "Title": "Authorized Radius",
+    "SPECTRUMXXITags": "RRD",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*RAD",
+    "IsArray": "FALSE",
+    "FieldName": 406,
+    "Column": "sfaf.rx_authorized_radius",
+    "DBType": "str(4)",
+    "Group": "Receiver Location",
+    "Description": "The area of operation for portable, mobile, or transportable receiver stations. This area is expressed as a radius in kilometers extending from the coordinates listed in Data Item 403."
+  },
+  {
+    "DataNumberSFAFItem": 407,
+    "Type": "Receiver Location Data",
+    "Title": "Path Length",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 407,
+    "Column": "sfaf.rx_path_length",
+    "DBType": "str(5)",
+    "Group": "Receiver Location",
+    "Description": "The distance (in kilometers) between the terrestrial transmitter and receiver stations."
+  },
+  {
+    "DataNumberSFAFItem": 408,
+    "Type": "Receiver Location Data",
+    "Title": "Repeater Indicator",
+    "SPECTRUMXXITags": "RPT",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*RPTb",
+    "IsArray": "FALSE",
+    "FieldName": 408,
+    "Column": "sfaf.rx_repeater_indicator",
+    "DBType": "str(1)",
+    "Group": "Receiver Location",
+    "Description": "Indicates if the receiver station is used primarily as a repeater. A direct coupling between the station's receiver and the station's transmitter allows the incoming signal to be retransmitted exactly as received."
+  },
+  {
+    "DataNumberSFAFItem": 415,
+    "Type": "Space Stations Receiver",
+    "Title": "Equatorial Inclination Angle",
+    "SPECTRUMXXITags": "RIN",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 415,
+    "Column": "sfaf.equatorial_inclination_angle",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": "The angle at which the nongeostationary receiving satellite's orbit crosses the equator. A nongeostationary satellite is defined as one whose circular orbit does not lie in the plane of the earth's equator and that has a specific equatorial inclination, apogee, and perigee."
+  },
+  {
+    "DataNumberSFAFItem": 416,
+    "Type": "Space Stations Receiver",
+    "Title": "Apogee",
+    "SPECTRUMXXITags": "RAE",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 416,
+    "Column": "sfaf.apogee",
+    "DBType": "str(5)",
+    "Group": "",
+    "Description": "The point in the orbit of a nongeostationary receiver satellite at which it is farthest from the earth."
+  },
+  {
+    "DataNumberSFAFItem": 417,
+    "Type": "Space Stations Receiver",
+    "Title": "Perigee",
+    "SPECTRUMXXITags": "RPE",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 417,
+    "Column": "sfaf.perigee",
+    "DBType": "str(5)",
+    "Group": "",
+    "Description": "The point in the orbit of a nongeostationary receiver satellite at which it is nearest to the earth."
+  },
+  {
+    "DataNumberSFAFItem": 418,
+    "Type": "Space Stations Receiver",
+    "Title": "Period of Orbit",
+    "SPECTRUMXXITags": "RPD",
+    "Required": "",
+    "MaximumLengthsInput": 7,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 418,
+    "Column": "sfaf.period_of_orbit",
+    "DBType": "str(7)",
+    "Group": "",
+    "Description": "The time it takes for a nongeostationary receiver satellite to make one complete orbit."
+  },
+  {
+    "DataNumberSFAFItem": 419,
+    "Type": "Space Stations Receiver",
+    "Title": "Number of Satellites",
+    "SPECTRUMXXITags": "RNR",
+    "Required": "",
+    "MaximumLengthsInput": 2,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*ORB",
+    "IsArray": "FALSE",
+    "FieldName": 419,
+    "Column": "sfaf.number_of_satellites",
+    "DBType": "str(2)",
+    "Group": "",
+    "Description": "The number of nongeostationary receiving satellites in a system having similar orbital characteristics."
+  },
+  {
+    "DataNumberSFAFItem": 440,
+    "Type": "Receiver Equipment",
+    "Title": "Equipment Nomenclature",
+    "SPECTRUMXXITags": "REQ",
+    "Required": "",
+    "MaximumLengthsInput": "1,18",
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "*EQR",
+    "IsArray": "TRUE",
+    "FieldName": 440,
+    "Column": "sfaf.rx_equipment_nomenclature",
+    "DBType": "str(18)",
+    "Group": "Receiver Equipment",
+    "Description": "A two-part data item. The first part identifies the type of equipment (government, commercial, or unassigned), and the second part identifies either the standard military nomenclature or the commercial make and model number of the equipment at each specific receiver station location. If both a military nomenclature and a commercial model number are assigned to the same equipment, the military nomenclature will be used."
+  },
+  {
+    "DataNumberSFAFItem": 442,
+    "Type": "Receiver Equipment",
+    "Title": "Aircraft Nautical Mile Value",
+    "SPECTRUMXXITags": "RNM",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "*RAD",
+    "IsArray": "FALSE",
+    "FieldName": 442,
+    "Column": "sfaf.rx_aircraft_nautical_mile_value",
+    "DBType": "str(4)",
+    "Group": "Receiver Equipment",
+    "Description": "The receiver radius of aeronautical assignment group frequency area of operation in nautical miles and is generated from Data Item 406."
+  },
+  {
+    "DataNumberSFAFItem": 443,
+    "Type": "Receiver Equipment",
+    "Title": "EquipmentIdentificationCertificationNumber",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 15,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 443,
+    "Column": "sfaf.rx_equipidcertnumber",
+    "DBType": "str(15)",
+    "Group": "Receiver Equipment",
+    "Description": "The certification number assigned to the receiver equipment or system by the MCEB J-12 Working Group."
+  },
+  {
+    "DataNumberSFAFItem": 454,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Name",
+    "SPECTRUMXXITags": "RAT",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "RAD",
+    "IsArray": "TRUE",
+    "FieldName": 454,
+    "Column": "sfaf.rx_antenna_name",
+    "DBType": "str(10)",
+    "Group": "Receiver Antenna",
+    "Description": "The generic name for the type of antenna."
+  },
+  {
+    "DataNumberSFAFItem": 455,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Nomenclature",
+    "SPECTRUMXXITags": "RAK",
+    "Required": "",
+    "MaximumLengthsInput": 18,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "*EQR",
+    "IsArray": "TRUE",
+    "FieldName": 455,
+    "Column": "sfaf.rx_antenna_nomenclature",
+    "DBType": "str(18)",
+    "Group": "Receiver Antenna",
+    "Description": "The standard military nomenclature or commercial manufacturer�s make and model number of the antenna."
+  },
+  {
+    "DataNumberSFAFItem": 456,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Structure Height",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 456,
+    "Column": "sfaf.rx_antenna_structure_height",
+    "DBType": "str(3)",
+    "Group": "Receiver Antenna",
+    "Description": "The overall height in meters of the receiver antenna support structure above ground level."
+  },
+  {
+    "DataNumberSFAFItem": 457,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Gain",
+    "SPECTRUMXXITags": "RAG",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "RAD,*SGN*EGN",
+    "IsArray": "TRUE",
+    "FieldName": 457,
+    "Column": "sfaf.rx_antenna_gain",
+    "DBType": "str(4)",
+    "Group": "Receiver Antenna",
+    "Description": "The antenna gain in decibels with reference to an isotropic source (dBi) in the direction of maximum radiation."
+  },
+  {
+    "DataNumberSFAFItem": 458,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Elevation",
+    "SPECTRUMXXITags": "RSE",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "RAD",
+    "IsArray": "TRUE",
+    "FieldName": 458,
+    "Column": "sfaf.rx_antenna_elevation",
+    "DBType": "str(5)",
+    "Group": "Receiver Antenna",
+    "Description": "The site's terrain elevation, in meters AMSL, at the base of a fixed station's receiver antenna. If the antenna is installed on a structure such as a tower or a building, the site elevation is specified as the ground elevation at the base of the structure."
+  },
+  {
+    "DataNumberSFAFItem": 459,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Feedpoint Height",
+    "SPECTRUMXXITags": "RAH",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "RAD",
+    "IsArray": "TRUE",
+    "FieldName": 459,
+    "Column": "sfaf.rx_antenna_feedpoint_height",
+    "DBType": "str(5)",
+    "Group": "Receiver Antenna",
+    "Description": "The distance (in meters) between the receiver antenna's feedpoint and the terrain."
+  },
+  {
+    "DataNumberSFAFItem": 460,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Horizontal Beamwidth",
+    "SPECTRUMXXITags": "RBW",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "RAD,*EBW,*SBW",
+    "IsArray": "TRUE",
+    "FieldName": 460,
+    "Column": "sfaf.rx_antenna_horizontal_beamwidth",
+    "DBType": "str(4)",
+    "Group": "Receiver Antenna",
+    "Description": "The angular beamwidth (measured in degrees at the half- power (3 dB) points) of space, earth, or terrestrial stations antennas (including experimental) employing space or earth-station techniques."
+  },
+  {
+    "DataNumberSFAFItem": 461,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Vertical Beamwidth",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 461,
+    "Column": "sfaf.rx_antenna_vertical_beamwidth",
+    "DBType": "str(3)",
+    "Group": "Receiver Antenna",
+    "Description": "The receiver antenna vertical beamwidth, measured in degrees and normally taken as the angle between the half-power points (-3 dB points) from the pattern of the antenna."
+  },
+  {
+    "DataNumberSFAFItem": 462,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Orientation",
+    "SPECTRUMXXITags": "RAZ,RAA",
+    "Required": "",
+    "MaximumLengthsInput": "3,3-33,3",
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "RAZ,RAD",
+    "IsArray": "TRUE",
+    "FieldName": 462,
+    "Column": "sfaf.rx_antenna_orientation",
+    "DBType": "str(33)",
+    "Group": "Receiver Antenna",
+    "Description": "The physical direction or movement of the receiver antenna. A second entry indicating the azimuth angle of the antenna's main beam may also be given. This second entry, given in degrees, clockwise from true north, applies only to earth stations or terrestrial stations employing earth station techniques."
+  },
+  {
+    "DataNumberSFAFItem": 463,
+    "Type": "Receiver Antenna Data",
+    "Title": "Antenna Polarization",
+    "SPECTRUMXXITags": "RAP",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "RAP",
+    "IsArray": "TRUE",
+    "FieldName": 463,
+    "Column": "sfaf.rx_antenna_polarization",
+    "DBType": "str(1)",
+    "Group": "Receiver Antenna",
+    "Description": "A one-character code indicating the polarization of the electromagnetic radiation from the antenna."
+  },
+  {
+    "DataNumberSFAFItem": 470,
+    "Type": "Space Systems",
+    "Title": "Space Station Noise Temperature",
+    "SPECTRUMXXITags": "SNT",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": "",
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 470,
+    "Column": "sfaf.space_station_noise_temperature",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "The noise temperature of the receiving space stations."
+  },
+  {
+    "DataNumberSFAFItem": 471,
+    "Type": "Space Systems",
+    "Title": "Earth Station System Noise",
+    "SPECTRUMXXITags": "RNT",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": "",
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 471,
+    "Column": "sfaf.earth_station_system_noise",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "The noise temperature of the receiving earth station(s)."
+  },
+  {
+    "DataNumberSFAFItem": 472,
+    "Type": "Space Systems",
+    "Title": "Equivalent Satellite Link Noise",
+    "SPECTRUMXXITags": "ENT",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": "",
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 472,
+    "Column": "sfaf.equivalent_satellite_link_noise",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "The noise temperature at the input of the earth-station receiver corresponding to the radio-frequency noise power that produces the total observed noise at the output of the satellite link. This excludes noise due to interference coming from satellite links using other satellites and from terrestrial systems."
+  },
+  {
+    "DataNumberSFAFItem": 473,
+    "Type": "Space Systems",
+    "Title": "JSC Area Code",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 473,
+    "Column": "sfaf.rx_jsc_area_code",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": "A minor area of the world in which the receiver is located and is used to reduce computer search time. The list of approved codes are listed in Annex E to this appendix."
+  },
+  {
+    "DataNumberSFAFItem": 500,
+    "Type": "Supplementary Details",
+    "Title": "IRAC Notes",
+    "SPECTRUMXXITags": "NTS",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "Y",
+    "GMFTags": "NTS",
+    "IsArray": "TRUE",
+    "FieldName": 500,
+    "Column": "sfaf.irac_notes",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": "A 4-character code identifying the IRAC note(s) (less M notes) applicable to the frequency assignment. The five types of notes which may be entered in this data item are: C (coordination), E (emission), L (limitation), P (priority), and S (special). M (minute) notes are entered only in Data Item 501 (Notes--Free Text). A complete listing of IRAC notes is contained in Annex F to this appendix."
+  },
+  {
+    "DataNumberSFAFItem": 501,
+    "Type": "Supplementary Details",
+    "Title": "Notes free-text Comments",
+    "SPECTRUMXXITags": "NOT",
+    "Required": "",
+    "MaximumLengthsInput": 35,
+    "OccurrencesMaximum": 30,
+    "IRACTo": "Y",
+    "GMFTags": "*NTS",
+    "IsArray": "TRUE",
+    "FieldName": 501,
+    "Column": "sfaf.notes_freetext_comments",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": "The M (minute) note(s) and complete the amplifying conditional comments as agreed to by the IRAC FAS. A complete listing of IRAC M notes is contained in Annex F to this appendix."
+  },
+  {
+    "DataNumberSFAFItem": 502,
+    "Type": "Supplementary Details",
+    "Title": "Description of Requirement",
+    "SPECTRUMXXITags": "GEN",
+    "Required": "",
+    "MaximumLengthsInput": 1440,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 502,
+    "Column": "sfaf.description_of_requirement",
+    "DBType": "str(1440)",
+    "Group": "",
+    "Description": "Agency remarks which, while pertinent to the assignment, are not intended to be part of the application processed through the IRAC. These remarks, therefore, will be excluded from the GMF."
+  },
+  {
+    "DataNumberSFAFItem": 503,
+    "Type": "Supplementary Details",
+    "Title": "Agency Free-text Comments",
+    "SPECTRUMXXITags": "AGN",
+    "Required": "",
+    "MaximumLengthsInput": 35,
+    "OccurrencesMaximum": 30,
+    "IRACTo": "Y",
+    "GMFTags": "*AGN",
+    "IsArray": "TRUE",
+    "FieldName": 503,
+    "Column": "sfaf.agency_freetext_comments",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": "Agency remarks in the applications processed through the IRAC. These remarks will, therefore, be included in the GMF. Remarks not intended for the GMF must be entered in Data Item 502 (Description of Requirement)."
+  },
+  {
+    "DataNumberSFAFItem": 504,
+    "Type": "Supplementary Details",
+    "Title": "FASCommentsAgenda",
+    "SPECTRUMXXITags": "FAS",
+    "Required": "",
+    "MaximumLengthsInput": 72,
+    "OccurrencesMaximum": 5,
+    "IRACTo": "Y",
+    "GMFTags": "FAS",
+    "IsArray": "TRUE",
+    "FieldName": 504,
+    "Column": "sfaf.fascommentsagenda",
+    "DBType": "str(72)",
+    "Group": "",
+    "Description": "Information that is not required to be recorded in the GMF. The data entered will appear in the FAS Agenda Action File (ACTF) file and the FRRS permanent proposal records only. It will not appear in the GMF or FRRS central databases."
+  },
+  {
+    "DataNumberSFAFItem": 505,
+    "Type": "Supplementary Details",
+    "Title": "NATONumberPooled Frequency Code",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "b",
+    "IsArray": "FALSE",
+    "FieldName": 505,
+    "Column": "sfaf.natonumberpooled_frequency_code",
+    "DBType": "str(5)",
+    "Group": "",
+    "Description": "Data on communications associated with ground transmitters/receivers as well as aircraft operating in the 225-400 MHz frequency band."
+  },
+  {
+    "DataNumberSFAFItem": 506,
+    "Type": "Supplementary Details",
+    "Title": "Paired Frequency",
+    "SPECTRUMXXITags": "PRD",
+    "Required": "",
+    "MaximumLengthsInput": "11,10,12",
+    "OccurrencesMaximum": 30,
+    "IRACTo": "Y",
+    "GMFTags": "*PRDb",
+    "IsArray": "TRUE",
+    "FieldName": 506,
+    "Column": "sfaf.paired_frequency",
+    "DBType": "str(12)",
+    "Group": "",
+    "Description": "Data Item 506 has three parts. The first part contains the repeater station transmit or receive frequency associated with the transmitter frequency described in this record. The second part contains the agency serial number associated with that paired frequency and the third part contains a brief associated comment."
+  },
+  {
+    "DataNumberSFAFItem": 511,
+    "Type": "Supplementary Details",
+    "Title": "Major Function Identifier",
+    "SPECTRUMXXITags": "MFI",
+    "Required": "",
+    "MaximumLengthsInput": 30,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*MFIb",
+    "IsArray": "FALSE",
+    "FieldName": 511,
+    "Column": "sfaf.major_function_identifier",
+    "DBType": "str(30)",
+    "Group": "",
+    "Description": "The major (or primary) function of the frequency assignment."
+  },
+  {
+    "DataNumberSFAFItem": 512,
+    "Type": "Supplementary Details",
+    "Title": "Intermediate Function Identifier",
+    "SPECTRUMXXITags": "IFI",
+    "Required": "",
+    "MaximumLengthsInput": 30,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*IFI b",
+    "IsArray": "FALSE",
+    "FieldName": 512,
+    "Column": "sfaf.intermediate_function_identifier",
+    "DBType": "str(30)",
+    "Group": "",
+    "Description": "The intermediate function of the frequency assignment."
+  },
+  {
+    "DataNumberSFAFItem": 513,
+    "Type": "Supplementary Details",
+    "Title": "Detailed Function Identifier",
+    "SPECTRUMXXITags": "DFI",
+    "Required": "",
+    "MaximumLengthsInput": 30,
+    "OccurrencesMaximum": 5,
+    "IRACTo": "Y",
+    "GMFTags": "*DFI",
+    "IsArray": "TRUE",
+    "FieldName": 513,
+    "Column": "sfaf.detailed_function_identifier",
+    "DBType": "str(30)",
+    "Group": "",
+    "Description": "The detailed function of the frequency assignment."
+  },
+  {
+    "DataNumberSFAFItem": 520,
+    "Type": "Supplementary Details",
+    "Title": "Supplementary Details",
+    "SPECTRUMXXITags": "SUP",
+    "Required": "",
+    "MaximumLengthsInput": 1080,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "SUP",
+    "IsArray": "FALSE",
+    "FieldName": 520,
+    "Column": "sfaf.supplementary_details",
+    "DBType": "str(1080)",
+    "Group": "",
+    "Description": "Details"
+  },
+  {
+    "DataNumberSFAFItem": 521,
+    "Type": "Supplementary Details",
+    "Title": "TransitionPlanning Dataand Narrow Band",
+    "SPECTRUMXXITags": "TRN",
+    "Required": "",
+    "MaximumLengthsInput": "8,13",
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*TRNb",
+    "IsArray": "FALSE",
+    "FieldName": 521,
+    "Column": "sfaf.transitionplanning_dataand_narrow_band",
+    "DBType": "str(13)",
+    "Group": "",
+    "Description": "Data Item 521 has two parts. Part one contains the date the assignment is planned to be transitioned to comply with narrowband transition plans (NTIA Manual sections 4.3.7A, 4.3.9, or 5.3.5.2) and part two will contain the new frequency if the assignment is to be moved to a new frequency to comply with NTIA Manual narrowband channel plans. The notation concerning the transition may be of two types, first the assignment will be modified to meet the narrow band requirements; however, the assignment will remain on the same frequency. In the second instance the assignment will be moved to a new frequency and the existing record deleted."
+  },
+  {
+    "DataNumberSFAFItem": 530,
+    "Type": "Supplementary Details",
+    "Title": "Authorized Areas",
+    "SPECTRUMXXITags": "XAR,RAR,ARB",
+    "Required": "",
+    "MaximumLengthsInput": "3,35",
+    "OccurrencesMaximum": 30,
+    "IRACTo": "Y",
+    "GMFTags": "*ART,*ARR,*ARB",
+    "IsArray": "TRUE",
+    "FieldName": 530,
+    "Column": "sfaf.authorized_areas",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": "Data Item 530 has two parts. Part one contains a 3-character coded data entry, and the second part describes geographical areas that cannot be described in data items 306/406 (Authorized Mileage Radius) or Data Item 531 (Authorized States)."
+  },
+  {
+    "DataNumberSFAFItem": 531,
+    "Type": "Supplementary Details",
+    "Title": "Authorized States",
+    "SPECTRUMXXITags": "AST",
+    "Required": "",
+    "MaximumLengthsInput": "3,35",
+    "OccurrencesMaximum": 6,
+    "IRACTo": "Y",
+    "GMFTags": "**LST,*LSR,*LSB,*EST,ESR,*ESB",
+    "IsArray": "TRUE",
+    "FieldName": 531,
+    "Column": "sfaf.authorized_states",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 701,
+    "Type": "Other Assignment Identifiers",
+    "Title": "Frequency Action Officer",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*AGN,FAO",
+    "IsArray": "FALSE",
+    "FieldName": 701,
+    "Column": "sfaf.frequency_action_officer",
+    "DBType": "str(3)",
+    "Group": "",
+    "Description": "MILDEP code identifying the person or group responsible for the assignment. This item is not used if Data Item 010 equals A."
+  },
+  {
+    "DataNumberSFAFItem": 702,
+    "Type": "Other Assignment Identifiers",
+    "Title": "Control/Request Number",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 15,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*AGN,CNO",
+    "IsArray": "FALSE",
+    "FieldName": 702,
+    "Column": "sfaf.control_request_number",
+    "DBType": "str(15)",
+    "Group": "",
+    "Description": "The control/request number that allows subordinate organizations to track specific frequency applications."
+  },
+  {
+    "DataNumberSFAFItem": 704,
+    "Type": "Other Assignment Identifiers",
+    "Title": "Type of Service",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*AGN,TOS",
+    "IsArray": "FALSE",
+    "FieldName": 704,
+    "Column": "sfaf.type_of_service",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": "A code used to identify the type of service/circuit involved."
+  },
+  {
+    "DataNumberSFAFItem": 707,
+    "Type": "Other Assignment Identifiers",
+    "Title": "PACOM Function NumberComplement/FMSC",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 707,
+    "Column": "sfaf.pacom_function_numbercomplement_fmsc",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 710,
+    "Type": "Other Assignment Identifiers",
+    "Title": "Host Country Docket Number",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 35,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 710,
+    "Column": "sfaf.host_country_docket_number",
+    "DBType": "str(35)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 711,
+    "Type": "Other Assignment Identifiers",
+    "Title": "Aeronauticaland Height  Service Range",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 6,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 711,
+    "Column": "sfaf.aeronauticaland_height_service_range",
+    "DBType": "str(6)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 715,
+    "Type": "Other Assignment Identifiers",
+    "Title": "TransmitterNumber    FMSC MRFL",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 14,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 715,
+    "Column": "sfaf.transmitternumber_fmsc_mrfl",
+    "DBType": "str(14)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 716,
+    "Type": "Other Assignment Identifiers",
+    "Title": "Usage Code",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 716,
+    "Column": "sfaf.usage_code",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 801,
+    "Type": "Additional Information",
+    "Title": "Coordination Data/Remarks",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 60,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 801,
+    "Column": "sfaf.coordination_data_remarks",
+    "DBType": "str(60)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 803,
+    "Type": "Additional Information",
+    "Title": "Requestor Data",
+    "SPECTRUMXXITags": "POC",
+    "Required": "",
+    "MaximumLengthsInput": 60,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 803,
+    "Column": "sfaf.requestor_data",
+    "DBType": "str(60)",
+    "Group": "",
+    "Description": "The name and DSN number of the individual submitting the request."
+  },
+  {
+    "DataNumberSFAFItem": 804,
+    "Type": "Additional Information",
+    "Title": "Tuning Range/Tuning Increments",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 60,
+    "OccurrencesMaximum": 30,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 804,
+    "Column": "sfaf.tuning_range_tuning_increments",
+    "DBType": "str(60)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 805,
+    "Type": "Additional Information",
+    "Title": "Date Response Required",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 805,
+    "Column": "sfaf.date_response_required",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 806,
+    "Type": "Additional Information",
+    "Title": "Indication are Acceptable",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 60,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 806,
+    "Column": "sfaf.indication_are_acceptable",
+    "DBType": "str(60)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 807,
+    "Type": "Additional Information",
+    "Title": "Frequencies to be Deleted",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 60,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 807,
+    "Column": "sfaf.frequencies_to_be_deleted",
+    "DBType": "str(60)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 901,
+    "Type": "Additional Information",
+    "Title": "Record Status",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 901,
+    "Column": "sfaf.record_status",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 903,
+    "Type": "Additional Information",
+    "Title": "Proposal Status",
+    "SPECTRUMXXITags": "CPS",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 903,
+    "Column": "sfaf.proposal_status",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 904,
+    "Type": "Additional Information",
+    "Title": "Status Date",
+    "SPECTRUMXXITags": "STD",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 20,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 904,
+    "Column": "sfaf.status_date",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 905,
+    "Type": "Additional Information",
+    "Title": "Proposal Date Time Group",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 14,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 905,
+    "Column": "sfaf.proposal_date_time_group",
+    "DBType": "str(14)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 906,
+    "Type": "Additional Information",
+    "Title": "Originator",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 66,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 906,
+    "Column": "sfaf.originator",
+    "DBType": "str(66)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 907,
+    "Type": "Additional Information",
+    "Title": "Validation Status",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 907,
+    "Column": "sfaf.validation_status",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 910,
+    "Type": "Additional Information",
+    "Title": "Exercise Project",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 20,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 910,
+    "Column": "sfaf.exercise_project",
+    "DBType": "str(20)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 911,
+    "Type": "Additional Information",
+    "Title": "Date of Last Transaction",
+    "SPECTRUMXXITags": "DAT",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 911,
+    "Column": "sfaf.date_of_last_transaction",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The date the record was last modified by a database transaction. This data item changes whenever any aspect of a record is changed such as when administrative, modification or delete transaction is posted to the central database master record."
+  },
+  {
+    "DataNumberSFAFItem": 924,
+    "Type": "Additional Information",
+    "Title": "Data Source Indicator",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 924,
+    "Column": "sfaf.data_source_indicator",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": "The source or organization from which the data record was received."
+  },
+  {
+    "DataNumberSFAFItem": 926,
+    "Type": "Additional Information",
+    "Title": "Semi-Bandwidth",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 12,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 926,
+    "Column": "sfaf.semibandwidth",
+    "DBType": "str(12)",
+    "Group": "",
+    "Description": "Data Item 926 represents, in kilohertz, half of the emission bandwidth of the largest bandwidth given for the assignment."
+  },
+  {
+    "DataNumberSFAFItem": 927,
+    "Type": "Additional Information",
+    "Title": "Date of Entry",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 927,
+    "Column": "sfaf.date_of_entry",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The date (YYYYMMDD) the assignment was initially entered into the FRRS database system."
+  },
+  {
+    "DataNumberSFAFItem": 928,
+    "Type": "Additional Information",
+    "Title": "Date of Receipt",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 928,
+    "Column": "sfaf.date_of_receipt",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": "The Date (YYYYMMDD) of receipt of the most recent transaction at the JSC."
+  },
+  {
+    "DataNumberSFAFItem": 950,
+    "Type": "Additional Information",
+    "Title": "PC ID",
+    "SPECTRUMXXITags": "PCI",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 950,
+    "Column": "sfaf.pc_id",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "The PC at which the transaction was originated. Normally, this occurs at organizational levels below where the serial number can be assigned."
+  },
+  {
+    "DataNumberSFAFItem": 952,
+    "Type": "Additional Information",
+    "Title": "IRAC Security Classification",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "CLA",
+    "IsArray": "FALSE",
+    "FieldName": 952,
+    "Column": "sfaf.irac_security_classification",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 953,
+    "Type": "Additional Information",
+    "Title": "IRAC Declassification Date",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "CDD",
+    "IsArray": "FALSE",
+    "FieldName": 953,
+    "Column": "sfaf.irac_declassification_date",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 956,
+    "Type": "Additional Information",
+    "Title": "Agency Action Number",
+    "SPECTRUMXXITags": "ACN",
+    "Required": "",
+    "MaximumLengthsInput": 10,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "ACN",
+    "IsArray": "FALSE",
+    "FieldName": 956,
+    "Column": "sfaf.agency_action_number",
+    "DBType": "str(10)",
+    "Group": "",
+    "Description": "Used to track transactions. It is formatted with 4 characters (AAAA) selected by the submitting organization, followed by a two digit year (YY) and a four digit sequential number (nnnn)."
+  },
+  {
+    "DataNumberSFAFItem": 957,
+    "Type": "Additional Information",
+    "Title": "Review Year",
+    "SPECTRUMXXITags": "RYR",
+    "Required": "",
+    "MaximumLengthsInput": 4,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "RYR",
+    "IsArray": "FALSE",
+    "FieldName": 957,
+    "Column": "sfaf.review_year",
+    "DBType": "str(4)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 958,
+    "Type": "Additional Information",
+    "Title": "Routine Agenda Item",
+    "SPECTRUMXXITags": "RTN",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "RTN",
+    "IsArray": "FALSE",
+    "FieldName": 958,
+    "Column": "sfaf.routine_agenda_item",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": "A coded data entry that indicates the type of NTIA FAS agenda on which the application will be processed."
+  },
+  {
+    "DataNumberSFAFItem": 959,
+    "Type": "Additional Information",
+    "Title": "Circuit Remarks",
+    "SPECTRUMXXITags": "REM",
+    "Required": "",
+    "MaximumLengthsInput": 40,
+    "OccurrencesMaximum": 30,
+    "IRACTo": "N",
+    "GMFTags": "REM",
+    "IsArray": "TRUE",
+    "FieldName": 959,
+    "Column": "sfaf.circuit_remarks",
+    "DBType": "str(40)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 963,
+    "Type": "Additional Information",
+    "Title": "FCC File Number",
+    "SPECTRUMXXITags": "FLN",
+    "Required": "",
+    "MaximumLengthsInput": 22,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "Y",
+    "GMFTags": "*FLN",
+    "IsArray": "FALSE",
+    "FieldName": 963,
+    "Column": "sfaf.fcc_file_number",
+    "DBType": "str(22)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 964,
+    "Type": "Additional Information",
+    "Title": "Tx Aircraft Altitude",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "XAD",
+    "IsArray": "TRUE",
+    "FieldName": 964,
+    "Column": "sfaf.tx_aircraft_altitude",
+    "DBType": "str(3)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 965,
+    "Type": "Additional Information",
+    "Title": "Rx Aircraft Altitude",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 10,
+    "IRACTo": "N",
+    "GMFTags": "RAD",
+    "IsArray": "TRUE",
+    "FieldName": 965,
+    "Column": "sfaf.rx_aircraft_altitude",
+    "DBType": "str(3)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 982,
+    "Type": "Additional Information",
+    "Title": "JCEOI Line Number",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 982,
+    "Column": "sfaf.jceoi_line_number",
+    "DBType": "str(5)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 983,
+    "Type": "Additional Information",
+    "Title": "JCEOI Master Net List Name",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 16,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 983,
+    "Column": "sfaf.jceoi_master_net_list_name",
+    "DBType": "str(16)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 984,
+    "Type": "Additional Information",
+    "Title": "Net Frequency Range",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 11,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 984,
+    "Column": "sfaf.net_frequency_range",
+    "DBType": "str(11)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 985,
+    "Type": "Additional Information",
+    "Title": "Joint Restricted Frequency List (JRFL) Protection Code",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 985,
+    "Column": "sfaf.jrfl",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 986,
+    "Type": "Additional Information",
+    "Title": "Net Tactical Call Word",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 15,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 986,
+    "Column": "sfaf.net_tactical_call_word",
+    "DBType": "str(15)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 987,
+    "Type": "Additional Information",
+    "Title": "Net Tactical Call Sign",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 987,
+    "Column": "sfaf.net_tactical_call_sign",
+    "DBType": "str(3)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 988,
+    "Type": "Additional Information",
+    "Title": "Net Tactical Air Designator  (TAD)",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 5,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 988,
+    "Column": "sfaf.net_tactical_air_designator_tad",
+    "DBType": "str(5)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 989,
+    "Type": "Additional Information",
+    "Title": "Net Color Word",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 16,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 989,
+    "Column": "sfaf.net_color_word",
+    "DBType": "str(16)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 990,
+    "Type": "Additional Information",
+    "Title": "Net Color Number",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 2,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 990,
+    "Column": "sfaf.net_color_number",
+    "DBType": "str(2)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 991,
+    "Type": "Additional Information",
+    "Title": "Net Restoral Priority",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 991,
+    "Column": "sfaf.net_restoral_priority",
+    "DBType": "str(3)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 992,
+    "Type": "Additional Information",
+    "Title": "Net Push Number",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 992,
+    "Column": "sfaf.net_push_number",
+    "DBType": "str(3)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 993,
+    "Type": "Additional Information",
+    "Title": "Band Usage",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 993,
+    "Column": "sfaf.band_usage",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 994,
+    "Type": "Additional Information",
+    "Title": "Check Sum",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 1,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 994,
+    "Column": "sfaf.check_sum",
+    "DBType": "str(1)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 995,
+    "Type": "Additional Information",
+    "Title": "COMSEC Keymat",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 15,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 995,
+    "Column": "sfaf.comsec_keymat",
+    "DBType": "str(15)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 996,
+    "Type": "Additional Information",
+    "Title": "Circuit Type, Line Item, Group",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 8,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 996,
+    "Column": "sfaf.circuittype_lineitem_group",
+    "DBType": "str(8)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 997,
+    "Type": "Additional Information",
+    "Title": "JCEOI Special Net Instructions",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 63,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 997,
+    "Column": "sfaf.jceoi_special_net_instructions",
+    "DBType": "str(63)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 998,
+    "Type": "Additional Information",
+    "Title": "Net Notes",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 3,
+    "OccurrencesMaximum": 1,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "FALSE",
+    "FieldName": 998,
+    "Column": "sfaf.net_notes",
+    "DBType": "str(3)",
+    "Group": "",
+    "Description": ""
+  },
+  {
+    "DataNumberSFAFItem": 999,
+    "Type": "Additional Information",
+    "Title": "Guard Requirements",
+    "SPECTRUMXXITags": "",
+    "Required": "",
+    "MaximumLengthsInput": 20,
+    "OccurrencesMaximum": 50,
+    "IRACTo": "N",
+    "GMFTags": "",
+    "IsArray": "TRUE",
+    "FieldName": 999,
+    "Column": "sfaf.guard_requirements",
+    "DBType": "str(20)",
+    "Group": "",
+    "Description": ""
+  }
+]
+;
+
+
+  /*
+   * Binary search in JavaScript.
+   * Returns the index of of the element in a sorted array or (-n-1) where n is the insertion point for the new element.
+   * Parameters:
+   *     ar - A sorted array
+   *     el - An element to search for
+   *     compare_fn - A comparator function. The function takes two arguments: (a, b) and returns:
+   *        a negative number  if a is less than b;
+   *        0 if a is equal to b;
+   *        a positive number of a is greater than b.
+   * The array may contain duplicate elements. If there are more than one equal elements in the array,
+   * the returned value can be the index of any one of the equal elements.
+   */
+  function binarySearch(ar, el, compare_fn) {
+      var m = 0;
+      var n = ar.length - 1;
+      while (m <= n) {
+          var k = (n + m) >> 1;
+          var cmp = compare_fn(el, ar[k]);
+          if (cmp > 0) {
+              m = k + 1;
+          } else if(cmp < 0) {
+              n = k - 1;
+          } else {
+              return k;
+          }
+      }
+      return -m - 1;
+  }
+
+  function compare_number(a, b) {
+    return a - b;
+  }
+
+  var entryMap = {};
+  var entryKeys = [];
+  var typeModel = {};
+  var types = [];
+
+  MCEBPub7Entries.forEach( function(entry){
+        entryMap[entry.DataNumberSFAFItem] = entry;
+        entryKeys.push(entry.DataNumberSFAFItem);
+        var type = entry.Type;
+        if( types.length == 0 || types[types.length-1] != type ){
+          types.push(type);
+        }
+        if( !typeModel.hasOwnProperty(type) ){
+          typeModel[type] = { Group: {} };
+        }
+        if( entry.OccurrencesMaximum > 1 && entry.OccurrencesMaximum < 30 ){
+          typeModel[type].Group[entry.DataNumberSFAFItem] = { Title:entry.Title };
+        }else{
+          typeModel[type][entry.DataNumberSFAFItem] = { Title:entry.Title };
+        }
+      });
+
+  entryKeys = entryKeys.sort(compare_number);
+
+  var getEntryKey = function(entry){
+    var e = entry;
+    if( typeof e === "string" ){
+      e = parseInt(e.split("/")[0]);
+    }
+    if( !entryMap.hasOwnProperty(e) ){
+      return null;
+    }
+    return e;
+  }
+
+  var getEntryKeyIndex = function(entry){
+    var e = getEntryKey(entry);
+    if( e ){
+      return binarySearch(entryKeys,e,compare_number);
+    }
+    return -1;
+  }
+
+  var getNextEntryKey = function(entry){
+    var e = getEntryKeyIndex(entry);
+    if( e >= 0 ){
+      e = e+1;
+      if( e < entryKeys.length ){
+        return entryKeys[e];
+      }
+    }
+    return null;
+  }
+
+  var getEntry = function(entry){
+    var e = getEntryKey(entry);
+    if( e ){
+      return entryMap[e];
+    }
+    return null;
+  }
+
+  var getMaxOccurrences = function(entry){
+    var e = getEntry(entry);
+    if( e ){
+      var occurs = e.OccurrencesMaximum;
+      if( typeof occurs === "number" ){
+        occurs = parseInt(occurs);
+        if( occurs < 1 ){
+          return 1;
+        }
+        return occurs;
+      }
+    }
+    return 1;
+  }
+
   var SFAFDictionaryModule =   {
      'modulation':modulation,
      'antenna':antenna,
      'specialHandlingCodes':specialHandlingCodes,
-     'getSHC' : getSHC
+     'getSHC' : getSHC,
+     'entries': MCEBPub7Entries,
+     'entryMap' : entryMap,
+     'entryKeys' : entryKeys,
+     'getEntry': getEntry,
+     'getEntryKey' : getEntryKey,
+     'getNextEntryKey' : getNextEntryKey,
+     'getEntryKeyIndex' : getEntryKeyIndex,
+     'getMaxOccurrences' : getMaxOccurrences,
+     'types': types,
+     'typeModel': typeModel,
+     'bsearch' : binarySearch
    };
+
    SFAFx.dictionary = SFAFDictionaryModule;
 })(SFAFx);
 
@@ -4928,17 +8351,32 @@ var modmux = modulation["modmux"] =
     return keys.sort();
   }
 
-  var groups = {
-     '113' : [113,115],
-     '340' : [340,349],
-     '354' : [354,374],
-     '355' : [354,374],
-     '400' : [400,408],
-     '401' : [401,408],
-     '402' : [402,408],
-     '440' : [440,443],
-     '441' : [441,443],
-  };
+  /**
+   * TODO this should be in the dictionary
+   */
+  var groups = [
+     [113,118, "Transmitter"],
+     [340,343, "Equipment"],
+     [354,360, "Antenna"],
+     [400,408, "Receiver Location"],
+     [440,443, "Receiver Equipment"]
+  ];
+
+  var groupAtKey = function( key ){
+    if( key ){
+      var idx = parseInt(key);
+      for( var i  = 0; i < groups.length; i++ ){
+        var group = groups[i];
+        if( idx > group[1] ) continue;
+        if( idx >= group[0] ){
+          return group;
+        }
+        return null;
+      }
+    }
+    return null;
+  }
+
   var result = "";
   var pad0 = function( i ){
     if( i < 10 ){
@@ -4954,7 +8392,12 @@ var modmux = modulation["modmux"] =
           result += key  + ".     " + entry[eidx] + "\n";
         }
       }else{
-        result += key  + ".     " + entry + "\n";
+        entry = entry.trim();
+        if( entry.length > 0 ){
+          result += key  + ".     " + entry + "\n";
+        }else{
+          return 0;
+        }
       }
       return 1;
     }
@@ -4962,15 +8405,20 @@ var modmux = modulation["modmux"] =
   }
   var onOccurEntry = function(occuritem,occurkey,key){
     if( occuritem != undefined && occuritem != null && occuritem.hasOwnProperty("entry") ){
-      result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
-      return 1;
+      var entry = occuritem["entry"].trim();
+      if( entry.length > 0 ){
+        result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
+        return 1;
+      }
     }
     return 0;
   }
   var onOccur = function(item,occurkey,key){
     if( item && item.hasOwnProperty('occur') ){
       var occur = item['occur'];
-      return onOccurEntry( occur[occurkey], occurkey,key );
+      if( occur.hasOwnProperty(occurkey) ){
+        return onOccurEntry( occur[occurkey], occurkey,key );
+      }
     }
     return 0;
   }
@@ -4986,8 +8434,9 @@ var modmux = modulation["modmux"] =
   }
   var onKey = function( keys, rec, idx ){
     var key = keys[idx];
-    if( groups.hasOwnProperty(key) ){
-      return onGroup( keys, rec, idx, groups[key] );
+    var group = groupAtKey(key);
+    if( group ){
+      return onGroup( keys, rec, idx, group );
     }
     var item = rec[ key ];
     if( item != null && item != undefined ){
@@ -5052,8 +8501,7 @@ var modmux = modulation["modmux"] =
     }
     if( !Array.isArray(sfaf) ){
       if( !sfaf.hasOwnProperty('sfaf') ) return null;
-      sfaf = sfaf.sfaf;
-      if( !Array.isArray(sfaf) ) return null;
+      sfaf = [sfaf];
     }
     var i = 0, len = sfaf.length;
     result = "";
@@ -5063,10 +8511,91 @@ var modmux = modulation["modmux"] =
     return result;
   }
 
+  var nextEntry = function( key ){
+    var idx = parseInt(key);
+    return pad0(++idx);
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of next entry to add
+   */
+  var addEntryAt = function( sfafx, key ){
+    if( sfafx.hasOwnProperty(key) ){
+      if( Array.isArray(sfafx[key].entry) ){
+        sfafx[key].entry.push('');
+      }else{
+        sfafx[key].entry = [sfafx[key].entry,''];
+      }
+    }else{
+      sfafx[key] = { entry:''};
+    }
+    return sfafx[key];
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of next entry to add
+   */
+  var addNextEntryAt = function( sfafx, key ){
+    var next = nextEntry(key);
+
+  }
+
+  /**
+   * sfafx : SFAFx JSON object
+   * key: key of entry to add occurence to
+   */
+  var addOccurenceAt = function( sfafx, key ){
+
+  }
+
+  /**
+   * sfafx : SFAFx JSON object
+   * key: key of entry to add occurence group to
+   */
+  var addOccurenceGroupAt = function( sfafx, key ){
+
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of entry to remove
+   */
+  var removeEntryAt = function( sfafx, key ){
+
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of entry to remove
+   */
+  var removeOccurenceAt = function( sfafx, key ){
+
+  }
+
+  /**
+   * sfafx : SFAFx.sfaf JSON object
+   * key: key of entry to remove
+   */
+  var removeOccurenceGroupAt = function( sfafx, key ){
+
+  }
+
 
   SFAFx.toSFAF = toSFAF;
   SFAFx.toSortedKeys = toSortedKeys;
   SFAFx.toSFAFRec = toSFAFRec;
+  SFAFx.groupAtKey = groupAtKey;
+  SFAFx.addNextEntryAt = addNextEntryAt;
+  SFAFx.addOccurenceAt = addOccurenceAt;
+  SFAFx.addOccurenceGroupAt = addOccurenceGroupAt;
+  SFAFx.addEntryAt = addEntryAt;
+  SFAFx.removeOccurenceAt = removeOccurenceAt;
+  SFAFx.removeOccurenceGroupAt = removeOccurenceGroupAt;
+  SFAFx.removeEntryAt = removeEntryAt;
+  SFAFx.pad0 = pad0;
+  SFAFx.nextEntry = nextEntry;
 
 })(SFAFx);
 

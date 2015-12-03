@@ -29,21 +29,18 @@
 113.     ALB
 114.     2K04A2A
 115.     W400
+117.     58
+118.     E
 113/02.     ALB
 114/02.     600H00P0N
 115/02.     W6
 113/03.     ML
 114/03.     6K00A3E
 115/03.     W10
-117.     58
-118.     E
 130.     1HX
 142.     20200825
 143.     20100825
 144.     Y
-199.     T/02(A/02)R00[TR]R/01(A/01)R05(E/01)
-199/02.     T/03(A/02)R00[TR]R/02(A/01)R05(E/01)
-199/03.     T/01(A/02)R00[TR]R/03(A/01)R05(E/01)
 200.     USAF
 201.     PACOM
 202.     PACAF
@@ -183,12 +180,38 @@
       assert.ok( sfaf, "SFAFx JSON record exists");
       var sfaftxt = SFAFx.toSFAF(records);
       assert.ok( sfaftxt, "SFAF Text converted");
-      assert.equal( originalData, sfaftxt, "Converted SFAF record is identical");
+      assert.equal( sfaftxt, originalData, "Converted SFAF record is identical");
       var records2 = SFAFx.toJSON(sfaftxt);
       assert.ok( records2, "Reparsed OK");
       assert.deepEqual( records, records2, "Deep compare of reparsed SFAF record identical");
       assert.equal( originalData.localeCompare(sfaftxt), 0, "SFAF text localeCompare == 0");
     });
+    QUnit.test( "SFAFx Edit", function(assert){
+      var originalData = document.getElementById('record1').innerText;
+      var records = SFAFx.toJSON(originalData);
+      var sfaf = records[0].sfaf;
+      assert.ok( sfaf['202'], "entry 202 exists");
+      assert.ok( sfaf['202'].entry, "entry 202 exists");
+      assert.ok(Array.isArray(SFAFx.addEntryAt(sfaf,'202').entry), 'add 202 line entry');
+      assert.ok( sfaf['202'].entry.length == 2, "entry 202 array of 2");
+      assert.equal( sfaf['202'].entry[1], '', "entry 202[1] === '' ");
+      assert.ok(Array.isArray(SFAFx.addEntryAt(sfaf,'202').entry), 'add 202 line entry');
+      assert.equal( sfaf['202'].entry.length, 3, "entry 202 array of 3");
+      assert.equal( sfaf['202'].entry[2], '', "entry 202[2] === '' ");
+      sfaf['202'].entry[2]='TEST';
+      assert.equal( records[0].sfaf['202'].entry[2], 'TEST', "set test line 202[2] === 'TEST' ");
+      var sfaftxt = SFAFx.toSFAF(records);
+      records = SFAFx.toJSON(sfaftxt);
+      assert.ok( records, "transformed to SFAF to JSON OK");
+      var sfaf2 = records[0].sfaf;
+      assert.ok( sfaf2['202'], "entry 202 exists again");
+      assert.ok( sfaf2['202'].entry, "entry 202 exists again");
+      assert.ok( Array.isArray(sfaf2['202'].entry), "entry 202 array");
+      assert.equal( sfaf2['202'].entry.length, 2, "entry 202 array length 2");
+      assert.equal( sfaf2['202'].entry[0], 'PACAF', "entry 202[0] == PACAF");
+      assert.equal( sfaf2['202'].entry[1], 'TEST', "entry 202[1] == TEST");
+    });
+
     QUnit.test( "SFAFx.dictionary", function(assert){
       assert.ok( SFAFx.dictionary, "dictionary exists");
       assert.ok( SFAFx.dictionary.specialHandlingCodes, "specialHandlingCodes exists");
@@ -211,6 +234,31 @@
       };
       assert.deepEqual( SFAFx.dictionary.modulation.modnature['3'], entries['3'], "modulation nature 3 card:'single', encoding:'analogue', desc: 'A single channel containing analogue information'");
       assert.deepEqual( SFAFx.dictionary.modulation.modnature['7'], entries['7'], "modulation nature 7 card:'multiple', encoding:'digital', desc: 'Two or more channels containing quantized or digital information'");
+      assert.ok( SFAFx.dictionary.entries, "entries exist" );
+      assert.ok( SFAFx.dictionary.getEntry, "getEntry exist" );
+      console.log(SFAFx.dictionary.entries.length);
+      assert.ok( SFAFx.dictionary.entries.length > 179, "entries non-trivial" );
+      assert.ok( SFAFx.dictionary.getEntryKey(118), "dictionary entry key 118 exists" );
+      assert.ok( SFAFx.dictionary.getNextEntryKey(118), "dictionary next entry key 118 exists" );
+      assert.equal( SFAFx.dictionary.getNextEntryKey(118), 130, "dictionary next entry key 118 is 130" );
+      assert.ok( SFAFx.dictionary.getEntry(343), "dictionary entry 343 exists" );
+      assert.ok( SFAFx.dictionary.getEntry("343/02"), "dictionary entry '343/02' exists" );
+      assert.equal(SFAFx.dictionary.getEntry(343).Title, "Equipment Identification Certification Number", "Entry 343.Title == EquipmentIdentificationCertificationNumber" );
+      assert.equal(SFAFx.dictionary.getEntry("343/02").Title, "Equipment Identification Certification Number", "Entry '343/02'.Title == EquipmentIdentificationCertificationNumber" );
+      assert.equal(SFAFx.dictionary.getEntry(343).OccurrencesMaximum, 10, "Entry 343.OccurrencesMaximum == 10" );
+      assert.equal(SFAFx.dictionary.getMaxOccurrences(343), 10, "getMaxOccurrences(343) == 10" );
+      assert.equal(SFAFx.dictionary.getMaxOccurrences(111), 30, "getMaxOccurrences(111) == 30" );
+      assert.equal(SFAFx.dictionary.getMaxOccurrences(112), 1, "getMaxOccurrences(112) == 1" );
+      assert.ok( SFAFx.dictionary.types, "dictionary types exist" );
+      assert.ok( SFAFx.dictionary.typeModel, "dictionary typeModel exist" );
+      console.log(SFAFx.dictionary.types.length);
+      console.log(SFAFx.dictionary.types);
+      assert.equal( SFAFx.dictionary.types.length, 16, "types.length == 16");
+      var exptypes = ["Administrative Data", "Emission Characteristics", "Time/Date Information", "Organizational Information", "Transmitter Location Data", "Space Stations", "Transmitter Equipment", "Transmitter Antenna Data", "Receiver Location Data", "Space Stations Receiver", "Receiver Equipment", "Receiver Antenna Data", "Space Systems", "Supplementary Details", "Other Assignment Identifiers", "Additional Information"];
+      assert.deepEqual( SFAFx.dictionary.types, exptypes, "All types exist in order");
+      assert.equal( SFAFx.dictionary.typeModel["Receiver Equipment"].Group["440"].Title, "Equipment Nomenclature", 'typeModel["Receiver Equipment"].Group["440"].Title === "Equipment Nomenclature"');
+      console.log( SFAFx.dictionary.typeModel );
+
     });
   </script>
 </body>

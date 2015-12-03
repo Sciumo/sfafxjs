@@ -33,6 +33,7 @@
     }
     return val;
   }
+
   function makeSubRecord( val, entry, occur, text, key ){
     var sub = occur;
     if( sub == null ) sub = "01";
@@ -62,6 +63,7 @@
     }
     return target;
   }
+
   function merge( obj, entries ){
     if( entries == null ) return obj;
     var i = 0, len = entries.length;
@@ -226,6 +228,11 @@ line111 =
     { var obj = { transmitter: { excludedband:onFreq(t) } };
       return makeRecord( obj, "110", s, t ); }
 
+emission =
+  line113 /
+  line114 /
+  line115
+
 line113 =
   "113" s:sub? "." ws t:linetext eol
     { var obj = { stationclass:t };
@@ -235,6 +242,11 @@ line114 =
   "114" s:sub? "." ws emission:emissiondesignator ws? eol
     { var obj = { emissiondesignator:emission.designator };
       return makeSubRecord( obj, "114", s, emission.text, "transmitter" ); }
+
+line115 =
+  "115" s:sub? "." ws t:linetext eol
+    { var obj = { power:t };
+      return makeSubRecord( obj, "115", s, t, "transmitter" ); }
 
 line303 =
   "303." ws t:linetext eol
@@ -387,15 +399,34 @@ line463 =
   "463" s:sub? "." ws t:linetext eol
     {  return makeSubRecord( { polarization: dict("antenna","polarization",t) }, "463", s, t, "rxantennas" ); }
 
-sfafplus =
+linkages = line199
+
+line199 =
   item:"199" s:sub? "." ws link:linkage eol
   {  return makeSubRecord( { link:link.link }, "199", s, link.text, "linkage" ); }
 
 //199/2.   T/02(A/02)R00[TR]R/02(A/01)R05(E/01,E/03)
 linkage =
-  tx:linktxnode dir:linkdir rx:linkrxnode ed:linkemission
+  linkall /
+  linkagetxrx /
+  linkagetx /
+  linkagerx
+
+linkagetxrx =
+  tx:linktxnode dir:linkdir rx:linkrxnode
   { return { text: tx.text+dir.text+rx.text+ed.text,
-      link: { txconfig:tx.config, dir:dir.dir, rxconfig:rx.config, emission:ed.ed } } }
+      link: { txconfig:tx.config, dir:dir.dir, rxconfig:rx.config } } }
+
+linkall = "ALL" { return { text: "ALL",
+    link: { txconfig: {equipment:"ALL", antenna:"ALL", location:"ALL", emission:"ALL"} ,
+            dir:"txrx",
+            rxconfig: {equipment:"ALL", antenna:"ALL", location:"ALL", emission:"ALL"} } }}
+
+linkagetx =
+  tx:linktxnode "[T]" { return { text:tx.text+"[T]", config:tx.ed } }
+
+linkagerx =
+  rx:linkrxnode "[R]" { return { text:rx.text+"[R]", config:rx.ed } }
 
 linktxnode = tx:linkrxtx "(" ant:linkant ")" loc:linkloc
   { return { text: tx.text + "(" + ant.text + ")" + loc.text, config:{ tx:tx.ed, ant:ant.ed, loc:loc.ed } }; }
@@ -419,7 +450,7 @@ linkloc = "R" loc:int2 { return { text:"R"+loc, ed:loc }; }
 linkdir =
   "[T]" { return { text:"[T]", dir:"tx" }; } /
   "[R]" { return { text:"[R]", dir:"rx" }; } /
-  "[TR]" { return { text:"[TR]", dir:"txrx" }; }
+  "[B]" { return { text:"[B]", dir:"txrx" }; }
 
 linkemission =
   "(E/" ed:linklist ")" { return { text:"(E/" + ed + ")", ed:ed }; }
@@ -438,15 +469,16 @@ line =
   docket /
   line107 /
   line110 /
-  line113 /
-  line114 /
+  emission /
   transmitter /
   txantennas /
   receivers /
   rxantennas /
-  sfafplus /
+  linkages /
   n:integer s:sub? "." ws t:linetext eol?
   { return makeRecord( {}, n, s, t); } /
+  n:integer s:sub? "." ws* eol?
+  { return null; } /
   eol { return null; }
 
 xline =

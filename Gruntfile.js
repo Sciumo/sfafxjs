@@ -44,6 +44,14 @@ module.exports = function (grunt) {
         banner: "//SFAFxJS https://github.com/Sciumo/sfafxjs\n\n", //added before everything
         footer: "" //added after everything
       },
+      dict: {
+        src: [
+          'src/sfafx_dict_intro.js',
+          'src/MCEBPub7.json',
+          'src/sfafx_dict_outro.js'
+        ],
+        dest: 'src/sfafx_dict.js'
+      },
       dist: {
         src: [
           'src/intro.js',
@@ -68,14 +76,30 @@ module.exports = function (grunt) {
           'sfafx.min.js': ['sfafx.js']
         }
       }
+    },
+
+    execute: {
+      pub7dictionary : {
+        options: {
+          args: ['src/MCEBPub7.csv','src/MCEBPub7.json']
+        },
+        src: ['bin/cvtdict.js']
+      }
+    },
+
+    clean : {
+        dict: [ 'src/MCEBPub7.json']
     }
 
   });
 
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-execute');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-peg');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.registerTask('dict', ['execute:pub7dictionary','concat:dict', 'clean:dict']);
   grunt.registerTask('grammar', ['peg:sfafx_parser']);
-  grunt.registerTask('dist', ['grammar', 'concat:dist', 'replace', 'uglify:sfafxmin']);
+  grunt.registerTask('dist', ['grammar', 'dict', 'concat:dist', 'replace', 'uglify:sfafxmin']);
 };
