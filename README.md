@@ -37,7 +37,7 @@ var sfaftxt = SFAFx.toSFAF(records);
 ```
 
 #Tools
-There are a few development tools available for testing and command line usage as we.
+There are a few development tools available for testing and command line usage as well.
 *  `bin/sfaf2json.js` converts a file to JSON and logs to the console.
 *  `bin/json2sfaf.js` converts a file to SFAF and logs to the console.
 
@@ -49,13 +49,15 @@ $diff temp.sfaf ../test/af744251.sfaf
 ```
 #Testing
 In the `/test` directory you will find a few test scripts and a *QUnit* HTML unit test.
-``test/inverttest.js`` ensures the invertible property of a file parameter or 'af744251.sfaf' by default.
-``test/timeparse.js`` attempts to provide parser timing benchmarks.
-``test/test.html`` is a *QUnit* HTML unit test for many of the SFAFx functions and models.
+*  ``test/inverttest.js`` ensures the invertible property of a file parameter or 'af744251.sfaf' by default.
+*  ``test/timeparse.js`` attempts to provide parser timing benchmarks.
+*  ``test/test.html`` is a *QUnit* HTML unit test for many of the SFAFx functions and models.
 
 #Modeling
-SFAF models a transmitter with a number of receiver, antennas, and emission designations which can result in fairly large combinatorics.
-Sections of are grouped together, such as `Adminstrative data` which are line entries in the range `005-108`. Not all of the entries are required except `005` for classification and `102` for serial ID, which is presumed to be a primary key.
+SFAF models a transmitter with a number of receiver, antennas, and emission designations which can result in fairly large combinatorics. Sections of are grouped together, such as `Adminstrative data` which are line entries in the range `005-108`. 
+
+*Not all of the entries are required except `005` for classification and `102` for serial ID, which is presumed to be a primary key.*
+
 Most of the modeling occurs in the PEG parser, which produces the JSON model as per the example below. Wherever possible, human readable descriptions were used instead of cryptic codes to 'save space'.
 Modern storage and communication methods usually have the capability to enable compression or is part of their design, such as gzipped HTTP or Solr inverted indices.
 
