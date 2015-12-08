@@ -6,7 +6,7 @@ SFAFx JavaScript [PEG.JS](https://github.com/pegjs/pegjs) parser and support lib
 You can use SFAFx to build browser client logic as well as JSON-friendly web services with some guarantees of supporting legacy SFAF formats.
 
 #Install via Bower
-If you don't want to build this library or use *Bower* et al, you can simply download either the `sfafx.js` or the minified `sfafx.min.js` library. 
+If you don't want to build this library or use *Bower* et al, you can simply download either the `sfafx.js` or the minified `sfafx.min.js` library.
 
 To use via Bower, first ensure [Bower](http://bower.io) is installed, then execute:
 ```shell
@@ -36,6 +36,14 @@ var records = SFAFx.toJSON(document.getElementById('sfaftext').innerText);
 var sfaftxt = SFAFx.toSFAF(records);
 ```
 
+##Dictionary
+`sfafxjs` contains a Pub 7 dictionary of data elements.
+*  ``getMaxOccurrences``  maximum ocurrences of this element
+*  ``types`` unique list of the categories of elements
+*  ``typeModel`` groups of data elements by type
+*  ``required`` list of minimum data elements required for a new record
+
+
 #Tools
 There are a few development tools available for testing and command line usage as well.
 *  `bin/sfaf2json.js` converts a file to JSON and logs to the console.
@@ -54,7 +62,7 @@ In the `/test` directory you will find a few test scripts and a *QUnit* HTML uni
 *  ``test/test.html`` is a *QUnit* HTML unit test for many of the SFAFx functions and models.
 
 #Modeling
-SFAF models a transmitter with a number of receiver, antennas, and emission designations which can result in fairly large combinatorics. Sections of are grouped together, such as `Adminstrative data` which are line entries in the range `005-108`. 
+SFAF models a transmitter with a number of receiver, antennas, and emission designations which can result in fairly large combinatorics. Sections of are grouped together, such as `Adminstrative data` which are line entries in the range `005-108`.
 
 *Not all of the entries are required except `005` for classification and `102` for serial ID, which is presumed to be a primary key.*
 
@@ -648,4 +656,3 @@ Included in this project is a dummy record, that is not a 'technically' correct 
   }
 ]
 ```
-
