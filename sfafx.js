@@ -4,7 +4,7 @@
  * SFAFx JS SFAF Parser and Library
  * Eric Lindahl, Sciumo Inc. (c) 2015 LGPL License
  * Version: 0.1.2
- * Last build: Wed Dec 02 2015 22:46:07
+ * Last build: Thu Dec 03 2015 06:29:27
  */
 
 // Module systems magic dance
@@ -5200,7 +5200,7 @@ var modmux = modulation["modmux"] =
     "Type": "Administrative Data",
     "Title": "Type of Action",
     "SPECTRUMXXITags": "TYP",
-    "Required": "",
+    "Required": true,
     "MaximumLengthsInput": 1,
     "MaxTotal": 1,
     "OccurrencesMaximum": 1,
@@ -5722,7 +5722,7 @@ var modmux = modulation["modmux"] =
     "Type": "Time/Date Information",
     "Title": "Approval Authority Indicator",
     "SPECTRUMXXITags": "",
-    "Required": "",
+    "Required": true,
     "MaximumLengthsInput": 1,
     "MaxTotal": 1,
     "OccurrencesMaximum": 1,
@@ -6028,7 +6028,7 @@ var modmux = modulation["modmux"] =
     "Type": "Transmitter Location Data",
     "Title": "Antenna Location",
     "SPECTRUMXXITags": "XAL",
-    "Required": "",
+    "Required": true,
     "MaximumLengthsInput": 24,
     "MaxTotal": 24,
     "OccurrencesMaximum": 1,
@@ -7414,7 +7414,7 @@ var modmux = modulation["modmux"] =
     "Type": "Other Assignment Identifiers",
     "Title": "Frequency Action Officer",
     "SPECTRUMXXITags": "",
-    "Required": "",
+    "Required": true,
     "MaximumLengthsInput": 3,
     "MaxTotal": 3,
     "OccurrencesMaximum": 1,
@@ -7432,7 +7432,7 @@ var modmux = modulation["modmux"] =
     "Type": "Other Assignment Identifiers",
     "Title": "Control/Request Number",
     "SPECTRUMXXITags": "",
-    "Required": "",
+    "Required": true,
     "MaximumLengthsInput": 15,
     "MaxTotal": 15,
     "OccurrencesMaximum": 1,
@@ -7576,7 +7576,7 @@ var modmux = modulation["modmux"] =
     "Type": "Additional Information",
     "Title": "Requestor Data",
     "SPECTRUMXXITags": "POC",
-    "Required": "",
+    "Required": true,
     "MaximumLengthsInput": 60,
     "MaxTotal": 60,
     "OccurrencesMaximum": 1,
