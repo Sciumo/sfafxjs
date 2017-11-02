@@ -101,5 +101,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.registerTask('dict', ['execute:pub7dictionary','concat:dict', 'clean:dict']);
   grunt.registerTask('grammar', ['peg:sfafx_parser']);
-  grunt.registerTask('dist', ['grammar', 'dict', 'replace', 'uglify:sfafxmin']);
+  grunt.registerTask('dist', ['grammar', 'dict', 'concat:dist', 'replace', 'uglify:sfafxmin']);
 };

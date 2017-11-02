@@ -3,8 +3,8 @@
 /*!
  * SFAFx JS SFAF Parser and Library
  * Eric Lindahl, Sciumo Inc. (c) 2015 LGPL License
- * Version: 0.1.2
- * Last build: Thu Dec 03 2015 06:29:27
+ * Version: 0.1.3
+ * Last build: Thu Nov 02 2017 13:57:13
  */
 
 // Module systems magic dance
@@ -8524,6 +8524,7 @@ var modmux = modulation["modmux"] =
 'use strict';
 
 (function(SFAFx) {
+  var grouping = false;
 
   var toSortedKeys = function( obj ){
     var keys = [];
@@ -8540,13 +8541,16 @@ var modmux = modulation["modmux"] =
    */
   var groups = [
      [113,118, "Transmitter"],
-     [340,343, "Equipment"],
-     [354,360, "Antenna"],
+     [340,347, "Equipment"], //transmitter equipment
+     [354,361, "Antenna"], //transmitter antenna data
      [400,408, "Receiver Location"],
      [440,443, "Receiver Equipment"]
   ];
 
   var groupAtKey = function( key ){
+    if( !SFAFx.grouping ){
+      return null;
+    }
     if( key ){
       var idx = parseInt(key);
       for( var i  = 0; i < groups.length; i++ ){
@@ -8572,9 +8576,29 @@ var modmux = modulation["modmux"] =
     if( item != undefined && item && item.hasOwnProperty('entry') ){
       var entry = item["entry"];
       if( Array.isArray(entry) ){
+        // keep occur arrays together. Issue #3
+        var occurElems = [];
+        var occurKeys = [];
+        if( item && item.hasOwnProperty('occur') ){
+          var occur = item['occur'];
+          for( var occurKey in occur ){ 
+            occurKeys.push(occurKey);
+            occurElems.push( occur[occurKey].entry );
+          }
+        }
         for( var eidx = 0; eidx < entry.length; eidx++ ){
           result += key  + ".     " + entry[eidx] + "\n";
+          for( var oidx = 0; oidx < occurElems.length; oidx++ ){
+            var occurkey = occurKeys[oidx];
+            var elem = occurElems[oidx];
+            if( Array.isArray(elem) && eidx < elem.length ){
+              result += key + "/" + occurkey + ".     " + elem[eidx] + "\n";
+            }else if( eidx == 0 ){
+              result += key + "/" + occurkey + ".     " + elem + "\n";
+            }
+          }
         }
+        return 0;
       }else{
         entry = entry.trim();
         if( entry.length > 0 ){
@@ -8589,10 +8613,13 @@ var modmux = modulation["modmux"] =
   }
   var onOccurEntry = function(occuritem,occurkey,key){
     if( occuritem != undefined && occuritem != null && occuritem.hasOwnProperty("entry") ){
-      var entry = occuritem["entry"].trim();
-      if( entry.length > 0 ){
-        result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
-        return 1;
+      var entry = occuritem["entry"];
+      if( typeof entry == "string" ){
+        entry = entry.trim();
+        if( entry.length > 0 ){
+          result += key + "/" + occurkey + ".     " + entry + "\n";
+          return 1;
+        }
       }
     }
     return 0;
@@ -8608,8 +8635,8 @@ var modmux = modulation["modmux"] =
   }
   // a non-grouped item, occurs follow
   var onItem = function(key,item){
-    onEntry(key,item);
-    if( item.hasOwnProperty('occur') ){
+    var n = onEntry(key,item);
+    if( n > 0 && item.hasOwnProperty('occur') ){
       var occur = item['occur'];
       for( var occurkey in occur ){
         onOccur(item,occurkey,key);
@@ -8765,8 +8792,14 @@ var modmux = modulation["modmux"] =
   var removeOccurenceGroupAt = function( sfafx, key ){
 
   }
+  
+  var setGrouping = function( flag ){
+    SFAFx.grouping = flag
+  }
 
 
+  SFAFx.setGrouping = setGrouping;
+  SFAFx.grouping = grouping;
   SFAFx.toSFAF = toSFAF;
   SFAFx.toSortedKeys = toSortedKeys;
   SFAFx.toSFAFRec = toSFAFRec;

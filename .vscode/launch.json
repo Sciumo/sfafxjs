@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    {
+        "type": "node",
+        "request": "attach",
+        "name": "Attach Node",
+        "port": 9229
+    },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "SFAF2JSON sfaf_occur",
+            "program": "${workspaceFolder}/bin/sfaf2json",
+            "cwd": "${workspaceFolder}",
+            "args": [ "${workspaceFolder}/test/sfaf_occur_sample.txt" ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "JSON2SFAF sfaf_occur",
+            "program": "${workspaceFolder}/bin/json2sfaf",
+            "cwd": "${workspaceFolder}",
+            "args": [ "${workspaceFolder}/test/sfaf_occur_sample.json" ]
+        }        ,
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "JSON2SFAF af744251",
+            "program": "${workspaceFolder}/bin/json2sfaf",
+            "cwd": "${workspaceFolder}",
+            "args": [ "${workspaceFolder}/test/af744251.json", "--group" ]
+        }
+    ]
+}

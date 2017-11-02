@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>SFAFx Test Set 1</title>
-  <link rel="stylesheet" href="../bower_components/qunit/qunit/qunit.css">
+  <link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
   <style>
   div.data { white-space: pre; }
   </style>
@@ -98,7 +98,7 @@
 <p/>
 <h3>SFAFx JSON</h3>
 <div class="data" id="sfafx"></div>
-  <script src="../bower_components/qunit/qunit/qunit.js"></script>
+  <script src="../node_modules/qunitjs/qunit/qunit.js"></script>
   <script src="../sfafx.js"></script>
   <script>
     var error = 0.000000001;
@@ -181,6 +181,7 @@
       assert.ok( records.length > 0, "Records has length > 0" );
       var sfaf = records[0].sfaf;
       assert.ok( sfaf, "SFAFx JSON record exists");
+      SFAFx.setGrouping(true);
       var sfaftxt = SFAFx.toSFAF(records);
       assert.ok( sfaftxt, "SFAF Text converted");
       assert.equal( sfaftxt, originalData, "Converted SFAF record is identical");
@@ -262,7 +263,7 @@
       assert.equal( SFAFx.dictionary.typeModel["Receiver Equipment"].Group["440"].Title, "Equipment Nomenclature", 'typeModel["Receiver Equipment"].Group["440"].Title === "Equipment Nomenclature"');
       console.log( SFAFx.dictionary.typeModel );
       console.log( SFAFx.dictionary.required );
-      var expreq = [5, 10, 102, 110, 207, 300];
+      var expreq = [5, 10, 102, 110, 144, 207, 300, 301, 701, 702, 803];
       assert.ok( SFAFx.dictionary.required, "dictionary required exist" );
       assert.deepEqual( SFAFx.dictionary.required, expreq, "All required");
 

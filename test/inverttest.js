@@ -1,7 +1,14 @@
 var peg = require('pegjs');
 var fs = require('fs');
+var argv = require('optimist').argv;
 var SFAFx = require('../sfafx.js');
-var fname = (process.argv.length < 3)?'af744251.sfaf':process.argv[2];
+var fname = 'af744251.sfaf';
+if( argv._.length > 0 ){
+  fname = argv._[0];
+}
+var group = argv.group == true;
+SFAFx.setGrouping(group);
+console.log("grouping:",group);
 console.log( "reading " + fname );
 var sfafxtxt = fs.readFileSync(fname,'utf8');
 console.log(sfafxtxt);
