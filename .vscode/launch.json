@@ -17,6 +17,22 @@
             "program": "${workspaceFolder}/bin/sfaf2json",
             "cwd": "${workspaceFolder}",
             "args": [ "${workspaceFolder}/test/sfaf_occur_sample.txt" ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "JSON2SFAF sfaf_occur",
+            "program": "${workspaceFolder}/bin/json2sfaf",
+            "cwd": "${workspaceFolder}",
+            "args": [ "${workspaceFolder}/test/sfaf_occur_sample.json" ]
+        }        ,
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "JSON2SFAF af744251",
+            "program": "${workspaceFolder}/bin/json2sfaf",
+            "cwd": "${workspaceFolder}",
+            "args": [ "${workspaceFolder}/test/af744251.json", "--group" ]
         }
     ]
 }

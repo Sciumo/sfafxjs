@@ -1,0 +1,428 @@
+[
+{
+  "classification": "UA",
+  "sfaf": {
+    "102": {
+      "entry": "AF  744251"
+    },
+    "103": {
+      "entry": "J0667646",
+      "occur": {
+        "02": {
+          "entry": "I7424719"
+        },
+        "03": {
+          "entry": "I9797391"
+        },
+        "04": {
+          "entry": "I9343371"
+        },
+        "05": {
+          "entry": "I8954035"
+        },
+        "06": {
+          "entry": "I8110113"
+        },
+        "07": {
+          "entry": "I7737346"
+        },
+        "08": {
+          "entry": "I7632677"
+        }
+      }
+    },
+    "107": {
+      "entry": "19740722"
+    },
+    "108": {
+      "entry": "I7737346"
+    },
+    "110": {
+      "entry": "K275"
+    },
+    "113": {
+      "entry": "ALB",
+      "occur": {
+        "02": {
+          "entry": "ALB"
+        },
+        "03": {
+          "entry": "ML"
+        }
+      }
+    },
+    "114": {
+      "entry": "2K04A2A",
+      "occur": {
+        "02": {
+          "entry": "600H00P0N"
+        },
+        "03": {
+          "entry": "6K00A3E"
+        }
+      }
+    },
+    "115": {
+      "entry": "W400",
+      "occur": {
+        "02": {
+          "entry": "W6"
+        },
+        "03": {
+          "entry": "W10"
+        }
+      }
+    },
+    "117": {
+      "entry": "58"
+    },
+    "118": {
+      "entry": "E"
+    },
+    "130": {
+      "entry": "1HX"
+    },
+    "142": {
+      "entry": "20200825"
+    },
+    "143": {
+      "entry": "20100825"
+    },
+    "144": {
+      "entry": "Y"
+    },
+    "199": {
+      "entry": "T/02(A/02)R00[TR]R/01(A/01)R05(E/01)",
+      "occur": {
+        "02": {
+          "entry": "T/03(A/02)R00[TR]R/02(A/01)R05(E/01)"
+        },
+        "03": {
+          "entry": "T/01(A/02)R00[TR]R/03(A/01)R05(E/01)"
+        }
+      }
+    },
+    "200": {
+      "entry": "USAF"
+    },
+    "201": {
+      "entry": "PACOM"
+    },
+    "202": {
+      "entry": "PACAF"
+    },
+    "204": {
+      "entry": "PACAF"
+    },
+    "205": {
+      "entry": "11AF"
+    },
+    "206": {
+      "entry": "ELMENDORF"
+    },
+    "207": {
+      "entry": "611ASUS"
+    },
+    "208": {
+      "entry": "BEACN"
+    },
+    "209": {
+      "entry": "JFMOALASKA"
+    },
+    "300": {
+      "entry": "AK"
+    },
+    "301": {
+      "entry": "CAPE ROMANZOF"
+    },
+    "303": {
+      "entry": "614726N1655811W"
+    },
+    "304": {
+      "entry": "CZF"
+    },
+    "306": {
+      "entry": "46B"
+    },
+    "340": {
+      "entry": "G,AN/URN-005",
+      "occur": {
+        "02": {
+          "entry": "G,AN/GRC-103"
+        }
+      }
+    },
+    "343": {
+      "entry": "J/F 12/04752",
+      "occur": {
+        "02": {
+          "entry": "J/F 12/04752"
+        }
+      }
+    },
+    "357": {
+      "entry": "2"
+    },
+    "362": {
+      "entry": "ND"
+    },
+    "363": {
+      "entry": "V"
+    },
+    "373": {
+      "entry": "G"
+    },
+    "400": {
+      "entry": "AK"
+    },
+    "401": {
+      "entry": "CAPE ROMANZOF"
+    },
+    "403": {
+      "entry": "614726N1655811W"
+    },
+    "404": {
+      "entry": "CZF"
+    },
+    "406": {
+      "entry": "46"
+    },
+    "440": {
+      "entry": "G,RM-0004",
+      "occur": {
+        "02": {
+          "entry": "G,AN/PRC-133"
+        }
+      }
+    },
+    "442": {
+      "entry": "25",
+      "occur": {
+        "02": {
+          "entry": "25"
+        }
+      }
+    },
+    "443": {
+      "entry": "J/F 12/04752",
+      "occur": {
+        "02": {
+          "entry": "J/F 12/04751"
+        }
+      }
+    },
+    "473": {
+      "entry": "G"
+    },
+    "500": {
+      "entry": "S401"
+    },
+    "502": {
+      "entry": "ALS 94-115"
+    },
+    "511": {
+      "entry": "AIR OPERATIONS"
+    },
+    "512": {
+      "entry": "NAVAIDS"
+    },
+    "513": {
+      "entry": "BEACON"
+    },
+    "520": {
+      "entry": [
+        "COORD WITH PHILLIPS FAA-AK 20100729",
+        "SECOND LINE OF TEXT"
+      ]
+    },
+    "701": {
+      "entry": "T02"
+    },
+    "702": {
+      "entry": "PACAF 2010-300"
+    },
+    "901": {
+      "entry": "A"
+    },
+    "911": {
+      "entry": "20100826"
+    },
+    "924": {
+      "entry": "FRRS"
+    },
+    "927": {
+      "entry": "19770429"
+    },
+    "928": {
+      "entry": "20100805"
+    },
+    "956": {
+      "entry": "RAB"
+    },
+    "958": {
+      "entry": "A"
+    },
+    "005": {
+      "entry": "UA"
+    },
+    "010": {
+      "entry": "M"
+    }
+  },
+  "serial": "AF  744251",
+  "docket": {
+    "current": "J0667646",
+    "original": "I7424719",
+    "previous": [
+      "I9797391",
+      "I9343371",
+      "I8954035",
+      "I8110113",
+      "I7737346",
+      "I7632677"
+    ]
+  },
+  "authorization": {
+    "text": "19740722",
+    "yyyy": 1974,
+    "mm": 7,
+    "dd": 22,
+    "date": "1974-07-22T04:00:00.000Z"
+  },
+  "transmitter": {
+    "freqband": {
+      "frequency": 0.275
+    },
+    "01": {
+      "stationclass": "ALB",
+      "emissiondesignator": {
+        "entry": "2K04A2A",
+        "frequency": 0.002,
+        "modulation": {
+          "type": {
+            "type": "amplitude",
+            "desc": "Double sideband"
+          },
+          "nature": {
+            "card": "single",
+            "encoding": "digital",
+            "desc": "A single channel containing quantized or digital information, using a modulating subcarrier"
+          },
+          "information": {
+            "type": "aural",
+            "desc": "Telegraphy - for aural reception"
+          }
+        }
+      },
+      "power": "W400"
+    },
+    "02": {
+      "stationclass": "ALB",
+      "emissiondesignator": {
+        "entry": "600H00P0N",
+        "frequency": 0.0006,
+        "modulation": {
+          "type": {
+            "type": "pulse",
+            "desc": "Sequence of unmodulated pulses."
+          },
+          "nature": {
+            "card": "none",
+            "encoding": "digital",
+            "desc": "No modulating signal"
+          },
+          "information": {
+            "type": "none",
+            "desc": "No information transmitted"
+          }
+        }
+      },
+      "power": "W6"
+    },
+    "03": {
+      "stationclass": "ML",
+      "emissiondesignator": {
+        "entry": "6K00A3E",
+        "frequency": 0.006,
+        "modulation": {
+          "type": {
+            "type": "amplitude",
+            "desc": "Double sideband"
+          },
+          "nature": {
+            "card": "single",
+            "encoding": "analogue",
+            "desc": "A single channel containing analogue information"
+          },
+          "information": {
+            "type": "aural",
+            "desc": "Telephony (including sound broadcasting)"
+          }
+        }
+      },
+      "power": "W10"
+    },
+    "location": {
+      "lat": {
+        "deg": 61,
+        "min": 47,
+        "sec": 26,
+        "dir": "N",
+        "dec": 61.79055555555556
+      },
+      "lon": {
+        "deg": 165,
+        "min": 58,
+        "sec": 11,
+        "dir": "W",
+        "dec": -165.96972222222223
+      },
+      "coord": [
+        61.79055555555556,
+        -165.96972222222223
+      ],
+      "radius": 46
+    }
+  },
+  "txantennas": {
+    "01": {
+      "gain": "2",
+      "orientation": "ND",
+      "polarization": {
+        "type": "fixed vertical"
+      }
+    }
+  },
+  "receivers": {
+    "01": {
+      "stateloc": "AK",
+      "antennaloc": "CAPE ROMANZOF",
+      "location": {
+        "lat": {
+          "deg": 61,
+          "min": 47,
+          "sec": 26,
+          "dir": "N",
+          "dec": 61.79055555555556
+        },
+        "lon": {
+          "deg": 165,
+          "min": 58,
+          "sec": 11,
+          "dir": "W",
+          "dec": -165.96972222222223
+        },
+        "coord": [
+          61.79055555555556,
+          -165.96972222222223
+        ]
+      },
+      "callsign": "CZF",
+      "radius": 46,
+      "equipmentcertid": "J/F 12/04752"
+    },
+    "02": {
+      "equipmentcertid": "J/F 12/04751"
+    }
+  }
+}]
