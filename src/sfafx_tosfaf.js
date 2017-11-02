@@ -66,10 +66,13 @@
   }
   var onOccurEntry = function(occuritem,occurkey,key){
     if( occuritem != undefined && occuritem != null && occuritem.hasOwnProperty("entry") ){
-      var entry = occuritem["entry"].trim();
-      if( entry.length > 0 ){
-        result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
-        return 1;
+      var entry;
+      if( typeof entry == "string" ){
+        occuritem["entry"].trim();
+        if( entry.length > 0 ){
+          result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
+          return 1;
+        }
       }
     }
     return 0;

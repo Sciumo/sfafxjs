@@ -4,7 +4,7 @@
  * SFAFx JS SFAF Parser and Library
  * Eric Lindahl, Sciumo Inc. (c) 2015 LGPL License
  * Version: 0.1.3
- * Last build: Wed Nov 01 2017 21:38:38
+ * Last build: Thu Nov 02 2017 09:47:03
  */
 
 // Module systems magic dance
@@ -8589,10 +8589,13 @@ var modmux = modulation["modmux"] =
   }
   var onOccurEntry = function(occuritem,occurkey,key){
     if( occuritem != undefined && occuritem != null && occuritem.hasOwnProperty("entry") ){
-      var entry = occuritem["entry"].trim();
-      if( entry.length > 0 ){
-        result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
-        return 1;
+      var entry;
+      if( typeof entry == "string" ){
+        occuritem["entry"].trim();
+        if( entry.length > 0 ){
+          result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
+          return 1;
+        }
       }
     }
     return 0;
