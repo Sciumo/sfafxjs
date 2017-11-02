@@ -3,8 +3,8 @@
 /*!
  * SFAFx JS SFAF Parser and Library
  * Eric Lindahl, Sciumo Inc. (c) 2015 LGPL License
- * Version: 0.1.2
- * Last build: Thu Dec 03 2015 06:29:27
+ * Version: 0.1.3
+ * Last build: Wed Nov 01 2017 21:38:38
  */
 
 // Module systems magic dance
@@ -8540,8 +8540,8 @@ var modmux = modulation["modmux"] =
    */
   var groups = [
      [113,118, "Transmitter"],
-     [340,343, "Equipment"],
-     [354,360, "Antenna"],
+     [340,347, "Equipment"], //transmitter equipment
+     [354,361, "Antenna"], //transmitter antenna data
      [400,408, "Receiver Location"],
      [440,443, "Receiver Equipment"]
   ];

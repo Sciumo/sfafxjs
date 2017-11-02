@@ -21,7 +21,11 @@ converter.on("end_parsed", function (jsonArray) {
        });
      }
    }
-   fs.writeFile(jsonout, JSON.stringify(jsonArray,null,2), 'utf-8');
+   fs.writeFile(jsonout, JSON.stringify(jsonArray,null,2), 'utf-8', function(err){
+     if(err){
+       console.error("Error writing conversion",err);
+     }
+   });
 });
 
 fs.createReadStream(csvin).pipe(converter);

@@ -17,8 +17,8 @@
    */
   var groups = [
      [113,118, "Transmitter"],
-     [340,343, "Equipment"],
-     [354,360, "Antenna"],
+     [340,347, "Equipment"], //transmitter equipment
+     [354,361, "Antenna"], //transmitter antenna data
      [400,408, "Receiver Location"],
      [440,443, "Receiver Equipment"]
   ];
