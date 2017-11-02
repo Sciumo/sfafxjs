@@ -4,7 +4,7 @@
  * SFAFx JS SFAF Parser and Library
  * Eric Lindahl, Sciumo Inc. (c) 2015 LGPL License
  * Version: 0.1.3
- * Last build: Thu Nov 02 2017 13:06:03
+ * Last build: Thu Nov 02 2017 13:57:13
  */
 
 // Module systems magic dance
