@@ -68,7 +68,7 @@
     if( occuritem != undefined && occuritem != null && occuritem.hasOwnProperty("entry") ){
       var entry;
       if( typeof entry == "string" ){
-        occuritem["entry"].trim();
+        entry = occuritem["entry"].trim();
         if( entry.length > 0 ){
           result += key + "/" + occurkey + ".     " + occuritem["entry"] + "\n";
           return 1;
