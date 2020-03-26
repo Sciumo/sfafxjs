@@ -17,7 +17,7 @@ and include `sfafx.js` in your HTML
 <script src="bower_components/sfafjs/sfafx.js"></script>
 ```
 
-#Usage
+# Usage
 `sfafxjs` library is intended to provide invertible conversion, meaning the results between SFAF text and JSON without any editing should be identical.
 An invertible function (denoted as F<sup>-1</sup>) requires that F<sup>-1</sup>( F( x ) ) == x for all x.  When designing web services to interact with legacy formats, the invertible property of legacy format conversion is a critical property of properly decoupled web services.
 
@@ -36,7 +36,7 @@ var records = SFAFx.toJSON(document.getElementById('sfaftext').innerText);
 var sfaftxt = SFAFx.toSFAF(records);
 ```
 
-##Dictionary
+## Dictionary
 `sfafxjs` contains a Pub 7 dictionary of data elements.
 *  ``getMaxOccurrences``  maximum ocurrences of this element
 *  ``types`` unique list of the categories of elements
@@ -44,7 +44,7 @@ var sfaftxt = SFAFx.toSFAF(records);
 *  ``required`` list of minimum data elements required for a new record
 
 
-#Tools
+# Tools
 There are a few development tools available for testing and command line usage as well.
 *  `bin/sfaf2json.js` converts a file to JSON and logs to the console.
 *  `bin/json2sfaf.js` converts a file to SFAF and logs to the console.
@@ -55,13 +55,13 @@ $node sfaf2json.js ../test/af744251.sfaf > temp.json
 $node json2sfaf.js temp.json > temp.sfaf
 $diff temp.sfaf ../test/af744251.sfaf
 ```
-#Testing
+# Testing
 In the `/test` directory you will find a few test scripts and a *QUnit* HTML unit test.
 *  ``test/inverttest.js`` ensures the invertible property of a file parameter or 'af744251.sfaf' by default.
 *  ``test/timeparse.js`` attempts to provide parser timing benchmarks.
 *  ``test/test.html`` is a *QUnit* HTML unit test for many of the SFAFx functions and models.
 
-#Modeling
+# Modeling
 SFAF models a transmitter with a number of receiver, antennas, and emission designations which can result in fairly large combinatorics. Sections of are grouped together, such as `Adminstrative data` which are line entries in the range `005-108`.
 
 *Not all of the entries are required except `005` for classification and `102` for serial ID, which is presumed to be a primary key.*
@@ -69,7 +69,7 @@ SFAF models a transmitter with a number of receiver, antennas, and emission desi
 Most of the modeling occurs in the PEG parser, which produces the JSON model as per the example below. Wherever possible, human readable descriptions were used instead of cryptic codes to 'save space'.
 Modern storage and communication methods usually have the capability to enable compression or is part of their design, such as gzipped HTTP or Solr inverted indices.
 
-##Guide to the SFAF Data Items
+## Guide to the SFAF Data Items
 *  Administrative data (005-108)
 *  Emission characteristics (110-118)
 *  Time/date information (130-152)
@@ -87,10 +87,10 @@ Modern storage and communication methods usually have the capability to enable c
 *  Other assignment identifiers (701-716)
 *  Additional information (801-965)
 
-##Occurs
+## Occurs
 SFAF has a idiosyncratic mechanism for enumerating child elements called an labeled 'occurs' in the SFAFx JSON model. For example, when an occur is left blank the default internal enumeration is "01".  SFAFx explicates this assumption in the JSON data model of the SFAF record.  The occur identifier is especially crucial for properly modeling equipment linkages.
 
-##Example
+## Example
 Included in this project is a dummy record, that is not a 'technically' correct record, but has sufficient properly formatted elements for demonstration purposes.
 
 ```
