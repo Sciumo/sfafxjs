@@ -1,7 +1,7 @@
 # SFAFx JS
 SFAFx JavaScript [PEG.JS](https://github.com/pegjs/pegjs) parser and support libraries for an extension to the [MCEB Pub 7 SFAF](https://acc.dau.mil/CommunityBrowser.aspx?id=283278) specification.
 
-*SFAFxJS* is a browser [Bower](http://bower.io) JavaScript module with no dependencies that parses *SFAF* or *SFAFx* ([extended SFAF](http://www.sfafx.us)) into a JSON data model, while decoding most of the cryptic bits into human readable JSON.  Using this library is simple, just `bower install sfafxjs`, then include it and call `SFAFx.toJSON()` to convert to JSON and `SFAFx.toSFAF()` to convert back to SFAF.
+*SFAFxJS* is a browser [Bower](http://bower.io) JavaScript module with no dependencies that parses *SFAF* or *SFAFx* ([extended SFAF](http://sfafx.us)) into a JSON data model, while decoding most of the cryptic bits into human readable JSON.  Using this library is simple, just `bower install sfafxjs`, then include it and call `SFAFx.toJSON()` to convert to JSON and `SFAFx.toSFAF()` to convert back to SFAF.
 
 You can use SFAFx to build browser client logic as well as JSON-friendly web services with some guarantees of supporting legacy SFAF formats.
 
